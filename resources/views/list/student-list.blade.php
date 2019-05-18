@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Students')
+@section('title', '所有學生')
 
 @section('content')
 <div class="container-fluid">
@@ -18,7 +18,7 @@
                     <li class="active">{{ucfirst($user->role)}}s</li>
                 </ol>
                 @endif
-                <div class="page-panel-title">List of all {{ucfirst($user->role)}}s</div>
+                <div class="page-panel-title">所有 {{ucfirst($user->role)}}s</div>
                  @break($loop->first)
               @endforeach
                 <div class="panel-body">

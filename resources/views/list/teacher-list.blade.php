@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Teachers')
+@section('title', '所有教師')
 
 @section('content')
 <div class="container-fluid">

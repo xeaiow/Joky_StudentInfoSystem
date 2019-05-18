@@ -6,11 +6,11 @@
       <th scope="col">#</th>
       @if(Auth::user()->role == 'admin')
         @if (!Session::has('section-attendance'))
-        <th scope="col">Action</th>
+        <th scope="col">操作</th>
         @endif
       @endif
-      <th scope="col">Code</th>
-      <th scope="col">Full Name</th>
+      <th scope="col">編號</th>
+      <th scope="col">姓名</th>
       @foreach ($users as $user)
         @if($user->role == 'student')
           @if(Auth::user()->role == 'student' || Auth::user()->role == 'teacher' || Auth::user()->role == 'admin')
