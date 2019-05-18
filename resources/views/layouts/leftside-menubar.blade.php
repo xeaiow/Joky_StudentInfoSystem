@@ -221,18 +221,18 @@
   @if(Auth::user()->role == 'student')
   <li class="nav-item">
     <a class="nav-link active" href="{{ url('attendances/0/'.Auth::user()->id.'/0') }}"><i class="material-icons">date_range</i>
-      <span class="nav-link-text">My Attendance</span></a>
+      <span class="nav-link-text">我的出席狀況</span></a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="{{ url('courses/0/'.Auth::user()->section_id) }}"><i class="material-icons">subject</i>
-      <span class="nav-link-text">My Courses</span></a>
+      <span class="nav-link-text">我的課程</span></a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="{{ url('grades/'.Auth::user()->id) }}"><i class="material-icons">bubble_chart</i> <span
-        class="nav-link-text">My Grade</span></a>
+        class="nav-link-text">我的考試成績</span></a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#"><i class="material-icons">payment</i> <span class="nav-link-text">Payment History</span></a>
+    <a class="nav-link" href="#"><i class="material-icons">payment</i> <span class="nav-link-text">繳費記錄</span></a>
   </li>
   @endif
   {{--<div style="text-align:center;">Student</div>--}}

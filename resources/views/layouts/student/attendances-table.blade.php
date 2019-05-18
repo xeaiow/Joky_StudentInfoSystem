@@ -18,7 +18,7 @@
         $calendar = \Calendar::addEvents($events);
   ?>
   <div class="col-md-8">
-    <h5>Attendance List of Full Semester</h5>
+    <h5>本學期出勤狀況</h5>
     {!! $calendar->calendar() !!}
   </div>
     {!! $calendar->script() !!}

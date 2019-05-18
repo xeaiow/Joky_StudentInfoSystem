@@ -17,7 +17,7 @@
                     <li class="active">View Attendance</li>
                 </ol>
                 @endif
-                <h2>Attendance of Student -  {{$attendances[0]->student->name}}</h2>
+                <h2>學生出勤紀錄 -  {{$attendances[0]->student->name}}</h2>
             @endif
             <div class="panel panel-default">
                 @if(count($attendances) > 0)
@@ -30,7 +30,7 @@
                     
                     @if(count($attendances) > 0)
                         <div class="col-md-4">
-                            <h5>Attendance List of This Term</h5>
+                            <h5>本學期出勤狀況</h5>
                             <table class="table table-striped table-hover table-condensed">
                                 <tr>
                                     <th>Status</th>
