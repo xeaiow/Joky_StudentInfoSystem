@@ -14,7 +14,7 @@
       @foreach ($users as $user)
         @if($user->role == 'student')
           @if(Auth::user()->role == 'student' || Auth::user()->role == 'teacher' || Auth::user()->role == 'admin')
-            <th scope="col">Attendance</th>
+            <th scope="col">出勤狀況</th>
             {{--@if (!Session::has('section-attendance'))
             <th scope="col">Marks</th>
             @endif --}}
@@ -24,12 +24,12 @@
             <th scope="col">Version</th>
             <th scope="col">Class</th>
             <th scope="col">Section</th>
-            <th scope="col">Father</th>
-            <th scope="col">Mother</th>
+            <th scope="col">父親</th>
+            <th scope="col">母親</th>
             @endif
         @elseif($user->role == 'teacher')
           @if (!Session::has('section-attendance'))
-          <th scope="col">Email</th>
+          <th scope="col">信箱</th>
           @if(Auth::user()->role == 'student' || Auth::user()->role == 'teacher' || Auth::user()->role == 'admin')
             <th scope="col">Courses</th>
           @endif
@@ -44,8 +44,8 @@
       @if (!Session::has('section-attendance'))
       <th scope="col">Gender</th>
       <th scope="col">Blood</th>
-      <th scope="col">Phone</th>
-      <th scope="col">Address</th>
+      <th scope="col">電話</th>
+      <th scope="col">地址</th>
       @endif
     </tr>
   </thead>

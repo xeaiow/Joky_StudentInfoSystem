@@ -269,7 +269,7 @@
   @if(Auth::user()->role == 'teacher')
   <li class="nav-item">
     <a class="nav-link" href="{{ url('courses/'.Auth::user()->id.'/0') }}"><i class="material-icons">import_contacts</i>
-      <span class="nav-link-text">My Courses</span></a>
+      <span class="nav-link-text">課程日誌</span></a>
   </li>
   @endif
 </ul>
