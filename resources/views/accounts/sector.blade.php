@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Account Sectors')
+@section('title', '帳務管理')
 @section('content')
 <div class="container-fluid">
     <div class="row">
@@ -8,7 +8,7 @@
         </div>
         <div class="col-md-10" id="main-container">
             <div class="panel panel-default">
-                <div class="page-panel-title">Account Sectors</div>
+                <div class="page-panel-title">帳務管理</div>
 
                 <div class="panel-body">
                     @if (session('status'))
@@ -19,7 +19,7 @@
                     <form class="form-horizontal" action="{{url('/accounts/create-sector')}}" method="post">
                       {{ csrf_field() }}
                       <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                          <label for="name" class="col-md-4 control-label">Sector Name</label>
+                          <label for="name" class="col-md-4 control-label">部門名稱</label>
 
                           <div class="col-md-6">
                               <input id="name" type="text" class="form-control" name="name" value="{{ (!empty($sector->name))?$sector->name:old('name') }}" placeholder="Sector Name" required>
@@ -32,7 +32,7 @@
                           </div>
                       </div>
                       <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
-                          <label for="type" class="col-md-4 control-label">Sector Type</label>
+                          <label for="type" class="col-md-4 control-label">部門類型</label>
 
                           <div class="col-md-6">
                               <select  class="form-control" name="type">
@@ -54,7 +54,7 @@
                       </div>
                       <div class="form-group">
                         <div class="col-sm-offset-4 col-sm-8">
-                          <button type="submit" class="btn btn-danger">Save</button>
+                          <button type="submit" class="btn btn-danger">新增</button>
                         </div>
                       </div>
                     </form>
