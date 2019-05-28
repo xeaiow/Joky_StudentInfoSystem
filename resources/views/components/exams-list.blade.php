@@ -15,10 +15,10 @@
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">Examination Name</th>
+      <th scope="col">考試科目名稱</th>
       <th scope="col">Notice Published</th>
       <th scope="col">Result Published</th>
-      <th scope="col">Created At</th>
+      <th scope="col">建立考試時間</th>
       <th scope="col">Set Active</th>
     </tr>
   </thead>
