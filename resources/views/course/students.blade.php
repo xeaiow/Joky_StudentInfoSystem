@@ -17,11 +17,12 @@
         <div class="col-md-10" id="main-container">
             @if(count($students) > 0)
             @foreach ($students as $student)
-            <h3>Course Students of Class: {{$student->student->section->class->class_number}} Section:
+            <h3>課程學生人數： {{$student->student->section->class->class_number}}
+            <br />班級:
                 {{$student->student->section->section_number}}</h3>
             @break
             @endforeach
-            <h4>Select Students to send message</h4>
+            <h4>推送訊息給學生</h4>
             @endif
             <div class="panel panel-default">
                 @if(count($students) > 0)
@@ -32,12 +33,12 @@
                                 <th>
                                     <div class="checkbox">
                                         <label style="font-weight:bold;">
-                                            <input type="checkbox" id="selectAll"> All
+                                            <input type="checkbox" id="selectAll"> 選取全部
                                         </label>
                                     </div>
                                 </th>
-                                <th>Student Code</th>
-                                <th>Student Name</th>
+                                <th>學號</th>
+                                <th>姓名A</th>
                             </tr>
                             @foreach ($students as $student)
                             <tr>
@@ -77,11 +78,10 @@
                             <input type="hidden" name="teacher_id" value="{{$teacher_id}}">
                             <input type="hidden" name="section_id" value="{{$section_id}}">
                             <div class="form-group">
-                                <label for="msg">Write Message: </label>
+                                <label for="msg">內容： </label>
                                 <textarea name="msg" class="form-control" id="msg" cols="30" rows="10"></textarea>
                             </div>
-                            <button type="submit" class="btn btn-danger btn-sm"><i class="material-icons">send</i> Send
-                                Message</button>
+                            <button type="submit" class="btn btn-danger btn-sm"><i class="material-icons">send</i> 送出</button>
                         </form>
                     </div>
                 </div>
@@ -107,7 +107,7 @@
                 </script>
                 @else
                 <div class="panel-body">
-                    No Related Data Found.
+                    沒有找到資料
                 </div>
                 @endif
             </div>

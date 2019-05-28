@@ -34,7 +34,7 @@
                 </div>
                 @else
                 <div class="panel-body">
-                    No Related Data Found.
+                    沒有找到資料
                 </div>
                 @endif
             </div>

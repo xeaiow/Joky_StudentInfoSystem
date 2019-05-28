@@ -18,7 +18,13 @@
                     <li class="active">{{ucfirst($user->role)}}s</li>
                 </ol>
                 @endif
-                <div class="page-panel-title">所有 {{ucfirst($user->role)}}s</div>
+                <div class="page-panel-title">
+                @switch(ucfirst($user->role))
+                    @case('Student')
+                        所有學生
+                        @break
+                @endswitch
+                </div>
                  @break($loop->first)
               @endforeach
                 <div class="panel-body">
@@ -27,13 +33,12 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
                     @component('components.users-list',['users'=>$users,'current_page'=>$current_page,'per_page'=>$per_page])
                     @endcomponent
                 </div>
               @else
                 <div class="panel-body">
-                    No Related Data Found.
+                    沒有找到資料
                 </div>
               @endif
             </div>

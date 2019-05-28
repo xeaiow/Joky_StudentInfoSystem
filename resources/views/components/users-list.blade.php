@@ -20,10 +20,10 @@
             @endif --}}
           @endif
             @if (!Session::has('section-attendance'))
-            <th scope="col">Session</th>
-            <th scope="col">Version</th>
-            <th scope="col">Class</th>
-            <th scope="col">Section</th>
+            <th scope="col">學年度</th>
+            <th scope="col">學籍</th>
+            <th scope="col">班級</th>
+            <th scope="col">教室</th>
             <th scope="col">父親</th>
             <th scope="col">母親</th>
             @endif
@@ -42,8 +42,8 @@
         @break($loop->first)
       @endforeach
       @if (!Session::has('section-attendance'))
-      <th scope="col">Gender</th>
-      <th scope="col">Blood</th>
+      <th scope="col">性別</th>
+      <th scope="col">血型</th>
       <th scope="col">電話</th>
       <th scope="col">地址</th>
       @endif
@@ -56,7 +56,7 @@
       @if(Auth::user()->role == 'admin')
         @if (!Session::has('section-attendance'))
         <td>
-          <a class="btn btn-xs btn-danger" href="{{url('edit/user/'.$user->id)}}">Edit</a>
+          <a class="btn btn-xs btn-danger" href="{{url('edit/user/'.$user->id)}}">編輯</a>
         </td>
         @endif
       @endif
@@ -77,9 +77,9 @@
           </small></td>
       @if($user->role == 'student')
         @if(Auth::user()->role == 'student' || Auth::user()->role == 'teacher' || Auth::user()->role == 'admin')
-          <td><small><a class="btn btn-xs btn-info" role="button" href="{{url('attendances/0/'.$user->id.'/0')}}">View Attendance</a></small></td>
+          <td><small><a class="btn btn-xs btn-info" role="button" href="{{url('attendances/0/'.$user->id.'/0')}}">查看</a></small></td>
           {{--@if (!Session::has('section-attendance'))
-          <td><small><a class="btn btn-xs btn-success" role="button" href="{{url('grades/'.$user->id)}}">View Marks</a></small></td>
+          <td><small><a class="btn btn-xs btn-success" role="button" href="{{url('grades/'.$user->id)}}">查看</a></small></td>
           @endif --}}
         @endif
         @if (!Session::has('section-attendance'))
@@ -103,7 +103,7 @@
         @if(Auth::user()->role == 'student' || Auth::user()->role == 'teacher' || Auth::user()->role == 'admin')
         <td style="white-space: nowrap;">
           <small>
-            <a href="{{url('courses/'.$user->id.'/0')}}">All Courses</a>
+            <a href="{{url('courses/'.$user->id.'/0')}}">所有課程</a>
           </small>
         </td>
         @endif

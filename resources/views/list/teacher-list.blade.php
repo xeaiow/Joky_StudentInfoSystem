@@ -12,7 +12,14 @@
             <div class="panel panel-default">
               @if(count($users) > 0)
               @foreach ($users as $user)
-                <div class="page-panel-title">List of all {{ucfirst($user->role)}}s</div>
+                <div class="page-panel-title">
+                @switch(ucfirst($user->role))
+                    @case('Teacher')
+                        所有教師
+                        @break
+                    
+                @endswitch
+                </div>
                  @break($loop->first)
               @endforeach
                 <div class="panel-body">

@@ -18,8 +18,8 @@
                 @if(count($students) > 0)
                 @foreach ($students as $student)
                   <div class="page-panel-title">
-                    <b>課程</b>: {{ $student->section->section_number}} &nbsp; <b>教室</b>:最近更新: {{$student->section->class->class_number}}
-                    <span class="pull-right"><b>最近更新:</b> &nbsp;{{ Carbon\Carbon::now()->format('Y/m/d h:i A')}}</span>
+                    <b>課程</b>: {{ $student->section->section_number}} &nbsp; <b>教室</b>：最近更新: {{$student->section->class->class_number}}
+                    <span class="pull-right"><b>最近更新：</b> &nbsp;{{ Carbon\Carbon::now()->format('Y/m/d h:i A')}}</span>
                   </div>
                    @break($loop->first)
                 @endforeach

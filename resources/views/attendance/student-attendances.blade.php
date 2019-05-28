@@ -17,7 +17,7 @@
                     <li class="active">View Attendance</li>
                 </ol>
                 @endif
-                <h2>學生出勤紀錄 -  {{$attendances[0]->student->name}}</h2>
+                <h2>學生出勤紀錄 - {{$attendances[0]->student->name}}</h2>
             @endif
             <div class="panel panel-default">
                 @if(count($attendances) > 0)
@@ -43,17 +43,17 @@
                                     @if($attendance->present == 1)
                                     <tr class="success">
                                         <td>Present</td>
-                                        <td>{{$attendance->created_at->format('M d Y h:i:sa')}}</td>
+                                        <td>{{$attendance->created_at->format('Y M d h:i:sa')}}</td>
                                     </tr>
                                     @elseif($attendance->present == 2)
                                     <tr class="warning">
-                                        <td>Escaped</td>
-                                        <td>{{$attendance->created_at->format('M d Y h:i:sa')}}</td>
+                                        <td>曠課</td>
+                                        <td>{{$attendance->created_at->format('Y M d h:i:sa')}}</td>
                                     </tr>
                                     @else
                                     <tr class="danger">
                                         <td>Absent</td>
-                                        <td>{{$attendance->created_at->format('M d Y h:i:sa')}}</td>
+                                        <td>{{$attendance->created_at->format('Y M d h:i:sa')}}</td>
                                     </tr>
                                     @endif
                                 @endforeach
@@ -65,7 +65,7 @@
                 </div>
                 @else
                 <div class="panel-body">
-                    No Related Data Found.
+                    沒有資料
                 </div>
                 @endif
             </div>

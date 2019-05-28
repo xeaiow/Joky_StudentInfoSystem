@@ -19,13 +19,33 @@
     @endif
   </div>
   <div class="col-md-10" id="main-container">
-    <h3>{{$user->name}} <span class="label label-danger">{{ucfirst($user->role)}}</span> <span class="label label-primary">{{ucfirst($user->gender)}}</span>
+    <h3>{{$user->name}} 
+    <span class="label label-danger">
+    @switch($user->role)
+      @case('student')
+        學生
+        @break
+      @case('admin')
+        管理員
+        @break
+      @case('teacher')
+        學生
+        @break
+    @endswitch
+    </span>&nbsp;
+    <span class="label label-primary">
+    @if ($user->gender === 'Male')
+        男
+    @else
+        女
+    @endif
+    </span>
       @if ($user->role == 'teacher' && $user->section_id > 0)
         <small>Class Teacher of Section: <span class="label label-info">{{ucfirst($user->section->section_number)}}</span></small>
       @endif
       
       @if($user->role == "student")
-       <button class="btn btn-xs btn-success pull-right" role="button" id="btnPrint"><i class="material-icons">print</i> Print Profile</button>
+       <button class="btn btn-xs btn-success pull-right" role="button" id="btnPrint"><i class="material-icons">print</i> 列印</button>
        <div class="visible-print-block" id="profile-content">
        <div class="row">
           <div class="col-md-12">
@@ -34,8 +54,8 @@
               <div style="font-size: 10px;">{{$user->section->class->school->about}}</div>
             </div>
             <div class="col-xs-4">
-              <h3>Student Profile</h3>
-              <div style="font-size: 10px;">Printing Date: {{Carbon\Carbon::now()->format('d/m/Y')}}</div>
+              <h3>學生資訊</h3>
+              <div style="font-size: 10px;">列印日期： {{Carbon\Carbon::now()->format('Y/m/d')}}</div>
             </div>
           </div>
         </div>
@@ -43,30 +63,30 @@
         <div class="row">
           <div class="col-md-12">
             <p class="bg-primary" style="text-align:center;">
-              Academic Information
+              課程資料
             </p>
             <div class="col-xs-9">
               <table class="table">
                 <tr>
-                  <td>Student ID:</td>
+                  <td>學號</td>
                   <td>{{$user->student_code}}</td>
-                  <td>Student's Name:</td>
+                  <td>姓名</td>
                   <td>{{$user->name}}</td>
                 </tr>
                 <tr>
-                  <td>Class:</td>
+                  <td>教室</td>
                   <td>{{$user->section->class->class_number}}</td>
-                  <td>Section:</td>
+                  <td>班級</td>
                   <td>{{$user->section->section_number}}</td>
                 </tr>
                 <tr>
-                  <td>Session:</td>
+                  <td>學年度</td>
                   <td>{{$user->studentInfo['session']}}</td>
-                  <td>Version:</td>
+                  <td>版本</td>
                   <td>{{$user->studentInfo['version']}}</td>
                 </tr>
                 <tr>
-                  <td>Group:</td>
+                  <td>群組</td>
                   <td>{{$user->studentInfo['group']}}</td>
                   <td colspan="2"></td>
                 </tr>
@@ -88,74 +108,74 @@
         <div class="row">
           <div class="col-md-12">
             <p class="bg-primary" style="text-align:center;">
-              Personal details
+              學生資料
             </p>
             <div class="col-xs-12">
               <table class="table">
                 <tr>
-                  <td>Email:</td>
+                  <td>電子信箱</td>
                   <td>{{$user->email}}</td>
-                  <td>Contact Number</td>
+                  <td>聯絡電話</td>
                   <td>{{$user->phone_number}}</td>
                 </tr>
                 <tr>
-                  <td>Gender:</td>
+                  <td>性別</td>
                   <td>{{$user->gender}}</td>
-                  <td>Blood Group:</td>
+                  <td>血型</td>
                   <td>{{$user->blood_group}}</td>
                 </tr>
                 <tr>
-                  <td>Nationality:</td>
+                  <td>國籍</td>
                   <td>{{$user->nationality}}</td>
-                  <td>Birthday:</td>
+                  <td>生日</td>
                   <td>{{Carbon\Carbon::parse($user->birthday)->format('d/m/Y')}}</td>
                 </tr>
                 <tr>
-                  <td>Religion:</td>
+                  <td>宗教</td>
                   <td>{{$user->studentInfo['religion']}}</td>
-                  <td>Father Name:</td>
+                  <td>父親名稱</td>
                   <td>{{$user->studentInfo['father_name']}}</td>
                 </tr>
                 <tr>
-                  <td>Mother Name:</td>
+                  <td>母親名稱</td>
                   <td>{{$user->studentInfo['mother_name']}}</td>
-                  <td>Address:</td>
+                  <td>地址</td>
                   <td>{{$user->address}}</td>
                 </tr>
                 <tr>
-                  <td>Phone Number:</td>
+                  <td>手機</td>
                   <td>{{$user->phone_number}}</td>
-                  <td>Father's Phone Number:</td>
+                  <td>父親手機</td>
                   <td>{{$user->studentInfo['father_phone_number']}}</td>
                 </tr>
                 <tr>
-                  <td>Father's National ID:</td>
+                  <td>父親身分證</td>
                   <td>{{$user->studentInfo['father_national_id']}}</td>
-                  <td>Father's Occupation:</td>
+                  <td>父親職業</td>
                   <td>{{$user->studentInfo['father_occupation']}}</td>
                 </tr>
                 <tr>
-                  <td>Father's Designation:</td>
+                  <td>父親備註</td>
                   <td>{{$user->studentInfo['father_designation']}}</td>
-                  <td>Father's Annual Income:</td>
+                  <td>父親年收入</td>
                   <td>{{$user->studentInfo['father_annual_income']}}</td>
                 </tr>
                 <tr>
-                  <td>Mother's Phone Number:</td>
+                  <td>母親手機</td>
                   <td>{{$user->studentInfo['mother_phone_number']}}</td>
-                  <td>Mother's National ID:</td>
+                  <td>母親身分證</td>
                   <td>{{$user->studentInfo['mother_national_id']}}</td>
                 </tr>
                 <tr>
-                  <td>Mother's Occupation:</td>
+                  <td>母親職業</td>
                   <td>{{$user->studentInfo['mother_occupation']}}</td>
-                  <td>Mother's Designation:</td>
+                  <td>母親備註</td>
                   <td>{{$user->studentInfo['mother_designation']}}</td>
                 </tr>
                 <tr>
-                  <td>Mother's Annual Income:</td>
+                  <td>母親年收入</td>
                   <td>{{$user->studentInfo['mother_annual_income']}}</td>
-                  <td>About:</td>
+                  <td>描述</td>
                   <td>{{$user->about}}</td>
                 </tr>
               </table>
@@ -186,90 +206,90 @@
       <tbody>
         <tr>
           @if($user->role == "student")
-          <td><b>Code:</b></td>
+          <td><b>學號</b></td>
           <td>{{$user->student_code}}</td>
-          <td><b>Session:</b></td>
+          <td><b>學年度</b></td>
           <td>{{$user->studentInfo['session']}}</td>
           @else
-          <td><b>Code:</b></td>
+          <td><b>教室</b></td>
           <td>{{$user->student_code}}</td>
-          <td><b>About:</b></td>
+          <td><b>描述</b></td>
           <td>{{$user->about}}</td>
           @endif
         </tr>
         @if($user->role == "student")
         <tr>
-          <td><b>Class:</b></td>
+          <td><b>教室</b></td>
           <td>{{$user->section->class->class_number}}</td>
-          <td><b>Section:</b></td>
+          <td><b>班級</b></td>
           <td>{{$user->section->section_number}}</td>
         </tr>
         <tr>
-          <td><b>Version:</b></td>
+          <td><b>版本</b></td>
           <td>{{$user->studentInfo['version']}}</td>
-          <td><b>Blood Group:</b></td>
+          <td><b>血型</b></td>
           <td>{{$user->blood_group}}</td>
         </tr>
         <tr>
-          <td><b>Group:</b></td>
+          <td><b>群組</b></td>
           <td>{{$user->studentInfo['group']}}</td>
-          <td><b>Birthday:</b></td>
+          <td><b>生日</b></td>
           <td>{{Carbon\Carbon::parse($user->birthday)->format('d/m/Y')}}</td>
         </tr>
         @endif
         <tr>
-          <td><b>Nationality:</b></td>
+          <td><b>國籍</b></td>
           <td>{{$user->nationality}}</td>
-          <td><b>Religion:</b></td>
+          <td><b>宗教</b></td>
           <td>{{$user->studentInfo['religion']}}</td>
         </tr>
         @if($user->role == "student")
         <tr>
-          <td><b>Father Name:</b></td>
+          <td><b>父親</b></td>
           <td>{{$user->studentInfo['father_name']}}</td>
-          <td><b>Mother Name:</b></td>
+          <td><b>母親</b></td>
           <td>{{$user->studentInfo['mother_name']}}</td>
         </tr>
         @endif
         <tr>
-          <td><b>Address:</b></td>
+          <td><b>地址</b></td>
           <td>{{$user->address}}</td>
-          <td><b>Phone Number:</b></td>
+          <td><b>手機</b></td>
           <td>{{$user->phone_number}}</td>
         </tr>
         @if($user->role == "student")
         <tr>
-          <td><b>Father's Phone Number:</b></td>
+          <td><b>父親手機</b></td>
           <td>{{$user->studentInfo['father_phone_number']}}</td>
-          <td><b>Father's National ID:</b></td>
+          <td><b>父親身分證</b></td>
           <td>{{$user->studentInfo['father_national_id']}}</td>
         </tr>
         <tr>
-          <td><b>Father's Occupation:</b></td>
+          <td><b>父親職業</b></td>
           <td>{{$user->studentInfo['father_occupation']}}</td>
-          <td><b>Father's Designation:</b></td>
+          <td><b>父親備註</b></td>
           <td>{{$user->studentInfo['father_designation']}}</td>
         </tr>
         <tr>
-          <td><b>Father's Annual Income:</b></td>
+          <td><b>父親年收入</b></td>
           <td>{{$user->studentInfo['father_annual_income']}}</td>
-          <td><b>Mother's Phone Number:</b></td>
+          <td><b>母親手機</b></td>
           <td>{{$user->studentInfo['mother_phone_number']}}</td>
         </tr>
         <tr>
-          <td><b>Mother's National ID:</b></td>
+          <td><b>母親身分證</b></td>
           <td>{{$user->studentInfo['mother_national_id']}}</td>
-          <td><b>Mother's Occupation:</b></td>
+          <td><b>母親職業</b></td>
           <td>{{$user->studentInfo['mother_occupation']}}</td>
         </tr>
         <tr>
-          <td><b>Mother's Designation:</b></td>
+          <td><b>母親備註</b></td>
           <td>{{$user->studentInfo['mother_designation']}}</td>
-          <td><b>Mother's Annual Income:</b></td>
+          <td><b>母親年收入</b></td>
           <td>{{$user->studentInfo['mother_annual_income']}}</td>
         </tr>
         <tr>
-          <td><b>About:</b></td>
+          <td><b>描述</b></td>
           <td colspan="3">{{$user->about}}</td>
         </tr>
         @endif

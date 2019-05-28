@@ -7,11 +7,11 @@
       $events = array();
       foreach ($attendances as $attendance){
         if($attendance->present == 1){
-          $events[] = \Calendar::event("Present",false,$attendance->created_at,$attendance->updated_at,0,['color'=>'green']);
+          $events[] = \Calendar::event("上課中",false,$attendance->created_at,$attendance->updated_at,0,['color'=>'green']);
         } else if($attendance->present == 2){
-          $events[] = \Calendar::event("Escaped",false,$attendance->created_at,$attendance->updated_at,0,['color'=>'orange']);
+          $events[] = \Calendar::event("曠課",false,$attendance->created_at,$attendance->updated_at,0,['color'=>'orange']);
         } else {
-          $events[] = \Calendar::event("Absent",false,$attendance->created_at,$attendance->updated_at,0,['color'=>'red']);
+          $events[] = \Calendar::event("請假",false,$attendance->created_at,$attendance->updated_at,0,['color'=>'red']);
         }
       }
       if(sizeof($events) > 0){

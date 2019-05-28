@@ -70,14 +70,14 @@
       <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Code</th>
-          <th scope="col">Name</th>
-          <th scope="col">Attendance</th>
-          <th scope="col">Quiz 1</th>
-          <th scope="col">Quiz 2</th>
-          <th scope="col">Quiz 3</th>
-          <th scope="col">Quiz 4</th>
-          <th scope="col">Quiz 5</th>
+          <th scope="col">學號</th>
+          <th scope="col">姓名</th>
+          <th scope="col">缺勤</th>
+          <th scope="col">小考 1</th>
+          <th scope="col">小考 2</th>
+          <th scope="col">小考 3</th>
+          <th scope="col">小考 4</th>
+          <th scope="col">小考 5</th>
           <th scope="col">Assignment 1</th>
           <th scope="col">Assignment 2</th>
           <th scope="col">Assignment 3</th>

@@ -29,9 +29,9 @@
             <div class="panel panel-default" id="main-container">
               @if(count($grades) > 0)
               @foreach ($grades as $grade)
-                <div class="page-panel-title" style="font-size: 15px;"><b>Course</b> - {{$grade->course->course_name}} &nbsp; <b>Class</b> - {{$grade->course->section->class->class_number}} &nbsp;<b>Section</b> - {{$grade->course->section->section_number}}
+                <div class="page-panel-title" style="font-size: 15px;"><b>課程</b>：{{$grade->course->course_name}} &nbsp; <b>教室</b>：{{$grade->course->section->class->class_number}} &nbsp;<b>班級</b>：{{$grade->course->section->section_number}}
                   <button type="submit" class="btn btn-success btn-xs pull-right">
-                    <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Save
+                    <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> 儲存
                   </button>
                 </div>
                 @break($loop->first)
@@ -57,14 +57,14 @@
                       <table class="table table-condensed table-hover">
                         <thead>
                           <tr>
-                            <th scope="col" style="width:10%;">Select Grade System</th>
-                            <th scope="col" style="width:10%;">Quiz Count</th>
-                            <th scope="col" style="width:10%;">Assignment Count</th>
-                            <th scope="col" style="width:10%;">Class Test Count</th>
-                            <th scope="col" style="width:10%;">Attendance %</th>
-                            <th scope="col" style="width:10%;">Assignment %</th>
-                            <th scope="col" style="width:10%;">Quiz %</th>
-                            <th scope="col" style="width:10%;">Class Test %</th>
+                            <th scope="col" style="width:10%;">選擇成績系統</th>
+                            <th scope="col" style="width:10%;">小考次數</th>
+                            <th scope="col" style="width:10%;">作業次數</th>
+                            <th scope="col" style="width:10%;">課堂小考次數</th>
+                            <th scope="col" style="width:10%;">出席率佔比</th>
+                            <th scope="col" style="width:10%;">作業佔比</th>
+                            <th scope="col" style="width:10%;">小考佔比</th>
+                            <th scope="col" style="width:10%;">課堂測驗佔比</th>
                           </tr>
                         </thead>
                         <?php
@@ -104,10 +104,10 @@
                             </td>
                           </tr>
                           <tr>
-                            <th scope="col" style="width:10%;">Final Exam %</th>
-                            <th scope="col" style="width:10%;">Practical %</th>
+                            <th scope="col" style="width:10%;">期末考佔比</th>
+                            <th scope="col" style="width:10%;">實作佔比</th>
                             <th scope="col" style="width:10%;">
-                              Quiz Full Marks
+                              課堂小考滿分為
                             </th>
                             <th scope="col" style="width:10%;">
                               Assignment Full Marks
@@ -116,13 +116,13 @@
                               CT Full Marks
                             </th>
                             <th scope="col" style="width:10%;">
-                              Final Exam Full Marks
+                              期末考滿分為
                             </th>
                             <th scope="col" style="width:10%;">
-                              Practical Full Marks
+                              實習課滿分為
                             </th>
                             <th scope="col" style="width:10%;">
-                              Attendance Full Marks
+                              出勤滿分為
                             </th>
                           </tr>
                           <tr>
@@ -171,7 +171,7 @@
               <div class="page-panel-title" style="font-size: 15px;">
                 <form action="{{url('grades/calculate-marks')}}" method="POST">
                   {{csrf_field()}}
-                  Give Marks to Students
+                  登記成績
                   <input type="hidden" name="course_id" value="{{$course_id}}">
                   @foreach($gradesystems as $gs)
                     <input type="hidden" name="grade_system_name" value="{{$gs->grade_system_name}}">
@@ -188,7 +188,7 @@
               </div>
               @else
                 <div class="panel-body">
-                  No Related Data Found.
+                  沒有找到資料
                 </div>
               @endif
             </div>

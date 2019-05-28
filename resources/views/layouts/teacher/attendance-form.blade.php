@@ -23,7 +23,7 @@
         <th scope="col">出席次數</th>
         <th scope="col">請假次數</th>
         <th scope="col">缺席次數</th>
-        <th scope="col">出席調整歷史紀錄</th>
+        <th scope="col">點名單紀錄</th>
       </tr>
     </thead>
     <tbody>
@@ -106,7 +106,7 @@
             <td>0</td>
             <td>0</td>
           @endif
-          <td><a href="{{url('attendance/adjust/'.$student->id)}}" role="button" class="btn btn-danger btn-sm">Adjust Missing Attendances</a></td>
+          <td><a href="{{url('attendance/adjust/'.$student->id)}}" role="button" class="btn btn-danger btn-sm">查看或更改</a></td>
         </tr>
         @endforeach
       @endif
@@ -125,9 +125,9 @@
   $('input[type="checkbox"]').change(function() {
       var attdState = $(this).parent().parent().parent().find('.attdState').removeClass('label-danger label-success');
       if($(this).is(':checked')){
-        attdState.addClass('label-success').text('Present');
+        attdState.addClass('label-success').text('出席');
       } else {
-        attdState.addClass('label-danger').text('Absent');
+        attdState.addClass('label-danger').text('請假');
       }
   });
 </script>
