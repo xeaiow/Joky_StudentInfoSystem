@@ -105,7 +105,7 @@
         <table class="table table-bordered table-condensed table-hover">
           <thead>
             <tr>
-              <th scope="col">Attendance</th>
+              <th scope="col">出席狀況</th>
               @for($i=1;$i<=5;$i++)
                 <th scope="col">Quiz {{$i}}</th>
               @endfor
