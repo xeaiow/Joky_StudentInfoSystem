@@ -7,11 +7,11 @@
 <form class="form-horizontal" action="{{url('library/issue-books')}}" method="post">
     {{ csrf_field() }}
     <div class="form-group{{ $errors->has('student_code') ? ' has-error' : '' }}">
-        <label for="student_code" class="col-md-4 control-label">Student Code</label>
+        <label for="student_code" class="col-md-4 control-label">學生編號</label>
 
         <div class="col-md-6">
             <input id="student_code" type="text" class="form-control" name="student_code" value="{{ old('student_code') }}"
-                placeholder="Student Code" required>
+                placeholder="學生編號" required>
 
             @if ($errors->has('student_code'))
             <span class="help-block">
@@ -21,7 +21,7 @@
         </div>
     </div>
     <div class="form-group{{ $errors->has('book_code') ? ' has-error' : '' }}">
-        <label for="book_code" class="col-md-4 control-label">Book Title &amp; Code (<small>Type & Search by Name/Code.
+        <label for="book_code" class="col-md-4 control-label">書籍名稱 &amp; 書籍編號 (<small>Type & Search by Name/Code.
                 You can Select Multiple Books (<i>Maximum 10 books</i>)</small>)</label>
 
         <div class="col-md-6">
@@ -33,11 +33,11 @@
         </div>
     </div>
     <div class="form-group{{ $errors->has('issue_date') ? ' has-error' : '' }}">
-        <label for="issue_date" class="col-md-4 control-label">Issue Date</label>
+        <label for="issue_date" class="col-md-4 control-label">租借日期</label>
 
         <div class="col-md-6">
             <input id="issue_date" class="form-control datepicker" name="issue_date" value="{{ old('issue_date') }}"
-                placeholder="Issue Date" required>
+                placeholder="租借日期" required>
 
             @if ($errors->has('issue_date'))
             <span class="help-block">
@@ -47,11 +47,11 @@
         </div>
     </div>
     <div class="form-group{{ $errors->has('return_date') ? ' has-error' : '' }}">
-        <label for="return_date" class="col-md-4 control-label">Return Date</label>
+        <label for="return_date" class="col-md-4 control-label">歸還日期</label>
 
         <div class="col-md-6">
             <input id="return_date" class="form-control datepicker" name="return_date" value="{{ old('return_date') }}"
-                placeholder="Return Date" required>
+                placeholder="歸還日期" required>
 
             @if ($errors->has('return_date'))
             <span class="help-block">
@@ -62,7 +62,7 @@
     </div>
     <div class="form-group">
         <div class="col-sm-offset-4 col-sm-8">
-            <button type="submit" class="btn btn-danger">Save</button>
+            <button type="submit" class="btn btn-danger">儲存</button>
         </div>
     </div>
 </form>
