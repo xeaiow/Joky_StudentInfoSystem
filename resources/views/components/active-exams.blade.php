@@ -11,11 +11,11 @@
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>Class</th>
-                    <th>Course Name</th>
-                    <th>Course Type</th>
-                    <th>Course Time</th>
-                    <th>Course Teacher</th>
+                    <th>教室</th>
+                    <th>考試名稱</th>
+                    <th>考試科目</th>
+                    <th>考試時間</th>
+                    <th>監考老師</th>
                 </tr>
             </thead>
           <tbody>
