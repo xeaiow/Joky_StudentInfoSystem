@@ -1,7 +1,7 @@
 <form class="form-horizontal" action="{{url('exams/create')}}" method="post">
     {{ csrf_field() }}
     <div class="form-group{{ $errors->has('term') ? ' has-error' : '' }}">
-        <label for="term" class="col-md-4 control-label">Terms</label>
+        <label for="term" class="col-md-4 control-label">科目</label>
 
         <div class="col-md-6">
             <select id="term" class="form-control" name="term">
@@ -18,7 +18,7 @@
         </div>
     </div>
     <div class="form-group{{ $errors->has('exam_name') ? ' has-error' : '' }}">
-        <label for="exam_name" class="col-md-4 control-label">Examination Name</label>
+        <label for="exam_name" class="col-md-4 control-label">考試名稱</label>
 
         <div class="col-md-6">
             <input id="exam_name" type="text" class="form-control" name="exam_name" value="{{ old('exam_name') }}" placeholder="Semester 1 Exam 2018, Final Exam 2019, ..." required>
@@ -31,7 +31,7 @@
         </div>
     </div>
     <div class="form-group{{ $errors->has('start_date') ? ' has-error' : '' }}">
-        <label for="start_date" class="col-md-4 control-label">Start Date</label>
+        <label for="start_date" class="col-md-4 control-label">開始日期</label>
 
         <div class="col-md-6">
             <input id="start_date" type="text" class="form-control" name="start_date" value="{{ old('start_date') }}" placeholder="5th April..." required>
@@ -44,7 +44,7 @@
         </div>
     </div>
     <div class="form-group{{ $errors->has('end_date') ? ' has-error' : '' }}">
-        <label for="end_date" class="col-md-4 control-label">End Date</label>
+        <label for="end_date" class="col-md-4 control-label">結束日期</label>
 
         <div class="col-md-6">
             <input id="end_date" type="text" class="form-control" name="end_date" value="{{ old('end_date') }}" placeholder="20th April..." required>
@@ -57,7 +57,7 @@
         </div>
     </div>
     <div class="form-group{{ $errors->has('classes') ? ' has-error' : '' }}">
-        <label for="classes" class="col-md-4 control-label">For Class</label>
+        <label for="classes" class="col-md-4 control-label">考試教室</label>
 
         <div class="col-md-6">
             @foreach ($classes as $class)

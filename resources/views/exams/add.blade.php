@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Add Examination')
+@section('title', '新增考試')
 @section('content')
 <div class="container-fluid">
     <div class="row">
@@ -8,7 +8,7 @@
         </div>
         <div class="col-md-8" id="main-container">
             <div class="panel panel-default">
-                <div class="page-panel-title">Add Examination</div>
+                <div class="page-panel-title">新增考試</div>
 
                 <div class="panel-body">
                     @if (session('status'))
