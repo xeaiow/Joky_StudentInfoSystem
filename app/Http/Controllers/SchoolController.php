@@ -75,7 +75,8 @@ class SchoolController extends Controller
     public function show($school_id)
     {
       $admins = User::where('school_id',$school_id)->where('role','admin')->get();
-      return view('school.admin-list',compact('admins'));
+      $school = School::where('id', $school_id)->first();
+      return view('school.admin-list', compact('admins', 'school'));
     }
 
     /**

@@ -33,12 +33,12 @@
 @endif--}}
 <ul class="nav flex-column">
   <li class="nav-item active">
-    <a class="nav-link" href="{{ url('home') }}"><i class="material-icons">dashboard</i> <span class="nav-link-text">主控台</span></a>
+    <a class="nav-link" href="{{ url('home') }}"><i class="material-icons">computer</i> <span class="nav-link-text">主控台</span></a>
   </li>
   @if(Auth::user()->role == 'admin')
   <li class="nav-item dropdown">
     <a role="button" href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
-        class="material-icons">date_range</i> <span class="nav-link-text">出席狀況</span> <i class="material-icons pull-right">keyboard_arrow_down</i></a>
+        class="material-icons">calendar_today</i> <span class="nav-link-text">出席狀況</span> <i class="material-icons pull-right">keyboard_arrow_down</i></a>
     <ul class="dropdown-menu" style="width: 100%;">
       <li class="nav-item">
         <a class="dropdown-item" href="#"><i class="material-icons">contacts</i> <span class="nav-link-text">教師</span></a>
@@ -53,7 +53,7 @@
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="{{ url('school/sections?course=1') }}"><i class="material-icons">class</i> <span class="nav-link-text">班級</span></a>
+    <a class="nav-link" href="{{ url('school/sections?course=1') }}"><i class="material-icons">nature_people</i> <span class="nav-link-text">班級</span></a>
   </li>
   @endif
 
@@ -85,18 +85,18 @@
   </li> --}}
   @if(Auth::user()->role != 'student')
   <li class="nav-item">
-    <a class="nav-link" href="{{url('users/'.Auth::user()->school->code.'/1/0')}}"><i class="material-icons">contacts</i>
+    <a class="nav-link" href="{{url('users/'.Auth::user()->school->code.'/1/0')}}"><i class="material-icons">face</i>
       <span class="nav-link-text">學生</span></a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="{{url('users/'.Auth::user()->school->code.'/0/1')}}"><i class="material-icons">contacts</i>
+    <a class="nav-link" href="{{url('users/'.Auth::user()->school->code.'/0/1')}}"><i class="material-icons">person</i>
       <span class="nav-link-text">教師</span></a>
   </li>
   @endif
   @if(Auth::user()->role == 'admin')
   <li class="nav-item dropdown">
     <a role="button" href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
-        class="material-icons">line_style</i> <span class="nav-link-text">考試</span> <i class="material-icons pull-right">keyboard_arrow_down</i></a>
+        class="material-icons">ballot</i> <span class="nav-link-text">考試</span> <i class="material-icons pull-right">keyboard_arrow_down</i></a>
     <ul class="dropdown-menu" style="width: 100%;">
       <!-- Dropdown menu links -->
       <li>
@@ -116,13 +116,13 @@
   </li>
   <li class="nav-item" style="border-bottom: 1px solid #dbd8d8;"></li>
   <li class="nav-item">
-    <a class="nav-link" href="{{ url('academic/routine') }}"><i class="material-icons">calendar_today</i> <span class="nav-link-text">課程日誌</span></a>
+    <a class="nav-link" href="{{ url('academic/routine') }}"><i class="material-icons">perm_contact_calendar</i> <span class="nav-link-text">課程日誌</span></a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="{{ url('academic/syllabus') }}"><i class="material-icons">vertical_split</i> <span class="nav-link-text">教學大綱</span></a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="{{ url('academic/notice') }}"><i class="material-icons">announcement</i> <span class="nav-link-text">通知</span></a>
+    <a class="nav-link" href="{{ url('academic/notice') }}"><i class="material-icons">message</i> <span class="nav-link-text">通知</span></a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="{{ url('academic/event') }}"><i class="material-icons">event</i> <span class="nav-link-text">公告</span></a>

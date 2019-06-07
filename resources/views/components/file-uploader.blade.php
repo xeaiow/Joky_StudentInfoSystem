@@ -1,8 +1,8 @@
 <div id="my_upload">
     @if($upload_type != 'profile')
         <!-- <h3>{{ucfirst($upload_type)}}</h3> -->
-        <label for="upload-title">檔案名稱: </label>
-        <input type="text" class="form-control" name="upload-title" id="upload-title" placeholder="標題" required>
+        <label for="upload-title">標題</label>
+        <input type="text" class="form-control" name="upload-title" id="upload-title" placeholder="輸入一個醒目的標題" required>
         <br/>
     @endif
   <input class="form-control-sm" id="fileupload" type="file"  accept=".xlsx,.xls,.doc,.docx,.ppt,.pptx,.txt,.pdf,image/png,image/jpeg" name="file" data-url="{{url('upload/file')}}">

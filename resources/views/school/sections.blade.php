@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', '所有課程出席狀況')
+@section('title', '課程出席狀況')
 
 @section('content')
 <style>
@@ -14,27 +14,12 @@
             @include('layouts.leftside-menubar')
         </div>
         <div class="col-md-10" id="main-container">
-            <h2>查看課程資訊</h2>
             <div class="panel panel-default" id="cls-sec">
               @if(count($classes) > 0)
                 @foreach ($classes as $class)
                     <div class="panel panel-default">
-                        <div class="page-panel-title" role="tab" id="heading{{$class->id}}">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <a class="panel-title collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ $class->id }}" aria-expanded="false" aria-controls="collapse{{ $class->id }}">{{ $class->class_number+1 }} {{ ucfirst($class->group) }}</a>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <a class="panel-title collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ $class->id }}" aria-expanded="false" aria-controls="collapse{{ $class->id }}"><small><b>點擊展開查看<i class="material-icons">keyboard_arrow_down</i></b></small></a>
-                                    </div>
-                                    @if(isset($_GET['course']) && $_GET['course'] == 1)
-                                    <div class="col-md-4">
-                                        <a role="button" class="btn btn-info btn-xs" href="{{url('academic/syllabus/'.$class->id)}}"><i class="material-icons">visibility</i> 查看</a>
-                                    </div>
-                                    @endif
-                                </div>
-                        </div>
-                        <div id="collapse{{$class->id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{$class->id}}">
+                    <div>課程編號：{{ $class->class_number+1 }}</div>
+                    <div>{{ empty($class->group) ? '' : '課程分類：'.$class->group }}</div>
                             <div class="panel-body">
                                 <table class="table table-bordered table-striped">
                                     <thead>
@@ -68,7 +53,7 @@
                                                     @endif
                                                 @endforeach
                                             <td>
-                                                <a role="button" class="btn btn-danger btn-xs" href="{{url('attendances/'.$section->id)}}"><i class="material-icons">visibility</i> 查看</a>
+                                                <a role="button" class="btn btn-primary btn-xs" href="{{url('attendances/'.$section->id)}}"><i class="material-icons">visibility</i> 查看</a>
                                             </td>
                                             <td>
                                                 <?php
@@ -79,7 +64,7 @@
                                                         <?php
                                                             $ce = 1;
                                                         ?>
-                                                        <a role="button" class="btn btn-info btn-xs" href="{{url('attendances/'.$section->id.'/0/'.$ex->exam_id)}}"><i class="material-icons">spellcheck</i> 送出點名表</a>
+                                                        <a role="button" class="btn btn-primary btn-xs" href="{{url('attendances/'.$section->id.'/0/'.$ex->exam_id)}}"><i class="material-icons">spellcheck</i> 送出點名表</a>
                                                     @endif
                                                 @endforeach
                                                 @if($ce == 0)
@@ -89,10 +74,10 @@
                                             @endif
                                             @if(isset($_GET['course']) && $_GET['course'] == 1)
                                             <td>
-                                                <a role="button" class="btn btn-info btn-xs" href="{{url('courses/0/'.$section->id)}}"><i class="material-icons">visibility</i> 查看</a>
+                                                <a role="button" class="btn btn-primary btn-xs" href="{{url('courses/0/'.$section->id)}}"><i class="material-icons">visibility</i> 查看</a>
                                             </td>
                                             <td>
-                                                <a role="button" class="btn btn-danger btn-xs" href="{{url('section/students/'.$section->id.'?section=1')}}"><i class="material-icons">visibility</i> 查看</a>
+                                                <a role="button" class="btn btn-primary btn-xs" href="{{url('section/students/'.$section->id.'?section=1')}}"><i class="material-icons">visibility</i> 查看</a>
                                             </td>
                                             <td>
                                                 <a role="button" class="btn btn-primary btn-xs" href="{{url('academic/routine/'.$section->id)}}"><i class="material-icons">visibility</i> 查看</a>
@@ -104,7 +89,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                        </div>
+                       
                     </div>
                 @endforeach
               @else

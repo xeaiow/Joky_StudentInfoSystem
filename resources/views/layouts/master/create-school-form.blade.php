@@ -1,4 +1,4 @@
-<button class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#schoolModal">新增客戶</button>
+
 <!-- Modal -->
 <div class="modal fade" id="schoolModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">

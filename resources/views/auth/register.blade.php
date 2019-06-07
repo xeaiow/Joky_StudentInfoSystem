@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', '新增管理員')
+@section('title', '新增人員')
 
 @section('content')
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet">
@@ -10,16 +10,8 @@
         <div class="col-md-2" id="side-navbar">
             @include('layouts.leftside-menubar')
         </div>
-        @else
-        <div class="col-md-3" id="side-navbar">
-            <ul class="nav flex-column">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ url('create-school') }}"><i class="material-icons">gamepad</i> <span class="nav-link-text">回客戶列表</span></a>
-                </li>
-            </ul>
-        </div>
         @endif
-        <div class="col-md-8" id="main-container">
+        <div class="col-md-12" id="main-container">
             @if (session('status'))
             <div class="alert alert-success">
                 {{ session('status') }}
@@ -30,7 +22,17 @@
             </div>
             @endif
             <div class="panel panel-default">
-                <div class="page-panel-title">新增 {{ucfirst(session('register_role'))}}</div>
+                <div class="page-panel-title text-center">
+                @switch(session('register_role'))
+                    @case('admin')
+                        新增管理員
+                        @break
+                    @case('student')
+                        新增學員
+                        @break
+                    @default
+                @endswitch
+                </div>
 
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" id="registerForm" action="{{ url('register/'.session('register_role')) }}">
@@ -520,6 +522,7 @@
                                 <button type="submit" id="registerBtn" class="btn btn-primary">
                                     新增
                                 </button>
+                                <a class="nav-link btn btn-primary" href="{{ url('create-school') }}">回客戶列表</a>
                             </div>
                         </div>
                     </form>

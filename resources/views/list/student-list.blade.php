@@ -14,13 +14,18 @@
               @foreach ($users as $user)
                 @if (Session::has('section-attendance'))
                 <ol class="breadcrumb" style="margin-top: 3%;">
-                    <li><a href="{{url('school/sections?att=1')}}" style="color:#3b80ef;">Classes &amp; Sections</a></li>
-                    <li class="active">{{ucfirst($user->role)}}s</li>
+                    <li><a href="{{url('school/sections?att=1')}}" style="color:#3b80ef;">課程出席狀況</a></li>
+                    <li class="active">
+                    @switch($user->role)
+                        @case('student')
+                            所有學生
+                            @break
+                    @endswitch</li>
                 </ol>
                 @endif
                 <div class="page-panel-title">
-                @switch(ucfirst($user->role))
-                    @case('Student')
+                @switch($user->role)
+                    @case('student')
                         所有學生
                         @break
                 @endswitch

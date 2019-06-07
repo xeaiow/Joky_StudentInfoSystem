@@ -1,13 +1,13 @@
 <form class="form-horizontal" action="{{url('exams/create')}}" method="post">
     {{ csrf_field() }}
     <div class="form-group{{ $errors->has('term') ? ' has-error' : '' }}">
-        <label for="term" class="col-md-4 control-label">Terms</label>
+        <label for="term" class="col-md-4 control-label">考試規則</label>
 
         <div class="col-md-6">
             <select id="term" class="form-control" name="term">
-               <option value="1">1st Term</option>
-               <option value="2">2nd Term</option>
-               <option value="3">3rd Term</option>
+               <option value="1">規則 1</option>
+               <option value="2">規則 2</option>
+               <option value="3">規則 3</option>
             </select>
 
             @if ($errors->has('term'))
@@ -18,10 +18,10 @@
         </div>
     </div>
     <div class="form-group{{ $errors->has('exam_name') ? ' has-error' : '' }}">
-        <label for="exam_name" class="col-md-4 control-label">Examination Name</label>
+        <label for="exam_name" class="col-md-4 control-label">試卷名稱</label>
 
         <div class="col-md-6">
-            <input id="exam_name" type="text" class="form-control" name="exam_name" value="{{ old('exam_name') }}" placeholder="Semester 1 Exam 2018, Final Exam 2019, ..." required>
+            <input id="exam_name" type="text" class="form-control" name="exam_name" value="{{ old('exam_name') }}" required>
 
             @if ($errors->has('exam_name'))
                 <span class="help-block">
@@ -31,10 +31,10 @@
         </div>
     </div>
     <div class="form-group{{ $errors->has('start_date') ? ' has-error' : '' }}">
-        <label for="start_date" class="col-md-4 control-label">Start Date</label>
+        <label for="start_date" class="col-md-4 control-label">開始日期</label>
 
         <div class="col-md-6">
-            <input id="start_date" type="text" class="form-control" name="start_date" value="{{ old('start_date') }}" placeholder="5th April..." required>
+            <input id="start_date" type="text" class="form-control" name="start_date" value="{{ old('start_date') }}" required>
 
             @if ($errors->has('start_date'))
                 <span class="help-block">
@@ -44,10 +44,10 @@
         </div>
     </div>
     <div class="form-group{{ $errors->has('end_date') ? ' has-error' : '' }}">
-        <label for="end_date" class="col-md-4 control-label">End Date</label>
+        <label for="end_date" class="col-md-4 control-label">結束日期</label>
 
         <div class="col-md-6">
-            <input id="end_date" type="text" class="form-control" name="end_date" value="{{ old('end_date') }}" placeholder="20th April..." required>
+            <input id="end_date" type="text" class="form-control" name="end_date" value="{{ old('end_date') }}" required>
 
             @if ($errors->has('end_date'))
                 <span class="help-block">
@@ -57,7 +57,7 @@
         </div>
     </div>
     <div class="form-group{{ $errors->has('classes') ? ' has-error' : '' }}">
-        <label for="classes" class="col-md-4 control-label">For Class</label>
+        <label for="classes" class="col-md-4 control-label">適用班級</label>
 
         <div class="col-md-6">
             @foreach ($classes as $class)
@@ -77,8 +77,8 @@
     </div>
     <div class="form-group">
         <div class="col-sm-offset-4 col-sm-8">
-            <a href="javascript:history.back()" class="btn btn-danger" style="margin-right: 2%;" role="button">Cancel</a>
-            <button type="submit" class="btn btn-success">Save</button>
+            <a href="javascript:history.back()" class="btn btn-danger" style="margin-right: 2%;" role="button">取消</a>
+            <button type="submit" class="btn btn-success">確定</button>
         </div>
     </div>
 </form>

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Edit')
+@section('title', '編輯資料')
 
 @section('content')
 <div class="container{{ (\Auth::user()->role == 'master')? '' : '-fluid' }}">
@@ -26,7 +26,7 @@
             </div>
             @endif
             <div class="panel panel-default">
-                <div class="page-panel-title">編輯資料</div>
+                <div class="page-panel-title text-center">編輯資料</div>
 
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ url('edit/user') }}">

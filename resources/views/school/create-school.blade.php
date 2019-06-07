@@ -29,14 +29,20 @@
               <div class="panel-body table-responsive">
                 @if(\Auth::user()->role == 'master')
                   @include('layouts.master.create-school-form')
-                  <h2>客戶列表</h2>
+                  <div class="row">
+                    <div class="col-md-11">
+                      <h2 class="text-center">客戶列表</h2>
+                    </div>
+                    <div class="col-md-1 text-right" style="line-height:80px;">
+                      <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#schoolModal">新增客戶</button>
+                    </div>
+                  </div>
                 @endif
-                <table class="table table-condensed" style="{{(\Auth::user()->role == 'master')?'':'width:800px'}}">
+                <table class="table table-hover customer-list">
                   <thead>
-                    <tr>
+                    <tr class="table-primary">
                       @if(\Auth::user()->role == 'master')
-                        <th scope="col">#</th>
-                        <th scope="col">機構</th>
+                        <th scope="col">客戶</th>
                         <th scope="col">聯絡電話</th>
                         <th scope="col">描述</th>
                       @endif
@@ -47,10 +53,6 @@
                         {{-- <th scope="col">Students</th>
                         <th scope="col">Teachers</th> --}}
                       @endif
-                      @if(\Auth::user()->role == 'master')
-                        <th scope="col"></th>
-                        <th scope="col"></th>
-                      @endif
                     </tr>
                   </thead>
                   <tbody>
@@ -58,7 +60,6 @@
                     @if(\Auth::user()->role == 'master' || \Auth::user()->school_id == $school->id)
                     <tr>
                       @if(\Auth::user()->role == 'master')
-                      <td>{{($loop->index + 1)}}</td>
                       <td><small>{{$school->name}}</small></td>
                       <td><small>{{$school->code}}</small></td>
                       <td><small>{{$school->about}}</small></td>
@@ -115,10 +116,10 @@
                       @endif
                       @if(\Auth::user()->role == 'master')
                         <td>
-                          <a class="btn btn-danger btn-sm" role="button" href="{{url('register/admin/'.$school->id.'/'.$school->code)}}"><small>新增管理員</small></a>
+                          <a class="btn btn-primary btn-xs" role="button" href="{{url('register/admin/'.$school->id.'/'.$school->code)}}"><small>新增</small></a>
                         </td>
                         <td>
-                          <a class="btn btn-success btn-sm" role="button" href="{{url('school/admin-list/'.$school->id)}}"><small>查看管理員</small></a>
+                          <a class="btn btn-primary btn-xs" role="button" href="{{url('school/admin-list/'.$school->id)}}"><small>查看</small></a>
                         </td>
                       @endif
                     </tr>
@@ -160,7 +161,7 @@
                                           @include('layouts.master.create-section-form')
                                         </div>
                                         <div class="modal-footer">
-                                          <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+                                          <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">關閉</button>
                                         </div>
                                       </div>
                                     </div>

@@ -46,7 +46,7 @@
         <img src="{{asset('01-progress.gif')}}" class="loader-gif" />
     </div>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
+        <nav class="navbar navbar-default navbar-static-top navbar-dark bg-dark">
             <div class="container">
                 <div class="navbar-header">
 
@@ -60,10 +60,13 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/home') }}" style="color: #000;">
+                    <!-- <a class="navbar-brand" href="{{ url('/home') }}" style="color: #000;">
                         {{ (Auth::check() && (Auth::user()->role == 'student' || Auth::user()->role == 'teacher' ||
                         Auth::user()->role == 'admin' || Auth::user()->role == 'accountant' || Auth::user()->role ==
                         'librarian'))?Auth::user()->school->name:'Joky 補習班管理系統' }}
+                    </a> -->
+                    <a>
+                        <img src="http://140.135.114.124:90/multi/images/logo.png" />
                     </a>
                 </div>
 
@@ -74,7 +77,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @guest
-                        <li><a href="{{ route('login') }}" style="color: #000;">Login</a></li>
+                        <li><a href="{{ route('login') }}" style="color: #000;">登入</a></li>
                         @else
                         @if(\Auth::user()->role == 'student')
                         <li class="nav-item">
@@ -93,8 +96,27 @@
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle nav-link-align-btn" data-toggle="dropdown" role="button"
                                 aria-expanded="false" aria-haspopup="true">
-                                <span class="label label-danger">
-                                    {{ ucfirst(\Auth::user()->role) }}
+                                <span class="label label-success">
+                                @switch(\Auth::user()->role)
+                                    @case('master')
+                                        開發者
+                                        @break
+                                    @case('admin')
+                                        管理員
+                                        @break
+                                    @case('teacher')
+                                        教師
+                                        @break
+                                    @case('student')
+                                        學生
+                                        @break
+                                    @case('accountant')
+                                        會計師
+                                        @break
+                                    @case('librarian')
+                                        圖書館員
+                                        @break
+                                    @endswitch
                                 </span>&nbsp;&nbsp;
                                 @if(!empty(Auth::user()->pic_path))
                                 <img src="{{asset('01-progress.gif')}}" data-src="{{url(Auth::user()->pic_path)}}" alt="Profile Picture"
@@ -152,9 +174,10 @@
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css') }}" id="bootstrap-print-id"> --}}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous" id="bootstrap-print-id">
-    <link href="{{asset('css/flatly.bootstrap-3.3.7.min.css') }}" rel="stylesheet" id="bootswatch-print-id">
+    <link href="https://bootswatch.com/3/yeti/bootstrap.min.css" rel="stylesheet" id="bootswatch-print-id">
     <link href="{{asset('css/dataTables-1.10.16.bootstrap.min.css') }}" rel="stylesheet">
 
+    
     <style>
         .navbar-default .navbar-toggle .icon-bar {
             background-color: #888;
@@ -170,11 +193,6 @@
 
         a {
             color: #5f6368;
-        }
-
-        a:hover,
-        a:focus {
-            color: #202124;
         }
 
         .panel {
@@ -306,21 +324,17 @@
             background-color: #ffffff;
         }
 
-        .navbar-default .navbar-nav>li>a,
-        .navbar-default .navbar-nav>li>a:hover,
-        .navbar-default .navbar-nav>li>a:focus,
-        .navbar-default .navbar-nav>li>a:active,
-        .navbar>.container .navbar-brand,
-        .navbar>.container-fluid .navbar-brand {
-            color: #000 !important;
-        }
-
         #side-navbar {
             background-color: #fff;
             padding-top: 1%;
             padding-right: 0%;
             font-size: 13px;
             font-weight: bold;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: #262626 !important;
+            color: #E9EAED !important;
         }
 
         #main-container {}
@@ -335,25 +349,6 @@
 
         .navbar-default .navbar-nav .open .dropdown-menu>.active>a {
             color: #fff;
-        }
-
-        .navbar-default .navbar-nav>.open>a,
-        .navbar-default .navbar-nav>.open>a:hover,
-        .navbar-default .navbar-nav>.open>a:focus {
-            color: #000;
-            background-color: #f9fafa;
-        }
-
-        .dropdown-menu>li>a:hover,
-        .dropdown-menu>li>a:focus {
-            color: #000;
-            background-color: #f9fafa;
-        }
-
-        .navbar-default .navbar-nav>.active>a,
-        .navbar-default .navbar-nav>.active>a:hover,
-        .navbar-default .navbar-nav>.active>a:focus {
-            background-color: #f9fafa;
         }
 
         .page-panel-title {
@@ -374,6 +369,9 @@
             padding-top: 0px !important;
             padding-bottom: 0px !important;
             line-height: 60px !important;
+        }
+        .customer-list th, .customer-list td, .table-list th, .table-list td {
+            font-size: 20px;
         }
     </style>
     <!-- Scripts -->

@@ -3,20 +3,19 @@
 <table class="table table-bordered table-data-div table-condensed table-striped table-hover">
   <thead>
     <tr>
-      <th scope="col">#</th>
       @if(Auth::user()->role == 'admin')
         @if (!Session::has('section-attendance'))
         <th scope="col">操作</th>
         @endif
       @endif
-      <th scope="col">編號</th>
-      <th scope="col">姓名</th>
+      <th scope="col" class="text-center">學號</th>
+      <th scope="col" class="text-center">姓名</th>
       @foreach ($users as $user)
         @if($user->role == 'student')
           @if(Auth::user()->role == 'student' || Auth::user()->role == 'teacher' || Auth::user()->role == 'admin')
-            <th scope="col">出勤狀況</th>
+            <th scope="col" class="text-center">出勤狀況</th>
             {{--@if (!Session::has('section-attendance'))
-            <th scope="col">Marks</th>
+            <th scope="col">備註</th>
             @endif --}}
           @endif
             @if (!Session::has('section-attendance'))
@@ -52,7 +51,6 @@
   <tbody>
     @foreach ($users as $key=>$user)
     <tr>
-      <th scope="row">{{ ($current_page-1) * $per_page + $key + 1 }}</th>
       @if(Auth::user()->role == 'admin')
         @if (!Session::has('section-attendance'))
         <td>
@@ -77,7 +75,7 @@
           </small></td>
       @if($user->role == 'student')
         @if(Auth::user()->role == 'student' || Auth::user()->role == 'teacher' || Auth::user()->role == 'admin')
-          <td><small><a class="btn btn-xs btn-info" role="button" href="{{url('attendances/0/'.$user->id.'/0')}}">查看</a></small></td>
+          <td class="text-center"><small><a class="btn btn-xs btn-info" role="button" href="{{url('attendances/0/'.$user->id.'/0')}}">查看</a></small></td>
           {{--@if (!Session::has('section-attendance'))
           <td><small><a class="btn btn-xs btn-success" role="button" href="{{url('grades/'.$user->id)}}">查看</a></small></td>
           @endif --}}

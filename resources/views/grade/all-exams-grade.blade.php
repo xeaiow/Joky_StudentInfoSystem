@@ -9,7 +9,7 @@
             @include('layouts.leftside-menubar')
         </div>
         <div class="col-md-8" id="main-container">
-            <h2>Marks and Grades of All Classes</h2>
+            <h2>所有的班級與分數資料</h2>
             <div class="panel panel-default">
               @if(count($classes) > 0)
                 <div class="panel-body">
@@ -21,21 +21,15 @@
                     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                     @foreach($classes as $class)
                         <div class="panel panel-default">
-                            <div class="page-panel-title" role="tab" id="heading{{$class->id}}">
-                            <a class="panel-title collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{$class->id}}" aria-expanded="false" aria-controls="collapse{{$class->id}}">
-                                <h5>
-                                {{$class->class_number}} {{$class->group}} <span class="pull-right"><b>Click to view all Sections under this Class+</b></span>
-                                </h5>
-                            </a>
-                            </div>
-                            <div id="collapse{{$class->id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{$class->id}}">
+                        <div>教室編號：{{ $class->class_number }}</div>
+                        <div>{{ empty($class->group) ? '' : '群組：'.$class->group }}</div>
                                 <div class="panel-body">
                                     <table class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                                <th scope="col">Section Name</th>
-                                                <th scope="col">View Each Student's Grade History</th>
-                                                <th scope="col">View all Students Marks under this Section</th>
+                                                <th scope="col">教室</th>
+                                                <th scope="col">學生歷史成績</th>
+                                                <th scope="col">本課程所有學生分數</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -46,10 +40,10 @@
                                                     <a href="{{url('grades/section/'.$section->id)}}">{{$section->section_number}}</a>
                                                 </td>
                                                 <td>
-                                                    <a href="{{url('section/students/'.$section->id)}}" class="btn btn-info btn-xs"><i class="material-icons">visibility</i> View Each Student's Grade History</a>
+                                                    <a href="{{url('section/students/'.$section->id)}}" class="btn btn-primary btn-xs"><i class="material-icons">visibility</i> 瀏覽</a>
                                                 </td>
                                                 <td>
-                                                    <a href="{{url('grades/section/'.$section->id)}}" role="button" class="btn btn-xs btn-danger"><i class="material-icons">visibility</i> View all Students Marks under this Section</a>
+                                                    <a href="{{url('grades/section/'.$section->id)}}" role="button" class="btn btn-xs btn-primary"><i class="material-icons">visibility</i> 瀏覽</a>
                                                 </td>
                                                 </tr>
                                                 @endif
@@ -57,7 +51,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>
+                           
                         </div>
                     @endforeach
                     </div>

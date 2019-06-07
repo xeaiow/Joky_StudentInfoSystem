@@ -9,7 +9,7 @@
         </div>
         <div class="col-md-10" id="main-container">
             <div class="panel panel-default">
-                <div class="page-panel-title">Add Notice</div>
+                <div class="page-panel-title text-center">新增通知</div>
                 <div class="panel-body">
                     @if (session('status'))
                         <div class="alert alert-success">

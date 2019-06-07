@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', '主控台')
 @section('content')
 <style>
     .badge-download {
@@ -24,36 +24,8 @@
                     </div>
                     @endif
                     <div class="row">
-                        <div class="page-panel-title">主控台</div>
-                        <div class="col-sm-2">
-                            <div class="card text-white bg-primary mb-3">
-                                <div class="card-header">學生總數：<b>{{$totalStudents}}</b></div>
-                            </div>
-                        </div>
-                        <div class="col-sm-2">
-                            <div class="card text-white bg-success mb-3">
-                                <div class="card-header">教師總數：<b>{{$totalTeachers}}</b></div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="card text-white bg-dark mb-3">
-                                <div class="card-header">書籍種類：<b>{{$totalBooks}}</b></div>
-                            </div>
-                        </div>
-                        <div class="col-sm-2">
-                            <div class="card text-white bg-danger mb-3">
-                                <div class="card-header">課程總數：<b>{{$totalClasses}}</b></div>
-                            </div>
-                        </div>
-                        <div class="col-sm-2">
-                            <div class="card text-white bg-info mb-3">
-                                <div class="card-header">科目總數：<b>{{$totalSections}}</b></div>
-                            </div>
-                        </div>
-                    </div>
-                    <p></p>
-                    <div class="row">
-                        <div class="col-sm-8">
+                        <!-- 當前考試 -->
+                        <div class="col-sm-6">
                             <div class="panel panel-default">
                                 <div class="page-panel-title">當前考試</div>
                                 <div class="panel-body">
@@ -78,7 +50,36 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-4">
+                        <!-- 當前考試_ -->
+                        <!-- 資訊板 -->
+                        <div class="col-sm-6">
+                        <div class="panel panel-default">
+                                <div class="page-panel-title">統計資料</div>
+                                <div class="panel-body">
+                                    <table class="table">
+                                        <tr>
+                                            <th>學生總數</th>
+                                            <th>教師總數</th>
+                                            <th>書籍種類</th>
+                                            <th>課程總數</th>
+                                            <th>科目總數</th>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ $totalStudents }}</td>
+                                            <td>{{ $totalTeachers }}</td>
+                                            <td>{{ $totalBooks }}</td>
+                                            <td>{{ $totalClasses }}</td>
+                                            <td>{{ $totalSections }}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 資訊板_ -->
+                    </div>
+                    <p></p>
+                    <div class="row">
+                        <div class="col-sm-6">
                             <div class="panel panel-default">
                                 <div class="page-panel-title">通知</div>
                                 <div class="panel-body pre-scrollable">
@@ -101,9 +102,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <div class="panel panel-default">
                                 <div class="page-panel-title">事件</div>
                                 <div class="panel-body pre-scrollable">
@@ -126,7 +125,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-4">
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
                             <div class="panel panel-default">
                                 <div class="page-panel-title">待辦事項</div>
                                 <div class="panel-body pre-scrollable">
@@ -149,7 +150,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <div class="panel panel-default">
                                 <div class="page-panel-title">課程大綱</div>
                                 <div class="panel-body pre-scrollable">
