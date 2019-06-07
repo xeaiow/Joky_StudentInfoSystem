@@ -11,10 +11,18 @@
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>
+<<<<<<< HEAD
                     <th>課程名稱</th>
                     <th>課程類型</th>
                     <th>上課時間</th>
                     <th>授課教師</th>
+=======
+                    <th>教室</th>
+                    <th>考試名稱</th>
+                    <th>考試科目</th>
+                    <th>考試時間</th>
+                    <th>監考老師</th>
+>>>>>>> aef31950fb71df21c686e10884dd57bd54aece5e
                 </tr>
             </thead>
           <tbody>

@@ -4,14 +4,14 @@
     <thead>
       <tr>
         <th scope="col">#</th>
-        <th scope="col">Book Title</th>
-        <th scope="col">Book Code</th>
-        <th scope="col">Type</th>
-        <th scope="col">Borrower Name</th>
-        <th scope="col">Borrower Code</th>
-        <th scope="col">Issue Date</th>
-        <th scope="col">Return Date</th>
-        <th scope="col">Action</th>
+        <th scope="col">書名</th>
+        <th scope="col">書籍編號</th>
+        <th scope="col">類型</th>
+        <th scope="col">租借人</th>
+        <th scope="col">租借人編號</th>
+        <th scope="col">租借日期</th>
+        <th scope="col">歸還日期</th>
+        <th scope="col">操作</th>
       </tr>
     </thead>
     <tbody>
@@ -30,7 +30,7 @@
             {{csrf_field()}}
             <input type="hidden" name="issue_id" value="{{$book->id}}">
             <input type="hidden" name="book_id" value="{{$book->book_id}}">
-            <button class="btn btn-xs btn-success">Save as Returned</button>
+            <button class="btn btn-xs btn-success">歸還</button>
           </form>
         </td>
       </tr>

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Add Syllabus')
+@section('title', '新增教學大綱')
 <!-- Main Quill library -->
 {{--<script src="//cdn.quilljs.com/1.3.5/quill.js"></script>--}}
 

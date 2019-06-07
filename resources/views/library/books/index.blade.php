@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'All Books')
+@section('title', '所有書籍')
 
 @section('content')
     <div class="container-fluid">
@@ -25,12 +25,12 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Title</th>
-                                        <th>Code</th>
-                                        <th>Author</th>
-                                        <th>Type</th>
-                                        <th>Quantity</th>
-                                        <th>Actions</th>
+                                        <th>書名</th>
+                                        <th>書籍編號</th>
+                                        <th>作者</th>
+                                        <th>類型</th>
+                                        <th>數量</th>
+                                        <th>操作</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -45,7 +45,7 @@
                                             <td>
                                                 <div class="btn-group">
                                                     <a href="{{ route('library.books.show', $book->id) }}" class="btn btn-xs btn-info">
-                                                        details
+                                                        查看
                                                     </a>
                                                 </div>
                                             </td>

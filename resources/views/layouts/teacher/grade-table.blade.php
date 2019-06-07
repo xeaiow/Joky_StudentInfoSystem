@@ -3,9 +3,9 @@
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">Student Code</th>
-      <th scope="col">Student Name</th>
-      <th scope="col">Attendance</th>
+      <th scope="col">學生編號</th>
+      <th scope="col">學生姓名</th>
+      <th scope="col">出席狀況</th>
         @for($i=1;$i<=5;$i++)
           <th scope="col">Quiz {{$i}}</th>
         @endfor

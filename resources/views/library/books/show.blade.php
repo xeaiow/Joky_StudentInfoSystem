@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'All Books')
+@section('title', '所有書籍')
 
 @section('content')
     <div class="container-fluid">
@@ -10,7 +10,7 @@
             </div>
             <div class="col-md-10" id="main-container">
                 <div class="panel panel-default">
-                    <div class="page-panel-title">Book Details</div>
+                    <div class="page-panel-title">書籍詳情</div>
 
                     <div class="panel-body">
                         @if (session('status'))
@@ -22,43 +22,43 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Book Code</th>
+                                    <th>書籍編號</th>
                                     <td>{{ $book->book_code }}</td>
-                                    <th>Book Title</th>
+                                    <th>書名</th>
                                     <td>{{ $book->title }}</td>
-                                    <th>Author</th>
+                                    <th>作者</th>
                                     <td>{{ $book->author }}</td>
-                                    <th>About</th>
+                                    <th>關於</th>
                                     <td>{{ $book->about }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Quantity</th>
+                                    <th>數量</th>
                                     <td>{{ $book->quantity }}</td>
-                                    <th>Rack No</th>
+                                    <th>幾號架上</th>
                                     <td>{{ $book->rackNo }}</td>
-                                    <th>row No</th>
+                                    <th>第幾排</th>
                                     <td>{{ $book->rowNo }}</td>
-                                    <th>Type</th>
+                                    <th>類型</th>
                                     <td>{{ $book->type }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Image</th>
+                                    <th>封面</th>
                                     <td>
                                         <img src="{{ $book->img_path }}" alt="{{ $book->title }}" />
                                     </td>
-                                    <th>Price</th>
+                                    <th>價錢</th>
                                     <td>{{ $book->price }}</td>
-                                    <th>Class</th>
+                                    <th>分級</th>
                                     <td>{{ $book->class->class_number }}</td>
-                                    <th>School</th>
+                                    <th>學校</th>
                                     <td>{{ $book->school->name }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Created At</th>
+                                    <th>購買日期</th>
                                     <td>{{ $book->created_at }}</td>
-                                    <th>Updated At</th>
+                                    <th>更新時間</th>
                                     <td>{{ $book->updated_at }}</td>
-                                    <th>Registered By</th>
+                                    <th>書籍註冊人</th>
                                     <td>{{ $book->user->name }}</td>
                                 </tr>
                             </thead>
@@ -66,7 +66,7 @@
 
                     </div>
                     <div class="row">
-                        <a href="{{ route('library.books.index') }}" class="btn btn-xs btn-primary">all books</a>
+                        <a href="{{ route('library.books.index') }}" class="btn btn-xs btn-primary">返回</a>
                     </div>
                 </div>
             </div>

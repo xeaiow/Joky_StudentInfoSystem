@@ -8,11 +8,20 @@
   <table class="table table-striped table-hover">
   <thead>
     <tr>
+<<<<<<< HEAD
       <th scope="col">考試卷名稱</th>
       <th scope="col">發佈公告</th>
       <th scope="col">發佈結果</th>
       <th scope="col">建立時間</th>
       <th scope="col">啟用</th>
+=======
+      <th scope="col">#</th>
+      <th scope="col">考試科目名稱</th>
+      <th scope="col">Notice Published</th>
+      <th scope="col">Result Published</th>
+      <th scope="col">建立考試時間</th>
+      <th scope="col">Set Active</th>
+>>>>>>> aef31950fb71df21c686e10884dd57bd54aece5e
     </tr>
   </thead>
   <tbody>
