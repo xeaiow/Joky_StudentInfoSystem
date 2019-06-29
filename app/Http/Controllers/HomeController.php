@@ -54,26 +54,40 @@ class HomeController extends Controller
         $totalSections = \Cache::remember('totalSections-'.$school_id, $minutes, function () use ($classes) {
           return \App\Section::whereIn('class_id', $classes)->count();
         });
+
+        // 取得通知
         $notices = \Cache::remember('notices-'.$school_id, $minutes, function () use($school_id) {
           return \App\Notice::where('school_id', $school_id)
-                            ->where('active',1)
+                            ->where('active', 1)
+                            ->take(5)
                             ->get();
         });
+
+        // 取得事件
         $events = \Cache::remember('events-'.$school_id, $minutes, function () use($school_id) {
           return \App\Event::where('school_id', $school_id)
                           ->where('active',1)
+                          ->take(5)
                           ->get();
         });
+
+        // 取得代辦事項
         $routines = \Cache::remember('routines-'.$school_id, $minutes, function () use($school_id) {
           return \App\Routine::where('school_id', $school_id)
                             ->where('active',1)
+                            ->take(5)
                             ->get();
         });
+
+        // 取得課程大綱
         $syllabuses = \Cache::remember('syllabuses-'.$school_id, $minutes, function () use($school_id) {
           return \App\Syllabus::where('school_id', $school_id)
                               ->where('active',1)
+                              ->take(5)
                               ->get();
         });
+
+        // 取得考試
         $exams = \Cache::remember('exams-'.$school_id, $minutes, function () use($school_id) {
           return \App\Exam::where('school_id', $school_id)
                           ->where('active',1)

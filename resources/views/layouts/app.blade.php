@@ -13,6 +13,10 @@
         || Auth::user()->role == 'admin' || Auth::user()->role == 'accountant' || Auth::user()->role ==
         'librarian'))?Auth::user()->school->name:'Joky 補習班管理系統' }}</title>
     <style>
+        @import url('https://fonts.googleapis.com/css?family=Noto+Sans+TC:300&display=swap');
+        * {
+            font-family: 'Noto Sans TC', sans-serif;
+        }
         .loader {
             position: fixed;
             left: 0px;
