@@ -46,7 +46,7 @@
         <img src="{{asset('01-progress.gif')}}" class="loader-gif" />
     </div>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top navbar-dark bg-dark">
+        <nav class="navbar navbar-default bg-light">
             <div class="container">
                 <div class="navbar-header">
 
@@ -60,14 +60,12 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <!-- <a class="navbar-brand" href="{{ url('/home') }}" style="color: #000;">
+                    <a class="navbar-brand nav-link dropdown-toggle nav-link-align-btn" href="{{ url('/home') }}" style="color: #000;">
                         {{ (Auth::check() && (Auth::user()->role == 'student' || Auth::user()->role == 'teacher' ||
                         Auth::user()->role == 'admin' || Auth::user()->role == 'accountant' || Auth::user()->role ==
                         'librarian'))?Auth::user()->school->name:'Joky 補習班管理系統' }}
-                    </a> -->
-                    <a>
-                        <img src="http://140.135.114.124:90/multi/images/logo.png" />
                     </a>
+                    
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -170,8 +168,6 @@
     </div>
     <!-- Styles -->
     <!-- Latest compiled and minified CSS -->
-    {{--
-    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css') }}" id="bootstrap-print-id"> --}}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous" id="bootstrap-print-id">
     <link href="https://bootswatch.com/3/yeti/bootstrap.min.css" rel="stylesheet" id="bootswatch-print-id">
@@ -332,23 +328,39 @@
             font-weight: bold;
         }
 
-        .dropdown-menu li a:hover {
-            background-color: #262626 !important;
-            color: #E9EAED !important;
-        }
-
         #main-container {}
 
         .navbar-nav .open .dropdown-menu {
             background-color: #fff;
         }
 
-        .navbar-default .navbar-nav .open .dropdown-menu>li>a {
-            color: #000;
+        .navbar-nav .dropdown a {
+            color: #000 !important;
         }
 
-        .navbar-default .navbar-nav .open .dropdown-menu>.active>a {
-            color: #fff;
+        .dropdown a:hover {
+            background-color: #f9fafa !important;
+        }
+
+        .dropdown li a {
+            color: #000 !important;
+        }
+
+        .navbar-default .navbar-nav>.open>a,
+        .navbar-default .navbar-nav>.open>a:hover,
+        .navbar-default .navbar-nav>.open>a:focus {
+            background-color: #f9fafa !important;
+        }
+
+        .dropdown-menu>li>a:hover,
+        .dropdown-menu>li>a:focus {
+            background-color: #f9fafa !important;
+        }
+
+        .navbar-default .navbar-nav>.active>a,
+        .navbar-default .navbar-nav>.active>a:hover,
+        .navbar-default .navbar-nav>.active>a:focus {
+            background-color: #f9fafa;
         }
 
         .page-panel-title {
@@ -373,6 +385,7 @@
         .customer-list th, .customer-list td, .table-list th, .table-list td {
             font-size: 20px;
         }
+
     </style>
     <!-- Scripts -->
     <script src="{{ asset('js/bootstrap-3.3.7.min.js') }}"></script>
