@@ -1,11 +1,9 @@
 <form class="form-horizontal" action="{{url('exams/create')}}" method="post">
     {{ csrf_field() }}
     <div class="form-group{{ $errors->has('term') ? ' has-error' : '' }}">
-<<<<<<< HEAD
+    
         <label for="term" class="col-md-4 control-label">考試規則</label>
-=======
         <label for="term" class="col-md-4 control-label">科目</label>
->>>>>>> aef31950fb71df21c686e10884dd57bd54aece5e
 
         <div class="col-md-6">
             <select id="term" class="form-control" name="term">

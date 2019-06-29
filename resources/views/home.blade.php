@@ -24,8 +24,46 @@
                     </div>
                     @endif
                     <div class="row">
+                        <div class="col-sm-2">
+                            <div class="card bg-info text-white">
+                                <div class="card-header">
+                                    學生人數：{{ $totalStudents }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="card bg-info text-white">
+                                <div class="card-header">
+                                    教師人數：{{ $totalTeachers }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="card bg-dark text-white">
+                                <div class="card-header">
+                                    書籍總數：{{ $totalBooks }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="card bg-danger text-white">
+                                <div class="card-header">
+                                    課程總數：{{ $totalClasses }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="card bg-danger text-white">
+                                <div class="card-header">
+                                    科目總數：{{ $totalSections }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
                         <!-- 當前考試 -->
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <div class="panel panel-default">
                                 <div class="page-panel-title">當前考試</div>
                                 <div class="panel-body">
@@ -51,33 +89,9 @@
                             </div>
                         </div>
                         <!-- 當前考試_ -->
-                        <!-- 資訊板 -->
-                        <div class="col-sm-6">
-                        <div class="panel panel-default">
-                                <div class="page-panel-title">統計資料</div>
-                                <div class="panel-body">
-                                    <table class="table">
-                                        <tr>
-                                            <th>學生總數</th>
-                                            <th>教師總數</th>
-                                            <th>書籍種類</th>
-                                            <th>課程總數</th>
-                                            <th>科目總數</th>
-                                        </tr>
-                                        <tr>
-                                            <td>{{ $totalStudents }}</td>
-                                            <td>{{ $totalTeachers }}</td>
-                                            <td>{{ $totalBooks }}</td>
-                                            <td>{{ $totalClasses }}</td>
-                                            <td>{{ $totalSections }}</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- 資訊板_ -->
+                       
                     </div>
-                    <p></p>
+                    <br />
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="panel panel-default">
