@@ -1,4 +1,4 @@
-<a class="btn btn-xs btn-info pull-right" data-toggle="collapse" href="#collapseForNewCourse{{$section->id}}" aria-expanded="false" aria-controls="collapseForNewCourse{{$section->id}}">+ Add New Course</a>
+<a class="btn btn-xs btn-primary pull-right" data-toggle="collapse" href="#collapseForNewCourse{{$section->id}}" aria-expanded="false" aria-controls="collapseForNewCourse{{$section->id}}">新增課程</a>
   <div class="collapse" id="collapseForNewCourse{{$section->id}}" style="margin-top:1%;">
     <div class="panel panel-default">
       <div class="panel-body">
@@ -7,16 +7,16 @@
           <input type="hidden" name="class_id" value="{{$class->id}}"/>
           <input type="hidden" name="section_id" value="{{$section->id}}"/>
           <div class="form-group">
-            <label for="courseName{{$section->id}}" class="col-sm-2 control-label">Course Name</label>
+            <label for="courseName{{$section->id}}" class="col-sm-2 control-label">課程名稱</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="courseName{{$section->id}}" name="course_name" placeholder="Course Name">
+              <input type="text" class="form-control" id="courseName{{$section->id}}" name="course_name">
             </div>
           </div>
           <div class="form-group">
-            <label for="teacherDepartment{{$section->id}}" class="col-sm-2 control-label">Teacher Department</label>
+            <label for="teacherDepartment{{$section->id}}" class="col-sm-2 control-label">選擇教師類別</label>
             <div class="col-sm-10">
               <select class="form-control" id="teacherDepartment{{$section->id}}" name="teacher_department">
-                <option value="0" selected disabled>Select Department</option>
+                <option value="0" selected disabled>請選擇</option>
                 @if(count($departments) > 0)
                   {{$departments_of_this_school = $departments->filter(function ($department) use ($school){
                     return $department->school_id == $school->id;
@@ -29,10 +29,10 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="assignTeacher{{$section->id}}" class="col-sm-2 control-label">Assign Course Teacher</label>
+            <label for="assignTeacher{{$section->id}}" class="col-sm-2 control-label">選擇教師</label>
             <div class="col-sm-10">
               <select class="form-control" id="assignTeacher{{$section->id}}" name="teacher_id">
-                <option value="0" selected disabled>Select Department First</option>
+                <option value="0" selected disabled>請選擇</option>
                 @if(count($teachers) > 0)
                   {{$teachers_of_this_school = $teachers->filter(function ($teacher) use ($school){
                     return $teacher->school_id == $school->id;
@@ -45,25 +45,24 @@
             </div>
           </div>
         <div class="form-group">
-          <label for="course_type{{$section->id}}" class="col-sm-2 control-label">Course Type</label>
+          <label for="course_type{{$section->id}}" class="col-sm-2 control-label">課程類型</label>
           <div class="col-sm-10">
             <select class="form-control" id="course_type{{$section->id}}" name="course_type">
-              <option value="core">Core</option>
-              <option value="elective">Elective</option>
-              <option value="optional">Optional</option>
+              <option value="core">主修</option>
+              <option value="elective">選修</option>
+              <option value="optional">其他</option>
             </select>
           </div>
         </div>
         <div class="form-group">
-          <label for="courseTime{{$section->id}}" class="col-sm-2 control-label">Course Time</label>
+          <label for="courseTime{{$section->id}}" class="col-sm-2 control-label">課程時間</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="courseTime{{$section->id}}" name="course_time" placeholder="Course Time">
-            <span id="helpBlock" class="help-block">Example: 12:50PM-01:40PM Sunday</span>
+            <input type="text" class="form-control" id="courseTime{{$section->id}}" name="course_time" placeholder="2019-08-01">
           </div>
         </div>
         <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-danger">Submit</button>
+          <div class="col-sm-offset-2 col-sm-10 text-right">
+            <button type="submit" class="btn btn-danger">新增</button>
           </div>
         </div>
       </form>

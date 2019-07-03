@@ -56,7 +56,7 @@
             <a href="{{url('course/students/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-info btn-xs"><i class="material-icons">message</i> 推送訊息</a>
           </td>
         @else
-          <td><small>Save under Exam to Add Student</small></td>
+          <td><small>尚無資料</small></td>
         @endif
 
         @if(!$student && ($course->teacher_id == Auth::user()->id || Auth::user()->role == 'admin') && $course->exam_id != 0)
@@ -64,7 +64,7 @@
             <a href="{{url('attendances/students/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-primary btn-xs"><i class="material-icons">spellcheck</i> 點名</a>
           </td>
         @else
-          <td><small>Save under Exam to Take Attendance</small></td>
+          <td><small>尚無資料</small></td>
         @endif
 
       @endif

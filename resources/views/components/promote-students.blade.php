@@ -7,14 +7,13 @@
         <table class="table table-bordered table-condensed table-striped table-hover">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Code</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Left School</th>
-                    <th scope="col">From Session</th>
-                    <th scope="col">To Session</th>
-                    <th scope="col">From Section</th>
-                    <th scope="col">To Section</th>
+                    <th scope="col">學號</th>
+                    <th scope="col">姓名</th>
+                    <th scope="col">離校</th>
+                    <th scope="col">時間從</th>
+                    <th scope="col">到時間</th>
+                    <th scope="col">從課程</th>
+                    <th scope="col">到課程</th>
                 </tr>
             </thead>
             <tbody>
@@ -39,10 +38,10 @@
                         <input class="form-control datepicker" name="to_session[]"
                             value="{{date('Y', strtotime('+1 year'))}}">
                     </td>
-                    <td style="text-align: center;">
+                    <!-- <td style="text-align: center;">
                         <small>Class: {{$student->section->class->class_number}} - Section:
                             {{$student->section->section_number}}</small>
-                    </td>
+                    </td> -->
                     <td>
                         <select id="to_section" class="form-control" name="to_section[]">
                             @foreach($classes as $class)
@@ -59,8 +58,8 @@
                 @endforeach
             </tbody>
         </table>
-        <div style="text-align:center;">
-            <input type="submit" class="btn btn-primary" value="Submit">
+        <div style="text-align:right;">
+            <input type="submit" class="btn btn-primary" value="確定">
         </div>
     </form>
 </div>

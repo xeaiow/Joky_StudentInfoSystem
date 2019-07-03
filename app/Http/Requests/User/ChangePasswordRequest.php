@@ -32,4 +32,14 @@ class ChangePasswordRequest extends FormRequest
             'new_password' => 'required|min:6',
         ];
     }
+
+    public function messages()
+{
+    return [
+        'old_password.required' => '請填寫舊密碼',
+        'old_password.min' => '舊密碼不得少於 :min 個字元',
+        'new_password.required'  => '請填寫新密碼',
+        'new_password.min'  => '新密碼不得少於 :min 個字元'
+    ];
+}
 }

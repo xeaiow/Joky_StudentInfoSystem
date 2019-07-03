@@ -51,17 +51,26 @@ class SectionController extends Controller
      */
     public function store(Request $request)
     {
-      $request->validate([
+      $rules = [
         'section_number' => 'required',
         'room_number' => 'required|numeric',
         'class_id' => 'required|numeric',
-      ]);
+      ];
+      $messages = [
+        'section_number.required' => '班級名稱必須填寫',
+        'room_number.required' => '教室必須填寫',
+        'room_number.numeric' => '教室只能為數字',
+        'class_id.required' => '課程編號遺失',
+        'class_id.numeric' => '課程編號不合法'
+      ];
+      $this->validate($request, $rules, $messages);
+
       $tb = new Section;
       $tb->section_number = $request->section_number;
       $tb->room_number = $request->room_number;
       $tb->class_id = $request->class_id;
       $tb->save();
-      return back()->with('status', 'Created');
+      return back()->with('status', '新增成功');
     }
 
     /**

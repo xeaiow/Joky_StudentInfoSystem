@@ -3,7 +3,6 @@
     <div class="form-group{{ $errors->has('term') ? ' has-error' : '' }}">
     
         <label for="term" class="col-md-4 control-label">考試規則</label>
-        <label for="term" class="col-md-4 control-label">科目</label>
 
         <div class="col-md-6">
             <select id="term" class="form-control" name="term">
@@ -20,11 +19,8 @@
         </div>
     </div>
     <div class="form-group{{ $errors->has('exam_name') ? ' has-error' : '' }}">
-<<<<<<< HEAD
+
         <label for="exam_name" class="col-md-4 control-label">試卷名稱</label>
-=======
-        <label for="exam_name" class="col-md-4 control-label">考試名稱</label>
->>>>>>> aef31950fb71df21c686e10884dd57bd54aece5e
 
         <div class="col-md-6">
             <input id="exam_name" type="text" class="form-control" name="exam_name" value="{{ old('exam_name') }}" required>
@@ -63,11 +59,8 @@
         </div>
     </div>
     <div class="form-group{{ $errors->has('classes') ? ' has-error' : '' }}">
-<<<<<<< HEAD
+
         <label for="classes" class="col-md-4 control-label">適用班級</label>
-=======
-        <label for="classes" class="col-md-4 control-label">考試教室</label>
->>>>>>> aef31950fb71df21c686e10884dd57bd54aece5e
 
         <div class="col-md-6">
             @foreach ($classes as $class)

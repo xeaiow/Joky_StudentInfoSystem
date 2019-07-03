@@ -20,6 +20,17 @@ class CreateAccountantRequest extends FormRequest
         return true;
     }
 
+    public function attributes()
+    {
+        return [
+            'name' => '姓名',
+            'email' => '電子信箱',
+            'password' => '密碼',
+            'gender' => '性別',
+            'phone_number' => '手機號碼'
+        ];
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -31,7 +42,6 @@ class CreateAccountantRequest extends FormRequest
             'name' => 'required|string|max:255',
             'password' => 'required|string|min:6|confirmed',
             'gender' => 'required',
-            'blood_group' => 'required',
             'phone_number' => 'required|unique:users',
             'email' => 'sometimes|email|max:255|unique:users',
         ];
@@ -40,8 +50,16 @@ class CreateAccountantRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => '姓名為必填欄位',
-            'password.required'  => 'A message is required',
+            'required' => ':attribute必須填寫',
+            'string' => ':attribute必須為文字',
+            'numeric' => ':attribute必須為數字',
+            'name.max' => '姓名最長不得大於 20 個字元',
+            'email.max' => '信箱最長不得大於 255 個字元',
+            'email' => ':attribute格式錯誤',
+            'password.confirmed' => '密碼與確認密碼不同',
+            'password.min' => '密碼至少 6 個字元(英文或數字)',
+            'email.unique' => '信箱已經存在',
+            'phone_number.unique' => '手機號碼已存在'
         ];
     }
 }

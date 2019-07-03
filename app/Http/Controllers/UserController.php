@@ -239,10 +239,10 @@ class UserController extends Controller
                     // Fire event to send welcome email
                     event(new UserRegistered($tb, $password));
                 } else {
-                    throw new \Exeception('Event returned false');
+                    throw new \Exeception('事件回傳失敗');
                 }
             } catch(\Exception $ex) {
-                Log::info('Email failed to send to this address: '.$tb->email.'\n'.$ex->getMessage());
+                Log::info('Email 寄送失敗： '.$tb->email.'\n'.$ex->getMessage());
             }
         });
 
@@ -262,10 +262,10 @@ class UserController extends Controller
             // event(new userRegistered($userObject, $plain_password)); // $plain_password(optional)
             event(new UserRegistered($tb, $password));
         } catch(\Exception $ex) {
-            Log::info('Email failed to send to this address: '.$tb->email);
+            Log::info('Email 寄送失敗： '.$tb->email);
         }
 
-        return back()->with('status', '更改完成');
+        return back()->with('status', '新增成功');
     }
 
     /**
@@ -280,10 +280,10 @@ class UserController extends Controller
             // Fire event to send welcome email
             event(new UserRegistered($tb, $password));
         } catch(\Exception $ex) {
-            Log::info('Email failed to send to this address: '.$tb->email);
+            Log::info('Email 寄送失敗： '.$tb->email);
         }
 
-        return back()->with('status', '更改完成');
+        return back()->with('status', '新增成功');
     }
 
     /**
@@ -298,10 +298,10 @@ class UserController extends Controller
             // Fire event to send welcome email
             event(new UserRegistered($tb, $password));
         } catch(\Exception $ex) {
-            Log::info('Email failed to send to this address: '.$tb->email);
+            Log::info('Email 寄送失敗： '.$tb->email);
         }
 
-        return back()->with('status', '更改完成');
+        return back()->with('status', '新增成功');
     }
 
     /**
@@ -316,10 +316,10 @@ class UserController extends Controller
             // Fire event to send welcome email
             event(new UserRegistered($tb, $password));
         } catch(\Exception $ex) {
-            Log::info('Email failed to send to this address: '.$tb->email);
+            Log::info('Email 寄送失敗： '.$tb->email);
         }
 
-        return back()->with('status', '更改完成');
+        return back()->with('status', '新增成功');
     }
 
     /**

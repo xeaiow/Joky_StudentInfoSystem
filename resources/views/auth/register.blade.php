@@ -11,7 +11,7 @@
             @include('layouts.leftside-menubar')
         </div>
         @endif
-        <div class="col-md-12" id="main-container">
+        <div class="col-md-10" id="main-container">
             @if (session('status'))
             <div class="alert alert-success">
                 {{ session('status') }}
@@ -29,6 +29,12 @@
                         @break
                     @case('student')
                         新增學員
+                        @break
+                    @case('accountant')
+                        新增會計師
+                        @break
+                    @case('librarian')
+                        新增圖書館員
                         @break
                     @default
                 @endswitch
@@ -110,7 +116,7 @@
                             <div class="col-md-6">
                                 <select id="section" class="form-control" name="section" required>
                                     @foreach (session('register_sections') as $section)
-                                    <option value="{{$section->id}}">Section: {{$section->section_number}} Class:
+                                    <option value="{{$section->id}}">課程：{{$section->section_number}}, 班級：
                                         {{$section->class->class_number}}</option>
                                     @endforeach
                                 </select>
@@ -123,7 +129,7 @@
                             </div>
                         </div>
                         <div class="form-group{{ $errors->has('birthday') ? ' has-error' : '' }}">
-                            <label for="birthday" class="col-md-4 control-label">Birthday</label>
+                            <label for="birthday" class="col-md-4 control-label">出生年月日</label>
 
                             <div class="col-md-6">
                                 <input id="birthday" type="text" class="form-control" name="birthday" value="{{ old('birthday') }}"
@@ -139,7 +145,7 @@
                         @endif
                         @if(session('register_role', 'teacher') == 'teacher')
                         <div class="form-group{{ $errors->has('department') ? ' has-error' : '' }}">
-                            <label for="department" class="col-md-4 control-label">Department</label>
+                            <label for="department" class="col-md-4 control-label">教師類別</label>
 
                             <div class="col-md-6">
                                 <select id="department" class="form-control" name="department_id" required>
@@ -157,7 +163,7 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="form-group{{ $errors->has('class_teacher') ? ' has-error' : '' }}">
+                        <!-- <div class="form-group{{ $errors->has('class_teacher') ? ' has-error' : '' }}">
                             <label for="class_teacher" class="col-md-4 control-label">Class Teacher</label>
 
                             <div class="col-md-6">
@@ -175,9 +181,9 @@
                                 </span>
                                 @endif
                             </div>
-                        </div>
+                        </div> -->
                         @endif
-                        <div class="form-group{{ $errors->has('blood_group') ? ' has-error' : '' }}">
+                        <!-- <div class="form-group{{ $errors->has('blood_group') ? ' has-error' : '' }}">
                             <label for="blood_group" class="col-md-4 control-label">血型</label>
 
                             <div class="col-md-6">
@@ -198,9 +204,9 @@
                                 </span>
                                 @endif
                             </div>
-                        </div>
+                        </div> -->
 
-                        <div class="form-group{{ $errors->has('nationality') ? ' has-error' : '' }}">
+                        <!-- <div class="form-group{{ $errors->has('nationality') ? ' has-error' : '' }}">
                             <label for="nationality" class="col-md-4 control-label">國籍</label>
 
                             <div class="col-md-6">
@@ -213,7 +219,7 @@
                                 </span>
                                 @endif
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
                             <label for="gender" class="col-md-4 control-label">性別</label>
@@ -232,8 +238,8 @@
                             </div>
                         </div>
                         @if(session('register_role', 'student') == 'student')
-                        <div class="form-group{{ $errors->has('version') ? ' has-error' : '' }}">
-                            <label for="version" class="col-md-4 control-label">Version</label>
+                        <!-- <div class="form-group{{ $errors->has('version') ? ' has-error' : '' }}">
+                            <label for="version" class="col-md-4 control-label">國籍</label>
 
                             <div class="col-md-6">
                                 <select id="version" class="form-control" name="version">
@@ -247,9 +253,9 @@
                                 </span>
                                 @endif
                             </div>
-                        </div>
+                        </div> -->
                         <div class="form-group{{ $errors->has('session') ? ' has-error' : '' }}">
-                            <label for="session" class="col-md-4 control-label">Session</label>
+                            <label for="session" class="col-md-4 control-label">學籍</label>
 
                             <div class="col-md-6">
                                 <input id="session" type="text" class="form-control" name="session" value="{{ old('session') }}"
@@ -263,8 +269,8 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('group') ? ' has-error' : '' }}">
-                            <label for="group" class="col-md-4 control-label">Group (Optional)</label>
+                        <!-- <div class="form-group{{ $errors->has('group') ? ' has-error' : '' }}">
+                            <label for="group" class="col-md-4 control-label">補習課程 (選填)</label>
 
                             <div class="col-md-6">
                                 <input id="group" type="text" class="form-control" name="group" value="{{ old('group') }}"
@@ -276,10 +282,10 @@
                                 </span>
                                 @endif
                             </div>
-                        </div>
+                        </div> -->
 
-                        <div class="form-group{{ $errors->has('religion') ? ' has-error' : '' }}">
-                            <label for="religion" class="col-md-4 control-label">Religion</label>
+                        <!-- <div class="form-group{{ $errors->has('religion') ? ' has-error' : '' }}">
+                            <label for="religion" class="col-md-4 control-label">信仰</label>
 
                             <div class="col-md-6">
                                 <select id="religion" class="form-control" name="religion">
@@ -296,10 +302,10 @@
                                 </span>
                                 @endif
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
-                            <label for="address" class="col-md-4 control-label">address</label>
+                            <label for="address" class="col-md-4 control-label">地址</label>
 
                             <div class="col-md-6">
                                 <input id="address" type="text" class="form-control" name="address" value="{{ old('address') }}"
@@ -314,7 +320,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('about') ? ' has-error' : '' }}">
-                            <label for="about" class="col-md-4 control-label">About</label>
+                            <label for="about" class="col-md-4 control-label">備註</label>
 
                             <div class="col-md-6">
                                 <textarea id="about" class="form-control" name="about">{{ old('about') }}</textarea>
@@ -328,7 +334,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('father_name') ? ' has-error' : '' }}">
-                            <label for="father_name" class="col-md-4 control-label">Father's Name</label>
+                            <label for="father_name" class="col-md-4 control-label">父親姓名</label>
 
                             <div class="col-md-6">
                                 <input id="father_name" type="text" class="form-control" name="father_name" value="{{ old('father_name') }}"
@@ -343,7 +349,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('father_phone_number') ? ' has-error' : '' }}">
-                            <label for="father_phone_number" class="col-md-4 control-label">Father's Phone Number</label>
+                            <label for="father_phone_number" class="col-md-4 control-label">父親聯絡電話</label>
 
                             <div class="col-md-6">
                                 <input id="father_phone_number" type="text" class="form-control" name="father_phone_number"
@@ -357,8 +363,8 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('father_national_id') ? ' has-error' : '' }}">
-                            <label for="father_national_id" class="col-md-4 control-label">Father's National ID</label>
+                        <!-- <div class="form-group{{ $errors->has('father_national_id') ? ' has-error' : '' }}">
+                            <label for="father_national_id" class="col-md-4 control-label">父親身分證字號</label>
 
                             <div class="col-md-6">
                                 <input id="father_national_id" type="text" class="form-control" name="father_national_id"
@@ -370,10 +376,10 @@
                                 </span>
                                 @endif
                             </div>
-                        </div>
+                        </div> -->
 
-                        <div class="form-group{{ $errors->has('father_occupation') ? ' has-error' : '' }}">
-                            <label for="father_occupation" class="col-md-4 control-label">Father's Occupation</label>
+                        <!-- <div class="form-group{{ $errors->has('father_occupation') ? ' has-error' : '' }}">
+                            <label for="father_occupation" class="col-md-4 control-label">父親職業</label>
 
                             <div class="col-md-6">
                                 <input id="father_occupation" type="text" class="form-control" name="father_occupation"
@@ -385,10 +391,10 @@
                                 </span>
                                 @endif
                             </div>
-                        </div>
+                        </div> -->
 
-                        <div class="form-group{{ $errors->has('father_designation') ? ' has-error' : '' }}">
-                            <label for="father_designation" class="col-md-4 control-label">Father's Designation</label>
+                        <!-- <div class="form-group{{ $errors->has('father_designation') ? ' has-error' : '' }}">
+                            <label for="father_designation" class="col-md-4 control-label">父親綽號</label>
 
                             <div class="col-md-6">
                                 <input id="father_designation" type="text" class="form-control" name="father_designation"
@@ -400,10 +406,10 @@
                                 </span>
                                 @endif
                             </div>
-                        </div>
+                        </div> -->
 
-                        <div class="form-group{{ $errors->has('father_annual_income') ? ' has-error' : '' }}">
-                            <label for="father_annual_income" class="col-md-4 control-label">Father's Annual Income</label>
+                        <!-- <div class="form-group{{ $errors->has('father_annual_income') ? ' has-error' : '' }}">
+                            <label for="father_annual_income" class="col-md-4 control-label">父親年收入</label>
 
                             <div class="col-md-6">
                                 <input id="father_annual_income" type="text" class="form-control" name="father_annual_income"
@@ -415,10 +421,10 @@
                                 </span>
                                 @endif
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="form-group{{ $errors->has('mother_name') ? ' has-error' : '' }}">
-                            <label for="mother_name" class="col-md-4 control-label">Mother's Name</label>
+                            <label for="mother_name" class="col-md-4 control-label">母親姓名</label>
 
                             <div class="col-md-6">
                                 <input id="mother_name" type="text" class="form-control" name="mother_name" value="{{ old('mother_name') }}"
@@ -433,7 +439,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('mother_phone_number') ? ' has-error' : '' }}">
-                            <label for="mother_phone_number" class="col-md-4 control-label">Mother's Phone Number</label>
+                            <label for="mother_phone_number" class="col-md-4 control-label">母親聯絡方式</label>
 
                             <div class="col-md-6">
                                 <input id="mother_phone_number" type="text" class="form-control" name="mother_phone_number"
@@ -447,8 +453,8 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('mother_national_id') ? ' has-error' : '' }}">
-                            <label for="mother_national_id" class="col-md-4 control-label">Mother's National ID</label>
+                        <!-- <div class="form-group{{ $errors->has('mother_national_id') ? ' has-error' : '' }}">
+                            <label for="mother_national_id" class="col-md-4 control-label">母親身分證字號</label>
 
                             <div class="col-md-6">
                                 <input id="mother_national_id" type="text" class="form-control" name="mother_national_id"
@@ -460,10 +466,10 @@
                                 </span>
                                 @endif
                             </div>
-                        </div>
+                        </div> -->
 
-                        <div class="form-group{{ $errors->has('mother_occupation') ? ' has-error' : '' }}">
-                            <label for="mother_occupation" class="col-md-4 control-label">Mother's Occupation</label>
+                        <!-- <div class="form-group{{ $errors->has('mother_occupation') ? ' has-error' : '' }}">
+                            <label for="mother_occupation" class="col-md-4 control-label">母親職業</label>
 
                             <div class="col-md-6">
                                 <input id="mother_occupation" type="text" class="form-control" name="mother_occupation"
@@ -475,10 +481,10 @@
                                 </span>
                                 @endif
                             </div>
-                        </div>
+                        </div> -->
 
-                        <div class="form-group{{ $errors->has('mother_designation') ? ' has-error' : '' }}">
-                            <label for="mother_designation" class="col-md-4 control-label">Mother's Designation</label>
+                        <!-- <div class="form-group{{ $errors->has('mother_designation') ? ' has-error' : '' }}">
+                            <label for="mother_designation" class="col-md-4 control-label">母親綽號</label>
 
                             <div class="col-md-6">
                                 <input id="mother_designation" type="text" class="form-control" name="mother_designation"
@@ -490,10 +496,10 @@
                                 </span>
                                 @endif
                             </div>
-                        </div>
+                        </div> -->
 
-                        <div class="form-group{{ $errors->has('mother_annual_income') ? ' has-error' : '' }}">
-                            <label for="mother_annual_income" class="col-md-4 control-label">Mother's Annual Income</label>
+                        <!-- <div class="form-group{{ $errors->has('mother_annual_income') ? ' has-error' : '' }}">
+                            <label for="mother_annual_income" class="col-md-4 control-label">母親年收入</label>
 
                             <div class="col-md-6">
                                 <input id="mother_annual_income" type="text" class="form-control" name="mother_annual_income"
@@ -505,11 +511,11 @@
                                 </span>
                                 @endif
                             </div>
-                        </div>
+                        </div> -->
                         @endif
 
                         <div class="form-group">
-                            <label class="col-md-4 control-label">上傳頭像</label>
+                            <label class="col-md-4 control-label">頭像</label>
                             <div class="col-md-6">
                                 <input type="hidden" id="picPath" name="pic_path">
                                 @component('components.file-uploader',['upload_type'=>'profile'])
@@ -522,7 +528,7 @@
                                 <button type="submit" id="registerBtn" class="btn btn-primary">
                                     新增
                                 </button>
-                                <a class="nav-link btn btn-primary" href="{{ url('create-school') }}">回客戶列表</a>
+                                <a class="nav-link btn btn-default" href="{{ url('create-school') }}">回去</a>
                             </div>
                         </div>
                     </form>

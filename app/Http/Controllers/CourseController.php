@@ -83,7 +83,7 @@ class CourseController extends Controller
       } catch (\Exception $ex){
         return 'Could not add course.';
       }
-      return back()->with('status', 'Created');
+      return back()->with('status', '新增成功');
     }
 
     /**
@@ -96,7 +96,7 @@ class CourseController extends Controller
       } catch (\Exception $ex){
         return 'Could not save configuration.';
       }
-      return back()->with('status', 'Saved');
+      return back()->with('status', '儲存成功');
     }
 
     /**
@@ -139,7 +139,7 @@ class CourseController extends Controller
       $tb->course_name = $request->course_name;
       $tb->course_time = $request->course_time;
       $tb->save();
-      return back()->with('status', 'Saved');
+      return back()->with('status', '儲存成功');
     }
 
     /**

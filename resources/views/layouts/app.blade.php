@@ -389,6 +389,10 @@
         .customer-list th, .customer-list td, .table-list th, .table-list td {
             font-size: 20px;
         }
+        
+        .panel-default {
+            border-bottom: 0px;
+        }
 
     </style>
     <!-- Scripts -->
