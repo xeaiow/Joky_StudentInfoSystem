@@ -41,14 +41,8 @@
         class="material-icons">calendar_today</i> <span class="nav-link-text">出席狀況</span> <i class="material-icons pull-right">keyboard_arrow_down</i></a>
     <ul class="dropdown-menu" style="width: 100%;">
       <li class="nav-item">
-        <a class="dropdown-item" href="#"><i class="material-icons">contacts</i> <span class="nav-link-text">教師</span></a>
-      </li>
-      <li class="nav-item">
         <a class="dropdown-item" href="{{url('school/sections?att=1')}}"><i class="material-icons">contacts</i> <span
             class="nav-link-text">學生</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="dropdown-item" href="#"><i class="material-icons">account_balance_wallet</i> <span class="nav-link-text">職員</span></a>
       </li>
     </ul>
   </li>
@@ -146,21 +140,7 @@
     </ul>
   </li>
   @endif
-  @if(Auth::user()->role == 'admin' || Auth::user()->role == 'accountant')
-  <li class="nav-item dropdown">
-    <a role="button" href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
-        class="material-icons">monetization_on</i> <span class="nav-link-text">繳費單管理</span> <i class="material-icons pull-right">keyboard_arrow_down</i></a>
-    <ul class="dropdown-menu" style="width: 100%;">
-      <!-- Dropdown menu links -->
-      <li>
-        <a class="dropdown-item" href="{{ url('fees/all') }}"><i class="material-icons">developer_board</i> <span class="nav-link-text">所有繳費單</span></a>
-      </li>
-      <li>
-        <a class="dropdown-item" href="{{ url('fees/create') }}"><i class="material-icons">note_add</i> <span class="nav-link-text">建立繳費單</span></a>
-      </li>
-    </ul>
-  </li>
-  @endif
+  
   {{--@if(Auth::user()->role == 'admin')
   <li class="nav-item dropdown">
     <a role="button" href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
@@ -186,38 +166,6 @@
     </ul>
   </li>
   @endif--}}
-  @if(Auth::user()->role == 'admin' || Auth::user()->role == 'accountant')
-  <li class="nav-item dropdown">
-    <a role="button" href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
-        class="material-icons">account_balance_wallet</i> <span class="nav-link-text">會計管理</span> <i class="material-icons pull-right">keyboard_arrow_down</i></a>
-    <ul class="dropdown-menu" style="width: 100%;">
-      <!-- Dropdown menu links -->
-      <li>
-        <a class="dropdown-item" href="{{url('users/'.Auth::user()->school->code.'/accountant')}}"><i class="material-icons">account_balance_wallet</i>
-          <span class="nav-link-text">會計師列表</span></a>
-      </li>
-      <li>
-        <a class="dropdown-item" href="{{ url('accounts/sectors') }}"><i class="material-icons">developer_board</i>
-          <span class="nav-link-text">帳務管理</span></a>
-      </li>
-      <li>
-        <a class="dropdown-item" href="{{ url('accounts/expense') }}"><i class="material-icons">note_add</i> <span
-            class="nav-link-text">新增帳務</span></a>
-      </li>
-      <li>
-        <a class="dropdown-item" href="{{ url('accounts/expense-list') }}"><i class="material-icons">developer_board</i>
-          <span class="nav-link-text">帳務列表</span></a>
-      </li>
-      <li>
-        <a class="dropdown-item" href="{{ url('accounts/income') }}"><i class="material-icons">note_add</i> <span class="nav-link-text">增加收入 / 開發票</span></a>
-      </li>
-      <li>
-        <a class="dropdown-item" href="{{ url('accounts/income-list') }}"><i class="material-icons">developer_board</i>
-          <span class="nav-link-text">收入列表</span></a>
-      </li>
-    </ul>
-  </li>
-  @endif
   @if(Auth::user()->role == 'student')
   <li class="nav-item">
     <a class="nav-link active" href="{{ url('attendances/0/'.Auth::user()->id.'/0') }}"><i class="material-icons">date_range</i>
@@ -233,37 +181,6 @@
   </li>
   <li class="nav-item">
     <a class="nav-link" href="#"><i class="material-icons">payment</i> <span class="nav-link-text">繳費記錄</span></a>
-  </li>
-  @endif
-  {{--<div style="text-align:center;">Student</div>--}}
-  {{--<div style="text-align:center;">Teacher</div>--}}
-  @if(Auth::user()->role == 'admin' || Auth::user()->role == 'librarian')
-  <li class="nav-item dropdown">
-    <a role="button" href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
-        class="material-icons">local_library</i> <span class="nav-link-text">圖書館管理</span> <i class="material-icons pull-right">keyboard_arrow_down</i></a>
-    <ul class="dropdown-menu" style="width: 100%;">
-      <!-- Dropdown menu links -->
-      <li>
-        <a class="dropdown-item" href="{{url('users/'.Auth::user()->school->code.'/librarian')}}"><i class="material-icons">local_library</i>
-          <span class="nav-link-text">館員列表</span></a>
-      </li>
-      <li>
-        <a class="dropdown-item" href="{{ route('library.books.index') }}"><i class="material-icons">developer_board</i>
-          <span class="nav-link-text">所有書籍</span></a>
-      </li>
-      <li>
-        <a class="dropdown-item" href="{{ url('library/issued-books') }}"><i class="material-icons">developer_board</i>
-          <span class="nav-link-text">已外借書籍</span></a>
-      </li>
-      <li>
-        <a class="dropdown-item" href="{{ url('library/issue-books') }}"><i class="material-icons">receipt</i> <span
-            class="nav-link-text">新增外借</span></a>
-      </li>
-      <li>
-        <a class="dropdown-item" href="{{ route('library.books.create') }}"><i class="material-icons">note_add</i> <span
-            class="nav-link-text">新增書籍</span></a>
-      </li>
-    </ul>
   </li>
   @endif
   @if(Auth::user()->role == 'teacher')

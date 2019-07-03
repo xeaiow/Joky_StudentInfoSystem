@@ -18,7 +18,7 @@
               @if(count($classes) > 0)
                 @foreach ($classes as $class)
                     <div class="panel panel-default">
-                    <div>課程編號：{{ $class->class_number+1 }}</div>
+                    <div>課程編號：{{ (int) $class->class_number+1 }}</div>
                     <div>{{ empty($class->group) ? '' : '課程分類：'.$class->group }}</div>
                             <div class="panel-body">
                                 <table class="table table-bordered table-striped">

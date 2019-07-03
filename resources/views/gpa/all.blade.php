@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'All GPA Systems')
+@section('title', '所有成績')
 @section('content')
 <div class="container-fluid">
     <div class="row">
@@ -8,7 +8,7 @@
         </div>
         <div class="col-md-8" id="main-container">
             <div class="panel panel-default">
-                <div class="page-panel-title">All GPA Systems</div>
+                <div class="page-panel-title">所有成績</div>
 
                 <div class="panel-body">
                   @if (session('status'))
@@ -31,12 +31,11 @@
                     <div class="table-responsive">
                       <table class="table table-hover">
                         <thead>
-                          <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Grade</th>
-                            <th scope="col">Point</th>
-                            <th scope="col">From Mark</th>
-                            <th scope="col">To Mark</th>
+                          <tr class="success">
+                            <th scope="col">級分</th>
+                            <th scope="col">積分</th>
+                            <th scope="col">從(分)</th>
+                            <th scope="col">到(分)</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -45,7 +44,6 @@
                             @continue
                           @endif
                           <tr>
-                            <td>{{($loop->index + 1)}}</td>
                             <td>{{$gpa->grade}}</td>
                             <td>{{$gpa->point}}</td>
                             <td>{{$gpa->from_mark}}</td>

@@ -40,11 +40,11 @@ Route::middleware(['auth','teacher'])->group(function (){
 
 Route::get('grades/{student_id}', 'GradeController@index')->middleware(['auth','student']);
 
-Route::middleware(['auth','accountant'])->group(function (){
-  Route::get('fees/all', 'FeeController@index');
-  Route::get('fees/create', 'FeeController@create');
-  Route::post('fees/create', 'FeeController@store');
-});
+// Route::middleware(['auth','accountant'])->group(function (){
+//   Route::get('fees/all', 'FeeController@index');
+//   Route::get('fees/create', 'FeeController@create');
+//   Route::post('fees/create', 'FeeController@store');
+// });
 
 Route::middleware(['auth','admin'])->group(function (){
   Route::get('gpa/create-gpa', 'GradesystemController@create');
@@ -106,45 +106,45 @@ Route::middleware(['auth','teacher'])->group(function (){
   Route::get('school/sections','SectionController@index');
 });
 
-Route::middleware(['auth', 'librarian'])->namespace('Library')->group(function () {
-    Route::prefix('library')->name('library.')->group(function () {
-        Route::resource('books', 'BookController',
-            ['only' => ['index', 'show', 'create', 'store']]
-        );
-    });
-});
+// Route::middleware(['auth', 'librarian'])->namespace('Library')->group(function () {
+//     Route::prefix('library')->name('library.')->group(function () {
+//         Route::resource('books', 'BookController',
+//             ['only' => ['index', 'show', 'create', 'store']]
+//         );
+//     });
+// });
 
-Route::middleware(['auth','librarian'])->group(function () {
-  Route::get('library/issue-books', 'IssuedbookController@create');
-  Route::post('library/issue-books', 'IssuedbookController@store');
-  Route::get('library/issued-books', 'IssuedbookController@index');
-  Route::post('library/save_as_returned', 'IssuedbookController@update');
-});
+// Route::middleware(['auth','librarian'])->group(function () {
+//   Route::get('library/issue-books', 'IssuedbookController@create');
+//   Route::post('library/issue-books', 'IssuedbookController@store');
+//   Route::get('library/issued-books', 'IssuedbookController@index');
+//   Route::post('library/save_as_returned', 'IssuedbookController@update');
+// });
 
-Route::middleware(['auth','accountant'])->group(function (){
-  Route::get('accounts/sectors','AccountController@sectors');
-  Route::post('accounts/create-sector','AccountController@storeSector');
-  Route::get('accounts/sector-list','AccountController@listSector');
-  Route::get('accounts/edit-sector/{id}','AccountController@editSector');
-  Route::post('accounts/update-sector','AccountController@updateSector');
-  Route::get('accounts/delete-sector/{id}','AccountController@deleteSector');
+// Route::middleware(['auth','accountant'])->group(function (){
+//   Route::get('accounts/sectors','AccountController@sectors');
+//   Route::post('accounts/create-sector','AccountController@storeSector');
+//   Route::get('accounts/sector-list','AccountController@listSector');
+//   Route::get('accounts/edit-sector/{id}','AccountController@editSector');
+//   Route::post('accounts/update-sector','AccountController@updateSector');
+//   Route::get('accounts/delete-sector/{id}','AccountController@deleteSector');
 
-  Route::get('accounts/income','AccountController@income');
-  Route::post('accounts/create-income','AccountController@storeIncome');
-  Route::get('accounts/income-list','AccountController@listIncome');
-  Route::post('accounts/list-income','AccountController@postIncome');
-  Route::get('accounts/edit-income/{id}','AccountController@editIncome');
-  Route::post('accounts/update-income','AccountController@updateIncome');
-  Route::get('accounts/delete-income/{id}','AccountController@deleteIncome');
+//   Route::get('accounts/income','AccountController@income');
+//   Route::post('accounts/create-income','AccountController@storeIncome');
+//   Route::get('accounts/income-list','AccountController@listIncome');
+//   Route::post('accounts/list-income','AccountController@postIncome');
+//   Route::get('accounts/edit-income/{id}','AccountController@editIncome');
+//   Route::post('accounts/update-income','AccountController@updateIncome');
+//   Route::get('accounts/delete-income/{id}','AccountController@deleteIncome');
   
-  Route::get('accounts/expense','AccountController@expense');
-  Route::post('accounts/create-expense','AccountController@storeExpense');
-  Route::get('accounts/expense-list','AccountController@listExpense');
-  Route::post('accounts/list-expense','AccountController@postExpense');
-  Route::get('accounts/edit-expense/{id}','AccountController@editExpense');
-  Route::post('accounts/update-expense','AccountController@updateExpense');
-  Route::get('accounts/delete-expense/{id}','AccountController@deleteExpense');
-});
+//   Route::get('accounts/expense','AccountController@expense');
+//   Route::post('accounts/create-expense','AccountController@storeExpense');
+//   Route::get('accounts/expense-list','AccountController@listExpense');
+//   Route::post('accounts/list-expense','AccountController@postExpense');
+//   Route::get('accounts/edit-expense/{id}','AccountController@editExpense');
+//   Route::post('accounts/update-expense','AccountController@updateExpense');
+//   Route::get('accounts/delete-expense/{id}','AccountController@deleteExpense');
+// });
 
 Route::get('create-school', 'SchoolController@index')->middleware('master.admin');
 

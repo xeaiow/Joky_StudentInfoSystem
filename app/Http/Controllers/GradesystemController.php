@@ -31,13 +31,24 @@ class GradesystemController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
-      $request->validate([
-        'grade_system_name' => 'required|string|max:255',
+      $rules = [
+        'grade_system_name' => 'required|string|max:40',
         'point' => 'required',
         'grade' => 'required',
         'from_mark' => 'required',
         'to_mark' => 'required',
-      ]);
+      ];
+      $messages = [
+        'grade_system_name.required' => '制度名稱必須填寫',
+        'grade_system_name.string' => '制度名稱必須為文字',
+        'grade_system_name.max' => '制度名稱最長為 40 個字元',
+        'point.required' => '積分必須填寫',
+        'grade.required' => '級分必須填寫',
+        'from_mark.required' => '級分範圍最小值必須填寫',
+        'to_mark.required' => '級分範圍最大值必須填寫'
+      ];
+      $this->validate($request, $rules, $messages);
+
       $gpa = new Gradesystem;
       $gpa->grade_system_name = $request->grade_system_name;
       $gpa->point = $request->point;
@@ -47,7 +58,7 @@ class GradesystemController extends Controller
       $gpa->school_id = \Auth::user()->school_id;
       $gpa->user_id = \Auth::user()->id;
       $gpa->save();
-      return back()->with('status', 'Saved');
+      return back()->with('status', '新增成功');
     }
     /**
      * Display the specified resource.
@@ -80,6 +91,6 @@ class GradesystemController extends Controller
     public function destroy(Request $request){
       $gpa = Gradesystem::find($request->gpa_id);
       $gpa->delete();
-      return back()->with('status', 'Deleted!');
+      return back()->with('status', '刪除成功');
     }
 }
