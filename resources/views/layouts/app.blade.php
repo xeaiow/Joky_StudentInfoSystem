@@ -79,7 +79,9 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @guest
-                        <li><a href="{{ route('login') }}" style="color: #000;">登入</a></li>
+                        <li class="nav-item">
+                            <a href="{{ route('login') }}" class="nav-link nav-link-align-btn" style="color: #000;">使用說明</a>
+                        </li>
                         @else
                         @if(\Auth::user()->role == 'student')
                         <li class="nav-item">
@@ -386,12 +388,17 @@
             padding-bottom: 0px !important;
             line-height: 60px !important;
         }
+        .nav-link:hover {
+            background-color: #F8F9FA !important;
+        }
         .customer-list th, .customer-list td, .table-list th, .table-list td {
             font-size: 20px;
         }
-        
         .panel-default {
             border-bottom: 0px;
+        }
+        .form-group > label {
+            font-size: 16px;
         }
 
     </style>

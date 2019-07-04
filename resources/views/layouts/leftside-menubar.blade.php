@@ -23,14 +23,7 @@
     padding: 8px 15px;
   }
 </style>
-{{--@if(Auth::user()->role != 'master')
-<ul class="nav flex-column">
-  <li class="nav-item">
-    <a class="nav-link" href="{{url('user/'.Auth::user()->student_code)}}"><i class="material-icons">face</i> <span
-        class="nav-link-text">Profile</span></a>
-  </li>
-</ul>
-@endif--}}
+
 <ul class="nav flex-column">
   <li class="nav-item active">
     <a class="nav-link" href="{{ url('home') }}"><i class="material-icons">computer</i> <span class="nav-link-text">主控台</span></a>
