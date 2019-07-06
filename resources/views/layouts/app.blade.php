@@ -11,7 +11,7 @@
 
     <title>@yield('title') - {{ (Auth::check() && (Auth::user()->role == 'student' || Auth::user()->role == 'teacher'
         || Auth::user()->role == 'admin' || Auth::user()->role == 'accountant' || Auth::user()->role ==
-        'librarian'))?Auth::user()->school->name:'Joky 補習班管理系統' }}</title>
+        'librarian'))?Auth::user()->school->name:'Joky Education' }}</title>
     <style>
         @import url('https://fonts.googleapis.com/css?family=Noto+Sans+TC:300&display=swap');
         * {
@@ -67,7 +67,7 @@
                     <a class="navbar-brand nav-link dropdown-toggle nav-link-align-btn" href="{{ url('/home') }}" style="color: #000;">
                         {{ (Auth::check() && (Auth::user()->role == 'student' || Auth::user()->role == 'teacher' ||
                         Auth::user()->role == 'admin' || Auth::user()->role == 'accountant' || Auth::user()->role ==
-                        'librarian'))?Auth::user()->school->name:'Joky 補習班管理系統' }}
+                        'librarian'))?Auth::user()->school->name:'Joky Education' }}
                     </a>
                     
                 </div>
