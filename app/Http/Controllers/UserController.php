@@ -401,7 +401,7 @@ class UserController extends Controller
                         // Fire event to store Student information
                         event(new StudentInfoUpdateRequested($request,$tb->id));
                     } catch(\Exception $ex) {
-                        Log::info('Failed to update Student information, Id: '.$tb->id. 'err:'.$ex->getMessage());
+                        Log::info('更改失敗, Id: '.$tb->id. 'err:'.$ex->getMessage());
                     }
                 }
             }

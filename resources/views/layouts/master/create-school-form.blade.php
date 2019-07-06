@@ -7,7 +7,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">新增客戶</h4>
+        <h4 class="modal-title" id="myModalLabel">新增機構</h4>
       </div>
       <div class="modal-body">
           <div class="form-group{{ $errors->has('school_name') ? ' has-error' : '' }}">
@@ -24,7 +24,7 @@
               </div>
           </div>
           <div class="form-group{{ $errors->has('school_medium') ? ' has-error' : '' }}">
-              <label for="school_medium" class="col-md-4 control-label">機構類型</label>
+              <label for="school_medium" class="col-md-4 control-label">類型</label>
 
               <div class="col-md-6">
                 <select id="school_medium" class="form-control" name="school_medium">

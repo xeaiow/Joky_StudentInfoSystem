@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', '管理')
+@section('title', '管理客戶')
 
 @section('content')
 <div class="container-fluid">
@@ -42,7 +42,7 @@
                   <thead>
                     <tr class="table-primary">
                       @if(\Auth::user()->role == 'master')
-                        <th scope="col">客戶</th>
+                        <th scope="col">機構名稱</th>
                         <th scope="col">聯絡電話</th>
                         <th scope="col">描述</th>
                       @endif

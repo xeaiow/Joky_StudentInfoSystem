@@ -11,22 +11,14 @@
         </div>
         @endif
         <div class="col-md-{{ (\Auth::user()->role == 'master')? 12 : 8 }}" id="main-container">
-            @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-            @endif
+            
             @if (session('status'))
             <div class="alert alert-success">
                 {{ session('status') }}
             </div>
             @endif
             <div class="panel panel-default">
-                <div class="page-panel-title text-center">編輯資料</div>
+                <div class="page-panel-title text-center">編輯{{ $user->name }}</div>
 
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ url('edit/user') }}">
@@ -34,7 +26,7 @@
                         <input type="hidden" name="user_id" value="{{$user->id}}">
                         <input type="hidden" name="user_role" value="{{$user->role}}">
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">名稱</label>
+                            <label for="name" class="col-md-4 control-label">機構名稱</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control" name="name" value="{{ $user->name }}"
@@ -383,9 +375,9 @@
                         @endif
 
                         <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <a href="javascript:history.back()" class="btn btn-danger" style="margin-right: 2%;"
-                                    role="button">取消</a>
+                            <div class="col-md-6 col-md-offset-4 text-right">
+                                <a href="javascript:location.href='{{ URL::to('school/admin-list/'.$user->school_id) }}'" class="btn btn-default" style="margin-right: 2%;"
+                                    role="button">回去列表</a>
                                 <input type="submit" role="button" class="btn btn-success" value="更改">
                             </div>
                         </div>

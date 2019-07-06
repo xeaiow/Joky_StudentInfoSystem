@@ -23,7 +23,7 @@
                 <div class="panel-body">
                     <table class="table table-striped">
                         <tr>
-                            <th>機構名稱</th>
+                            <th>姓名</th>
                             <th>編號</th>
                             <th>電子信箱</th>
                             <th>手機</th>

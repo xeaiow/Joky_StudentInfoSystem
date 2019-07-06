@@ -21,6 +21,17 @@ class UpdateUserRequest extends FormRequest
         return true;
     }
 
+    public function attributes()
+    {
+        return [
+            'user_id' => '使用者id',
+            'email' => '電子信箱',
+            'name' => '姓名',
+            'phone_number' => '手機號碼',
+            'department_id' => '部門 ID'
+        ];
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -31,7 +42,7 @@ class UpdateUserRequest extends FormRequest
         $rules = [
             'user_id' => 'required|numeric',
             'email' => 'required|email|max:255|' . Rule::unique('users')->ignore($this->get('user_id')),
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:20',
             'phone_number' => 'required|string|' . Rule::unique('users')->ignore($this->get('user_id')),
         ];
 
@@ -40,5 +51,17 @@ class UpdateUserRequest extends FormRequest
         }
 
         return $rules;
+    }
+
+    public function messages()
+    {
+        return [
+            'required' => ':attribute必須填寫',
+            'string' => ':attribute必須為文字',
+            'numeric' => ':attribute必須為數字',
+            'email' => '電子信箱格式錯誤',
+            'email.unique' => '電子信箱已存在',
+            'name.max' => '姓名不得超過 20 字元'
+        ];
     }
 }

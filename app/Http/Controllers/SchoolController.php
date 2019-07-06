@@ -49,12 +49,27 @@ class SchoolController extends Controller
      */
     public function store(Request $request)
     {
-      $request->validate([
-        'school_name' => 'required|string|max:255',
+      $rules = [
+        'school_name' => 'required|string|max:50',
         'school_medium' => 'required',
         'school_about' => 'required',
         'school_established' => 'required',
-      ]);
+      ];
+      $messages = [
+        'required' => ':attribute必須填寫',
+        'string' => ':attribute必須為合法字元',
+        'school_name.max' => '機構名稱不得大於 50 個字元'
+      ];
+
+      $attributes = [
+        'school_name' => '機構名稱',
+        'school_medium' => '類型',
+        'school_established' => '地址',
+        'school_about' => '描述',
+      ];
+
+      $this->validate($request, $rules, $messages, $attributes);
+
       $tb = new School;
       $tb->name = $request->school_name;
       $tb->established = $request->school_established;
