@@ -27,9 +27,9 @@ class SectionController extends Controller
                   ->groupBy('class_id')
                   ->get();
       return view('school.sections',[
-        'classes'=>$classes,
-        'sections'=>$sections,
-        'exams'=>$exams
+        'classes' => $classes,
+        'sections' => $sections,
+        'exams' => $exams
       ]);
      }
 

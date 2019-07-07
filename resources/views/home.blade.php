@@ -12,9 +12,6 @@
     .focus:hover {
         cursor: pointer;
     }
-    .panel-default {
-        border-color: #FFFFFF !important;
-    }
     .important-text {
         font-weight: 900;
     }
@@ -23,6 +20,11 @@
     }
     .page-panel-title {
         font-size: 24px !important;
+    }
+    .title-text {
+        font-size: 22px !important;
+        margin-bottom: 15px;
+        margin-top: 15px;
     }
 </style>
 <div class="container-fluid">
@@ -79,32 +81,25 @@
                     <div class="row">
                         <!-- 當前考試 -->
                         <div class="col-sm-12">
-                            <div class="panel panel-default">
-                                <div class="page-panel-title important-text">當前考試</div>
-                                <div class="panel-body">
-                                    @if(count($exams) > 0)
-                                    <table class="table">
-                                        <tr>
-                                            <th>考試名稱</th>
-                                            <th>考試公告已發佈</th>
-                                            <th>考試結果已發佈</th>
-                                        </tr>
-                                        @foreach($exams as $exam)
-                                        <tr>
-                                            <td>{{$exam->exam_name}}</td>
-                                            <td>{{($exam->notice_published === 1)?'是':'否'}}</td>
-                                            <td>{{($exam->result_published === 1)?'是':'否'}}</td>
-                                        </tr>
-                                        @endforeach
-                                    </table>
-                                    @else
-                                    沒有資料
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                        <!-- 當前考試_ -->
-                       
+                            <div class="important-text title-text">當前考試</div>
+                            @if(count($exams) > 0)
+                            <table class="table">
+                                <tr>
+                                    <th>考試名稱</th>
+                                    <th>考試公告已發佈</th>
+                                    <th>考試結果已發佈</th>
+                                </tr>
+                                @foreach($exams as $exam)
+                                <tr>
+                                    <td>{{$exam->exam_name}}</td>
+                                    <td>{{($exam->notice_published === 1)?'是':'否'}}</td>
+                                    <td>{{($exam->result_published === 1)?'是':'否'}}</td>
+                                </tr>
+                                @endforeach
+                            </table>
+                            @else
+                                沒有資料
+                            @endif
                     </div>
                     <br />
                     <div class="row">
@@ -119,9 +114,8 @@
                                             <i class="badge badge-download material-icons">
                                                 keyboard_arrow_right
                                             </i>
-                                            <h5 class="list-group-item-heading">{{$notice->title}}</h5>
-                                            <p class="list-group-item-text">發佈於：
-                                                {{$notice->created_at->format('M d Y h:i:sa')}}</p>
+                                            <h5 class="list-group-item-heading important-text">{{ $notice->title }}</h5>
+                                            <p class="list-group-item-text">{{ $notice->created_at->format('Y/m/d h:i:s') }}</p>
                                         </a>
                                         @endforeach
                                     </div>
@@ -144,9 +138,8 @@
                                             <i class="badge badge-download material-icons">
                                                 keyboard_arrow_right
                                             </i>
-                                            <h5 class="list-group-item-heading">{{$event->title}}</h5>
-                                            <p class="list-group-item-text">發佈於：
-                                                {{$event->created_at->format('M d Y')}}</p>
+                                            <h5 class="list-group-item-heading important-text">{{ $event->title }}</h5>
+                                            <p class="list-group-item-text">{{ $event->created_at->format('Y/m/d h:i:s') }}</p>
                                         </a>
                                         @endforeach
                                     </div>
@@ -170,9 +163,8 @@
                                             <i class="badge badge-download material-icons">
                                                 keyboard_arrow_right
                                             </i>
-                                            <h5 class="list-group-item-heading">{{$routine->title}}</h5>
-                                            <p class="list-group-item-text">發佈於：
-                                                {{$routine->created_at->format('M d Y')}}</p>
+                                            <h5 class="list-group-item-heading important-text">{{ $routine->title }}</h5>
+                                            <p class="list-group-item-text">{{ $routine->created_at->format('Y/m/d h:i:s') }}</p>
                                         </a>
                                         @endforeach
                                     </div>
@@ -194,9 +186,8 @@
                                             <i class="badge badge-download material-icons">
                                                 keyboard_arrow_right
                                             </i>
-                                            <h5 class="list-group-item-heading">{{$syllabus->title}}</h5>
-                                            <p class="list-group-item-text">發佈於：
-                                                {{$syllabus->created_at->format('M d Y')}}</p>
+                                            <h5 class="list-group-item-heading important-text">{{$syllabus->title}}</h5>
+                                            <p class="list-group-item-text">{{ $syllabus->created_at->format('Y/m/d h:i:s') }}</p>
                                         </a>
                                         @endforeach
                                     </div>
