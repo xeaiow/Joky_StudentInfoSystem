@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\School;
+use App\Myclass;
+use App\Section;
+use App\User;
+use App\Department;
 
 class HomeController extends Controller
 {
@@ -24,7 +29,16 @@ class HomeController extends Controller
     public function index()
     {
       if(\Auth::user()->role == 'master') {
-        return view('school.create-school');
+        $schools = School::all();
+        $classes = Myclass::all();
+        $sections = Section::all();
+        $teachers = User::join('departments', 'departments.id', '=', 'users.department_id')
+          ->where('role', 'teacher')
+          ->orderBy('name','ASC')
+          ->where('active', 1)
+          ->get();
+        $departments = Department::where('school_id',\Auth::user()->school_id)->get();
+        return view('school.create-school', compact('schools', 'classes', 'sections', 'teachers', 'departments'));
       }
       else {
 
