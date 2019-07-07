@@ -189,10 +189,10 @@ class UserController extends Controller
               'password' => Hash::make($request->new_password),
             ])->save();
 
-            return back()->with('status', '更改完成');
+            return back()->with('status', '更改成功');
         }
 
-        return back()->with('error-status', '密碼與確認密碼不相符');
+        return back()->with('error-status', '舊密碼錯誤');
     }
 
     /**
@@ -246,7 +246,7 @@ class UserController extends Controller
             }
         });
 
-        return back()->with('status', '更改完成');
+        return back()->with('status', '更改成功');
     }
 
     /**
@@ -407,7 +407,7 @@ class UserController extends Controller
             }
         });
 
-        return back()->with('status', '更改完成');
+        return back()->with('status', '更改成功');
     }
 
     /**
@@ -427,7 +427,7 @@ class UserController extends Controller
 
         $admin->save();
 
-        return back()->with('status', '更改完成');
+        return back()->with('status', '更改成功');
     }
 
     /**
@@ -447,7 +447,7 @@ class UserController extends Controller
 
         $admin->save();
 
-        return back()->with('status', '更改完成');
+        return back()->with('status', '更改成功');
     }
 
     /**

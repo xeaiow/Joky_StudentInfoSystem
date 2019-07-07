@@ -61,8 +61,8 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-sm-offset-4 col-sm-8">
-                                <button type="submit" class="btn btn-danger">確定</button>
+                            <div class="col-sm-offset-7 col-sm-8">
+                                <button type="submit" class="btn btn-primary">確定</button>
                             </div>
                         </div>
                     </form>

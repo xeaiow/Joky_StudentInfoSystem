@@ -30,9 +30,7 @@
                 @if(\Auth::user()->role == 'master')
                   @include('layouts.master.create-school-form')
                   <div class="row">
-                    <div class="col-md-11">
-                      <h2 class="text-center">客戶列表</h2>
-                    </div>
+                    <div class="col-md-11"></div>
                     <div class="col-md-1 text-right" style="line-height:80px;">
                       <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#schoolModal">新增客戶</button>
                     </div>

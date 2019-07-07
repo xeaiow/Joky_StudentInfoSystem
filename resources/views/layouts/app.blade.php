@@ -176,7 +176,7 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous" id="bootstrap-print-id">
-    <link href="https://bootswatch.com/3/yeti/bootstrap.min.css" rel="stylesheet" id="bootswatch-print-id">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" id="bootswatch-print-id">
     <link href="{{asset('css/dataTables-1.10.16.bootstrap.min.css') }}" rel="stylesheet">
 
     
