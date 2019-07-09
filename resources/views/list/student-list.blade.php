@@ -43,7 +43,10 @@
                 </div>
               @else
                 <div class="panel-body">
-                    沒有找到資料
+                    <div class="alert alert-dismissible alert-success">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>目前沒有學生資料</strong>，<a href="{{ url('register/student') }}" class="alert-link">立即新增</a>
+                    </div>
                 </div>
               @endif
             </div>

@@ -87,8 +87,8 @@ class HandleUser {
         $tb->code = Auth::user()->code;
         $tb->student_code = Auth::user()->school_id.date('y').substr(number_format(time() * mt_rand(), 0, '', ''), 0, 5);
         $tb->gender = $request->gender;
-        $tb->blood_group = $request->blood_group;
-        $tb->nationality = (!empty($request->nationality)) ? $request->nationality : '';
+        $tb->blood_group = '';
+        $tb->nationality = '';
         $tb->phone_number = $request->phone_number;
         $tb->address = (!empty($request->address)) ? $request->address : '';
         $tb->about = (!empty($request->about)) ? $request->about : '';
@@ -110,7 +110,7 @@ class HandleUser {
         $tb->code = session('register_school_code');
         $tb->student_code = session('register_school_id').date('y').substr(number_format(time() * mt_rand(), 0, '', ''), 0, 5);
         $tb->gender = $request->gender;
-        $tb->blood_group = $request->blood_group;
+        $tb->blood_group = (!empty($request->blood_group)) ? $request->blood_group : 'o+';
         $tb->nationality = (!empty($request->nationality)) ? $request->nationality : '';
         $tb->phone_number = $request->phone_number;
         $tb->pic_path = (!empty($request->pic_path)) ? $request->pic_path : '';
@@ -130,14 +130,12 @@ class HandleUser {
         $tb->code = Auth::user()->code;
         $tb->student_code = Auth::user()->school_id.date('y').substr(number_format(time() * mt_rand(), 0, '', ''), 0, 5);
         $tb->gender = $request->gender;
-        $tb->blood_group = $request->blood_group;
-        $tb->nationality = (!empty($request->nationality)) ? $request->nationality : '';
         $tb->phone_number = $request->phone_number;
         $tb->pic_path = (!empty($request->pic_path)) ? $request->pic_path : '';
         $tb->verified = 1;
-        $tb->department_id = (!empty($request->department_id))?$request->department_id:0;
+        $tb->department_id = (!empty($request->department_id))?$request->department_id : 0;
         
-        if($role == 'teacher'){
+        if ($role == 'teacher') {
             $tb->section_id = ($request->class_teacher_section_id != 0) ? $request->class_teacher_section_id : 0;
         }
         

@@ -49,8 +49,69 @@
                   <tbody>
                   @foreach($schools as $school)
                   @if(\Auth::user()->school_id == $school->id)
-                    <h4>課程</h4>
-                    <a href="#collapse{{($loop->index + 1)}}" role="button" class="btn btn-primary btn-sm" data-toggle="collapse" aria-expanded="false" aria-controls="collapse{{($loop->index + 1)}}">顯示所有課程</a>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="card border-light mb-3">
+                          <div class="card-header">教育類型</div>
+                          <div class="card-body">
+                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#departmentModal">新增</button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="card border-light mb-3">
+                          <div class="card-header">課程與班級</div>
+                          <div class="card-body">
+                            <a href="#collapse{{($loop->index + 1)}}" role="button" class="btn btn-primary btn-sm" data-toggle="collapse" aria-expanded="false" aria-controls="collapse{{($loop->index + 1)}}">顯示</a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="card border-light mb-3">
+                          <div class="card-header">管理角色</div>
+                          <div class="card-body">
+                          @foreach($schools as $school)
+                          @if(\Auth::user()->role == 'admin' && \Auth::user()->school_id == $school->id)
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                              <a class="btn btn-primary btn-sm" href="{{url('register/student')}}">學員</a>
+                              <a class="btn btn-primary btn-sm" href="{{url('register/teacher')}}">教師</a>
+                              <a class="btn btn-primary btn-sm" href="{{url('register/accountant')}}">會計師</a>
+                              <a class="btn btn-primary btn-sm" href="{{url('register/librarian')}}">圖書館員</a>
+                            </div>
+                            @break
+                          @endif
+                        @endforeach
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="departmentModal" tabindex="-1" role="dialog">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title">新增教育類型</h4>
+                          </div>
+                          <div class="modal-body">
+                            <form action="{{url('school/add-department')}}" method="post">
+                              {{csrf_field()}}
+                              <div class="form-group">
+                                <label>類型名稱</label>
+                                <input type="text" class="form-control" name="department_name" placeholder="英語、數學、自然..">
+                              </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary btn-sm">確定</button>
+                          </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
                     <br />
                     <br />
                   @endif
@@ -122,18 +183,6 @@
                     @endforeach
                   </tbody>
                 </table>
-                @foreach($schools as $school)
-                  @if(\Auth::user()->role == 'admin' && \Auth::user()->school_id == $school->id)
-                    <h4>新增角色</h4>
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                      <a class="btn btn-primary btn-sm" href="{{url('register/student')}}">學員</a>
-                      <a class="btn btn-primary btn-sm" href="{{url('register/teacher')}}">教師</a>
-                      <a class="btn btn-primary btn-sm" href="{{url('register/accountant')}}">會計師</a>
-                      <a class="btn btn-primary btn-sm" href="{{url('register/librarian')}}">圖書館員</a>
-                    </div>
-                    @break
-                  @endif
-                @endforeach
               </div>
           </div>
         </div>

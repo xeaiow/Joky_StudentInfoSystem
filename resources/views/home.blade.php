@@ -1,12 +1,15 @@
 @extends('layouts.app')
+
 @section('title', '主控台')
+
 @section('content')
+
 <style>
     .badge-download {
         background-color: transparent !important;
         color: #464443 !important;
     }
-    .list-group-item-text{
+    .list-group-item-text {
       font-size: 14px;
     }
     .focus:hover {
@@ -17,9 +20,6 @@
     }
     .table tr th, .table tr td {
         font-size: 16px !important;   
-    }
-    .page-panel-title {
-        font-size: 24px !important;
     }
     .title-text {
         font-size: 22px !important;
@@ -41,38 +41,31 @@
                     </div>
                     @endif
                     <div class="row">
-                        <div class="col-sm-2">
-                            <div class="card bg-dark text-white">
+                        <div class="col-sm-3">
+                            <div class="card bg-secondary text-white">
                                 <div class="card-header">
                                     學生人數：{{ $totalStudents }}
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-2">
-                            <div class="card bg-dark text-white">
+                        <div class="col-sm-3">
+                            <div class="card bg-secondary text-white">
                                 <div class="card-header">
                                     教師人數：{{ $totalTeachers }}
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-2">
-                            <div class="card bg-info text-white">
+                        <div class="col-sm-3">
+                            <div class="card bg-secondary text-white">
                                 <div class="card-header">
                                     科目總數：{{ $totalSections }}
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-2">
-                            <div class="card bg-info text-white">
+                        <div class="col-sm-3">
+                            <div class="card bg-secondary text-white">
                                 <div class="card-header">
                                     課程總數：{{ $totalClasses }}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-2">
-                            <div class="card bg-info text-white">
-                                <div class="card-header">
-                                    書籍總數：{{ $totalBooks }}
                                 </div>
                             </div>
                         </div>
@@ -81,21 +74,21 @@
                     <div class="row">
                         <!-- 當前考試 -->
                         <div class="col-sm-12">
-                            <div class="card border-primary">
-                                <div class="card-header important-text">當前考試</div>
+                            <div class="card">
+                                <div class="card-header important-text"><h4>當前考試</h4></div>
                                 <div class="card-body">
                                 @if(count($exams) > 0)
                             <table class="table table-hover">
                                 <tr>
                                     <th>考試名稱</th>
-                                    <th>考試公告已發佈</th>
-                                    <th>考試結果已發佈</th>
+                                    <th>公告已發佈</th>
+                                    <th>結果已發佈</th>
                                 </tr>
                                 @foreach($exams as $exam)
                                 <tr>
-                                    <td>{{$exam->exam_name}}</td>
-                                    <td>{{($exam->notice_published === 1)?'是':'否'}}</td>
-                                    <td>{{($exam->result_published === 1)?'是':'否'}}</td>
+                                    <td>{{ $exam->exam_name }}</td>
+                                    <td>{{ ($exam->notice_published === 1) ? '是' : '否' }}</td>
+                                    <td>{{ ($exam->result_published === 1) ? '是' : '否' }}</td>
                                 </tr>
                                 @endforeach
                             </table>
@@ -108,7 +101,7 @@
                     <br />
                     <div class="row">
                         <div class="col-sm-6">
-                            <div class="card-body" style="min-height:430px;">
+                            <div class="card-body">
                                 <div class="card-title important-text"><h3>通知</h3></div>
                                 <p class="card-text">
                                     @if(count($notices) > 0)

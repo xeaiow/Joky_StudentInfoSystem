@@ -20,6 +20,18 @@ class CreateAdminRequest extends FormRequest
         return true;
     }
 
+    public function attributes()
+    {
+        return [
+            'name' => '姓名',
+            'email' => '電子信箱',
+            'password' => '密碼',
+            'gender' => '性別',
+            'blood_group' => '血型',
+            'phone_number' => '手機號碼'
+        ];
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -28,10 +40,9 @@ class CreateAdminRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:50',
             'password' => 'required|string|min:6|confirmed',
             'gender' => 'required',
-            'blood_group' => 'required',
             'phone_number' => 'required|unique:users',
             'email' => 'email|max:255|unique:users',
         ];
@@ -40,14 +51,14 @@ class CreateAdminRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => '姓名為必填欄位',
-            'password.required'  => '密碼為必填欄位',
-            'gender.required'  => '性別為必填欄位',
-            'blood_group.required'  => '血型為必填欄位',
-            'phone_number.required'  => '手機為必填欄位',
-            'email.email' => '無效的信箱',
+            'required' => ':attribute必須填寫',
+            'email.email' => '電子信箱格式錯誤',
             'password.confirmed' => '密碼與確認密碼不符',
-            'phone_number.unique' => '手機號碼已被登錄'
+            'phone_number.unique' => '手機號碼已存在',
+            'email.unique' => '電子信箱已存在',
+            'email.max' => '電子信箱不得超過 255 字元',
+            'name.max' => '姓名不得超過 50 字元',
+            'password.min' => '密碼不得少於 6 個字元',
         ];
     }
 }

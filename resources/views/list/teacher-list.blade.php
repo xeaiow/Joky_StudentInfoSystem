@@ -16,8 +16,7 @@
                 @switch(ucfirst($user->role))
                     @case('Teacher')
                         所有教師
-                        @break
-                    
+                        @break 
                 @endswitch
                 </div>
                  @break($loop->first)
@@ -34,7 +33,10 @@
                 </div>
               @else
                 <div class="panel-body">
-                    No Related Data Found.
+                    <div class="alert alert-dismissible alert-success">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>目前沒有教師資料</strong>，<a href="{{ url('register/teacher') }}" class="alert-link">立即新增</a>
+                    </div>
                 </div>
               @endif
             </div>

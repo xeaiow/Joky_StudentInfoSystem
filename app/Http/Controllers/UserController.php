@@ -246,7 +246,7 @@ class UserController extends Controller
             }
         });
 
-        return back()->with('status', '更改成功');
+        return back()->with('status', '新增成功');
     }
 
     /**
@@ -257,13 +257,13 @@ class UserController extends Controller
     {
         $password = $request->password;
         $tb = HandleUser::storeAdmin($request);
-        try {
-            // Fire event to send welcome email
-            // event(new userRegistered($userObject, $plain_password)); // $plain_password(optional)
-            event(new UserRegistered($tb, $password));
-        } catch(\Exception $ex) {
-            Log::info('Email 寄送失敗： '.$tb->email);
-        }
+        // try {
+        //     // Fire event to send welcome email
+        //     // event(new userRegistered($userObject, $plain_password)); // $plain_password(optional)
+        //     event(new UserRegistered($tb, $password));
+        // } catch(\Exception $ex) {
+        //     Log::info('Email 寄送失敗： '.$tb->email);
+        // }
 
         return back()->with('status', '新增成功');
     }
