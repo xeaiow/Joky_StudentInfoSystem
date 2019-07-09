@@ -1,9 +1,5 @@
-<div class="form-group text-right">
-  <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addClassModal{{$school->id}}">新增課程</button>
-</div>
-
 <!-- Modal -->
-<div class="modal fade" id="addClassModal{{$school->id}}" tabindex="-1" role="dialog" aria-labelledby="addClassModal{{$school->id}}Label">
+<div class="modal fade" id="addClassModal{{ $school->id }}">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -12,31 +8,21 @@
         </button>
         <h4 class="modal-title" id="myModalLabel">新增課程</h4>
       </div>
-      <div class="modal-body">
-      <form class="form-horizontal" action="{{url('school/add-class')}}" method="post">
+      <div class="modal-body" style="height:300px;">
+        <form class="form-horizontal" action="{{url('school/add-class')}}" method="post">
           {{csrf_field()}}
           <div class="form-group">
-            <label for="classNumber{{$school->id}}" class="col-sm-2 control-label">名稱</label>
-            <div class="col-sm-10">
+            <label for="classNumber{{$school->id}}">名稱</label>
               <input type="text" name="class_number" class="form-control" id="classNumber{{$school->id}}" placeholder="會話一" required>
-            </div>
           </div>
           <div class="form-group">
-            <label for="classRoomNumber{{$school->id}}" class="col-sm-2 control-label">課程類別</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" name="group" id="classRoomNumber{{$school->id}}" placeholder="英語, 數學, 自然">
-              <span id="helpBlock" class="help-block">*留空為則為無群組</span>
-            </div>
+            <label for="classRoomNumber{{$school->id}}">課程類別</label>
+              <input type="text" name="group" class="form-control" id="classRoomNumber{{$school->id}}" placeholder="英語, 數學, 自然">
           </div>
-          <div class="form-group">
-            <div class="col-sm-12 text-right">
-              <button type="submit" class="btn btn-primary btn-sm">新增</button>
-            </div>
+          <div class="form-group text-right">
+            <button type="submit" class="btn btn-primary btn-sm">新增</button>
           </div>
         </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">關閉</button>
       </div>
     </div>
   </div>

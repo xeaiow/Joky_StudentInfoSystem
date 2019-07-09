@@ -52,7 +52,6 @@ class SchoolController extends Controller
       $rules = [
         'school_name' => 'required|string|max:50',
         'school_medium' => 'required',
-        'school_about' => 'required',
         'school_established' => 'required',
       ];
       $messages = [
@@ -65,7 +64,7 @@ class SchoolController extends Controller
         'school_name' => '機構名稱',
         'school_medium' => '類型',
         'school_established' => '地址',
-        'school_about' => '描述',
+        'school_about' => '備註',
       ];
 
       $this->validate($request, $rules, $messages, $attributes);
@@ -73,12 +72,12 @@ class SchoolController extends Controller
       $tb = new School;
       $tb->name = $request->school_name;
       $tb->established = $request->school_established;
-      $tb->about = $request->school_about;
+      $tb->about = (!empty($request->school_about)) ? $request->school_about : '';
       $tb->medium = $request->school_medium;
       $tb->code = date("y").substr(number_format(time() * mt_rand(),0,'',''),0,6);
       $tb->theme = 'flatly';
       $tb->save();
-      return back()->with('status', '新增完成');
+      return back()->with('status', '新增成功');
     }
 
     /**

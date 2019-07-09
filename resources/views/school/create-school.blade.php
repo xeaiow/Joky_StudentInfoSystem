@@ -52,36 +52,91 @@
                     <div class="row">
                       <div class="col-md-4">
                         <div class="card border-light mb-3">
-                          <div class="card-header">教育類型</div>
+                          <div class="card-header nav-link-align-btn">
+                            教育類型
+                            <span class="pull-right">
+                              <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#departmentModal">新增</button>
+                            </span>
+                          </div>
                           <div class="card-body">
-                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#departmentModal">新增</button>
+                            @foreach ($departments as $d)
+                              @if( $d->school_id == $school->id )
+                                <span class="badge" style="background-color:#3398DB;">{{ $d->department_name }}</span>
+                              @endif
+                            @endforeach
                           </div>
                         </div>
                       </div>
                       <div class="col-md-4">
                         <div class="card border-light mb-3">
-                          <div class="card-header">課程與班級</div>
-                          <div class="card-body">
-                            <a href="#collapse{{($loop->index + 1)}}" role="button" class="btn btn-primary btn-sm" data-toggle="collapse" aria-expanded="false" aria-controls="collapse{{($loop->index + 1)}}">顯示</a>
+                          <div class="card-header nav-link-align-btn">
+                            課程與班級
+                            <span class="pull-right">
+                              <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#addClassModal{{$school->id}}">新增課程</button>
+                            </span>
+                          </div>
+                          <div class="card-body"> 
+                            @if(\Auth::user()->school_id == $school->id)
+                              @include('layouts.master.add-class-form')
+                              <div class="row">
+                                @foreach($classes as $class)
+                                  @if($class->school_id == $school->id)
+                                  <div class="col-sm-3">
+                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal{{$class->id}}" style="margin-top: 5%;">{{$class->class_number}} {{!empty($class->group)? '- '.$class->group:''}}</button>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="myModal{{$class->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                      <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            <h4 class="modal-title" id="myModalLabel">{{ $class->class_number }}</h4>
+                                          </div>
+                                          <div class="modal-body">
+                                            <ul class="list-group">
+                                              @foreach($sections as $section)
+                                                @if($section->class_id == $class->id)
+                                                <li class="list-group-item">課程 {{ $section->section_number }} &nbsp;
+                                                  <a class="btn btn-xs btn-primary" href="{{url('courses/'.$class->id.'/'.$section->id)}}">所有子課程</a>
+                                                  <span class="pull-right"> &nbsp;&nbsp;
+                                                    <a class="btn btn-xs btn-primary" data-toggle="collapse" href="#collapseForNewCourse{{$section->id}}" aria-expanded="false" aria-controls="collapseForNewCourse{{$section->id}}">新增子課程</a>  
+                                                    <a class="btn btn-xs btn-success" href="{{url('school/promote-students/'.$section->id)}}">管理學生</a>
+                                                  </span>
+                                                  
+                                                  @include('layouts.master.add-course-form')
+                                                </li>
+                                                @endif
+                                              @endforeach
+                                            </ul>
+                                            @include('layouts.master.create-section-form')
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  @endif
+                                @endforeach
+                              </div>
+                            @endif
                           </div>
                         </div>
                       </div>
                       <div class="col-md-4">
                         <div class="card border-light mb-3">
-                          <div class="card-header">管理角色</div>
-                          <div class="card-body">
-                          @foreach($schools as $school)
-                          @if(\Auth::user()->role == 'admin' && \Auth::user()->school_id == $school->id)
-                            <div class="btn-group" role="group" aria-label="Basic example">
-                              <a class="btn btn-primary btn-sm" href="{{url('register/student')}}">學員</a>
-                              <a class="btn btn-primary btn-sm" href="{{url('register/teacher')}}">教師</a>
-                              <a class="btn btn-primary btn-sm" href="{{url('register/accountant')}}">會計師</a>
-                              <a class="btn btn-primary btn-sm" href="{{url('register/librarian')}}">圖書館員</a>
+                          <div class="card-header nav-link-align-btn">
+                            管理角色
+                          </div>
+                            <div class="card-body">
+                            @foreach($schools as $school)
+                              @if(\Auth::user()->role == 'admin' && \Auth::user()->school_id == $school->id)
+                                <a class="btn btn-primary btn-sm" href="{{url('register/student')}}" >學員</a>
+                                <a class="btn btn-primary btn-sm" href="{{url('register/teacher')}}">教師</a>
+                                <a class="btn btn-primary btn-sm" href="{{url('register/accountant')}}">會計師</a>
+                                <a class="btn btn-primary btn-sm" href="{{url('register/librarian')}}">圖書館員</a>
+                              @endif
+                            @endforeach
                             </div>
-                            @break
-                          @endif
-                        @endforeach
-                          </div>
                         </div>
                       </div>
                     </div>
@@ -102,10 +157,10 @@
                                 <label>類型名稱</label>
                                 <input type="text" class="form-control" name="department_name" placeholder="英語、數學、自然..">
                               </div>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary btn-sm">確定</button>
-                          </div>
+                              <div class="form-group text-right">
+                                <button type="submit" class="btn btn-primary btn-sm">確定</button>
+                              </div>
+                            </div>
                             </form>
                           </div>
                         </div>
@@ -114,72 +169,24 @@
                     
                     <br />
                     <br />
-                  @endif
-                    @if(\Auth::user()->role == 'master' || \Auth::user()->school_id == $school->id)
-                    <tr>
-                      @if(\Auth::user()->role == 'master')
-                      <td><small>{{$school->name}}</small></td>
-                      <td><small>{{$school->code}}</small></td>
-                      <td><small>{{$school->about}}</small></td>
-                      @endif
-                      @if(\Auth::user()->role == 'master')
-                        <td>
-                          <a class="btn btn-primary btn-xs" role="button" href="{{url('register/admin/'.$school->id.'/'.$school->code)}}"><small>新增</small></a>
-                        </td>
-                        <td>
-                          <a class="btn btn-primary btn-xs" role="button" href="{{url('school/admin-list/'.$school->id)}}"><small>查看</small></a>
-                        </td>
-                      @endif
-                    </tr>
-                    @if(\Auth::user()->school_id == $school->id)
-                    <tr class="collapse" id="collapse{{($loop->index + 1)}}" aria-labelledby="heading{{($loop->index + 1)}}" aria-expanded="false">
-                      <td colspan="12">
-                        @include('layouts.master.add-class-form')
-                            <div class="row">
-                              @foreach($classes as $class)
-                                @if($class->school_id == $school->id)
-                                <div class="col-sm-3">
-                                  <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal{{$class->id}}" style="margin-top: 5%;">{{$class->class_number}} {{!empty($class->group)? '- '.$class->group:''}}</button>
-                                  <!-- Modal -->
-                                  <div class="modal fade" id="myModal{{$class->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                                    <div class="modal-dialog modal-lg" role="document">
-                                      <div class="modal-content">
-                                        <div class="modal-header">
-                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                          </button>
-                                          <h4 class="modal-title" id="myModalLabel">{{$class->class_number}}</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                          <ul class="list-group">
-                                            @foreach($sections as $section)
-                                              @if($section->class_id == $class->id)
-                                              <li class="list-group-item">課程 {{$section->section_number}} &nbsp;
-                                                <a class="btn btn-xs btn-default" href="{{url('courses/'.$class->id.'/'.$section->id)}}">相關課程</a>
-                                                <span class="pull-right"> &nbsp;&nbsp;
-                                                  <a  class="btn btn-xs btn-primary" href="{{url('school/promote-students/'.$section->id)}}">管理學生</a>
-                                                </span>
-                                                @include('layouts.master.add-course-form')
-                                              </li>
-                                              @endif
-                                            @endforeach
-                                          </ul>
-                                          @include('layouts.master.create-section-form')
-                                        </div>
-                                        <div class="modal-footer">
-                                          <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">關閉</button>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                @endif
-                              @endforeach
-                            </div>
-                      </td>
-                    </tr>
                     @endif
-                    @endif
+                      @if(\Auth::user()->role == 'master' || \Auth::user()->school_id == $school->id)
+                      <tr>
+                        @if(\Auth::user()->role == 'master')
+                        <td><small>{{$school->name}}</small></td>
+                        <td><small>{{$school->code}}</small></td>
+                        <td><small>{{$school->about}}</small></td>
+                        @endif
+                        @if(\Auth::user()->role == 'master')
+                          <td>
+                            <a class="btn btn-primary btn-xs" role="button" href="{{url('register/admin/'.$school->id.'/'.$school->code)}}"><small>新增</small></a>
+                          </td>
+                          <td>
+                            <a class="btn btn-primary btn-xs" role="button" href="{{url('school/admin-list/'.$school->id)}}"><small>查看</small></a>
+                          </td>
+                        @endif
+                      </tr>
+                      @endif
                     @endforeach
                   </tbody>
                 </table>

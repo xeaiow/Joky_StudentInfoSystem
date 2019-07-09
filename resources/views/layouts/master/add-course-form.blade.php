@@ -1,4 +1,4 @@
-<a class="btn btn-xs btn-primary pull-right" data-toggle="collapse" href="#collapseForNewCourse{{$section->id}}" aria-expanded="false" aria-controls="collapseForNewCourse{{$section->id}}">新增課程</a>
+
   <div class="collapse" id="collapseForNewCourse{{$section->id}}" style="margin-top:1%;">
     <div class="panel panel-default">
       <div class="panel-body">
@@ -7,7 +7,7 @@
           <input type="hidden" name="class_id" value="{{$class->id}}"/>
           <input type="hidden" name="section_id" value="{{$section->id}}"/>
           <div class="form-group">
-            <label for="courseName{{$section->id}}" class="col-sm-2 control-label">課程名稱</label>
+            <label for="courseName{{ $section->id }}" class="col-sm-2 control-label">課程名稱</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="courseName{{$section->id}}" name="course_name">
             </div>

@@ -21,7 +21,6 @@
                 @endif
             </div>
             @endif
-
             <div class="card border-primary" style="margin-top: 20px;">
                 <div class="card-header text-center">
                     @switch(session('register_role'))
@@ -60,10 +59,8 @@
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-3 control-label">電子信箱</label>
-
                             <div class="col-md-7">
                                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
-
                                 @if ($errors->has('email'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('email') }}</strong>

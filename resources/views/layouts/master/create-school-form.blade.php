@@ -52,11 +52,9 @@
               </div>
           </div>
           <div class="form-group{{ $errors->has('school_about') ? ' has-error' : '' }}">
-              <label for="school_about" class="col-md-4 control-label">描述</label>
-
+              <label for="school_about" class="col-md-4 control-label">備註</label>
               <div class="col-md-6">
-                  <textarea id="school_about" class="form-control" rows="3" name="school_about" placeholder="備註" required>{{ old('school_about') }}</textarea>
-
+                  <textarea id="school_about" class="form-control" rows="3" name="school_about">{{ old('school_about') }}</textarea>
                   @if ($errors->has('school_about'))
                       <span class="help-block">
                           <strong>{{ $errors->first('school_about') }}</strong>
@@ -66,7 +64,7 @@
           </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
         <button type="submit" class="btn btn-primary">新增</button>
       </div>
     </div>

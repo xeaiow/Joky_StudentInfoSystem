@@ -56,9 +56,10 @@
                     </table>
                 </div>
                 @else
-                <div class="panel-body">
-                    <div class="alert alert-dismissible alert-secondary" role="alert">
-                        <a class="btn btn-default" href="{{url('register/admin/'.$school->id.'/'.$school->code)}}">立即新增成員</a>
+                <div class="card border-primary mb-3" style="margin-top:20px;">
+                    <div class="card-header text-center">成員</div>
+                    <div class="card-body">
+                        <a class="btn btn-primary btn-sm" href="{{url('register/admin/'.$school->id.'/'.$school->code)}}">新增</a>
                     </div>
                 </div>
                 @endif
