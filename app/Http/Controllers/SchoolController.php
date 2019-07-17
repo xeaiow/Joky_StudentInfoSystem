@@ -93,6 +93,25 @@ class SchoolController extends Controller
       return view('school.admin-list', compact('admins', 'school'));
     }
 
+    // 整間停權
+    public function deactivate ($school_id)
+    {
+      // 取得該學校現狀
+      $school = School::where('id', $school_id);
+
+      if ($school->first()['deactivate'] == 1)
+      {
+        $school->update(['deactivate' => 0]);
+      }
+      else {
+        $school->update(['deactivate' => 1]);
+      }
+
+      $admins = User::where('school_id',$school_id)->where('role','admin')->get();
+      $school = School::where('id', $school_id)->first();
+      return view('school.admin-list', compact('admins', 'school'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

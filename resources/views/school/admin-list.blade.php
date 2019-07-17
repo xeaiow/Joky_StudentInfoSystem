@@ -2,6 +2,15 @@
 
 @section('title', '管理成員')
 
+<style>
+    table th {
+        font-size: 16px !important;
+    }
+    .action-menu {
+        padding: 10 0 10 10px;
+    }
+</style>
+
 @section('content')
 <div class="container-fluid">
     <div class="row">
@@ -18,17 +27,27 @@
             </ul>
         </div>
         <div class="col-md-10" id="main-container">
-            <div class="panel panel-default">
-                @if(count($admins) > 0)
-                <div class="panel-body">
-                    <table class="table table-striped">
-                        <tr>
+            <div class="row action-menu">
+                <div class="col-md-12 text-right">
+                    @if($school->deactivate == 0)
+                        <a href="{{url('school/admin-list/'.$school->id.'/deactivate')}}" class="btn btn-primary btn-xs" role="button">停權補習班</a>
+                    @else
+                        <a href="{{url('school/admin-list/'.$school->id.'/deactivate')}}" class="btn btn-danger btn-xs" role="button">啟用補習班</a>
+                    @endif
+                </div>
+            </div>
+
+            <div class="card border-primary">
+                <div class="card-header text-center">{{ $school->name }}</div>
+                <div class="card-body">
+                    @if(count($admins) > 0)
+                    <table class="table table-hover">
+                        <tr class="table-th">
                             <th>姓名</th>
                             <th>編號</th>
                             <th>電子信箱</th>
                             <th>手機</th>
                             <th>地址</th>
-                            <!-- <th>備註</th> -->
                             <th>操作</th>
                         </tr>
                         @foreach ($admins as $admin)
@@ -40,7 +59,6 @@
                             <td>{{$admin->email}}</td>
                             <td>{{$admin->phone_number}}</td>
                             <td>{{$admin->address}}</td>
-                            <!-- <td>{{$admin->about}}</td> -->
                             <td>
                             <div class="btn-group" role="group">
                             <a href="{{url('edit/user/'.$admin->id)}}" class="btn btn-xs btn-primary" role="button"><i class="material-icons">edit</i></a>
@@ -54,15 +72,15 @@
                         </tr>
                         @endforeach
                     </table>
-                </div>
-                @else
-                <div class="card border-primary mb-3" style="margin-top:20px;">
-                    <div class="card-header text-center">成員</div>
-                    <div class="card-body">
-                        <a class="btn btn-primary btn-sm" href="{{url('register/admin/'.$school->id.'/'.$school->code)}}">新增</a>
+                    @else
+                    <div class="card border-primary mb-3" style="margin-top:20px;">
+                        <div class="card-header text-center">成員</div>
+                        <div class="card-body">
+                            <a class="btn btn-primary btn-sm" href="{{url('register/admin/'.$school->id.'/'.$school->code)}}">新增</a>
+                        </div>
                     </div>
+                    @endif
                 </div>
-                @endif
             </div>
         </div>
     </div>

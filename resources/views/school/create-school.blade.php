@@ -81,7 +81,7 @@
                               <div class="row">
                                 @foreach($classes as $class)
                                   @if($class->school_id == $school->id)
-                                  <div class="col-sm-3">
+                                  <div class="col-sm-12">
                                     <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal{{$class->id}}" style="margin-top: 5%;">{{$class->class_number}} {{!empty($class->group)? '- '.$class->group:''}}</button>
                                     <!-- Modal -->
                                     <div class="modal fade" id="myModal{{$class->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
