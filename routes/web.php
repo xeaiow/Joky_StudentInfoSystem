@@ -9,6 +9,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
+// Route::get('/rp', 'UserController@stores');
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::middleware(['auth'])->group(function (){
@@ -191,7 +192,7 @@ Route::middleware(['auth','admin'])->group(function (){
     session(['register_role' => 'librarian']);
     return redirect()->route('register');
   });
-  Route::post('register/student', 'UserController@store');
+  Route::post('register/student', 'UserController@stores');
   Route::post('register/teacher',  'UserController@storeTeacher');
   Route::post('register/accountant',  'UserController@storeAccountant');
   Route::post('register/librarian',  'UserController@storeLibrarian');
@@ -199,8 +200,6 @@ Route::middleware(['auth','admin'])->group(function (){
   Route::get('edit/course/{id}','CourseController@edit');
   Route::post('edit/course/{id}','CourseController@updateNameAndTime');
 });
-
-
 
 //use PDF;
 Route::middleware(['auth','master.admin'])->group(function (){

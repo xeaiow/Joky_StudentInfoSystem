@@ -3,6 +3,7 @@ namespace App\Http\Controllers\User;
 
 use App\User;
 use App\StudentInfo;
+use DB;
 use Illuminate\Support\Facades\Auth;
 
 class HandleUser {
@@ -78,46 +79,32 @@ class HandleUser {
 
     public static function storeStudent($request)
     {
-        $data = [
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-            'role' => 'student',
-            'active' => 1,
-            'school_id' => Auth::user()->school_id,
-            'code' => Auth::user()->code,
-            'student_code' => Auth::user()->school_id.date('y').substr(number_format(time() * mt_rand(), 0, '', ''), 0, 5),
-            'gender' => $request->gender,
-            'boold_group' => '',
-            'nationality' => '',
-            'phone_number' => $request->phone_number,
-            'address' => (!empty($request->address)) ? $request->address : '',
-            'about' => (!empty($request->about)) ? $request->about : '',
-            'pic_path' => (!empty($request->pic_path)) ? $request->pic_path : '',
-            'verified' => 1,
-            'section_id' => $request->section
-        ];
-        User::create($data);
-        // $tb = new User();
-        // $tb->name = $request->name;
-        // $tb->email = (!empty($request->email)) ? $request->email : '';
-        // $tb->password = bcrypt($request->password);
-        // $tb->role = 'student';
-        // $tb->active = 1;
-        // $tb->school_id = Auth::user()->school_id;
-        // $tb->code = Auth::user()->code;
-        // $tb->student_code = Auth::user()->school_id.date('y').substr(number_format(time() * mt_rand(), 0, '', ''), 0, 5);
-        // $tb->gender = $request->gender;
-        // $tb->boold_group = '';
-        // $tb->nationality = '';
-        // $tb->phone_number = $request->phone_number;
-        // $tb->address = (!empty($request->address)) ? $request->address : '';
-        // $tb->about = (!empty($request->about)) ? $request->about : '';
-        // $tb->pic_path = (!empty($request->pic_path)) ? $request->pic_path : '';
-        // $tb->verified = 1;
-        // $tb->section_id = $request->section;
-        // $tb->save();
-        return $data;
+        $exist = User::where('email', $request->email)->count();
+
+        if ($exist == 0)
+        {
+            $tb = new User();
+            $tb->name = $request->name;
+            $tb->email = (!empty($request->email)) ? $request->email : '';
+            $tb->password = bcrypt($request->password);
+            $tb->role = 'student';
+            $tb->active = 1;
+            $tb->school_id = Auth::user()->school_id;
+            $tb->code = Auth::user()->code;
+            $tb->student_code = Auth::user()->school_id.date('y').substr(number_format(time() * mt_rand(), 0, '', ''), 0, 5);
+            $tb->gender = $request->gender;
+            $tb->blood_group = '';
+            $tb->nationality = '';
+            $tb->phone_number = $request->phone_number;
+            $tb->address = (!empty($request->address)) ? $request->address : '';
+            $tb->about = (!empty($request->about)) ? $request->about : '';
+            $tb->pic_path = (!empty($request->pic_path)) ? $request->pic_path : '';
+            $tb->verified = 1;
+            $tb->section_id = $request->section;
+            $tb->save();
+            return $tb;
+        }
+        return false;
     }
 
     public static function storeAdmin($request){
@@ -165,7 +152,23 @@ class HandleUser {
     }
     
     public static function storeTeacher($request){
-        return (new self)->storeStaff($request, 'teacher');
+        $tb = new User();
+        $tb->name = $request->name;
+        $tb->email = (!empty($request->email)) ? $request->email : '';
+        $tb->password = bcrypt($request->password);
+        $tb->role = 'teacher';
+        $tb->active = 1;
+        $tb->school_id = Auth::user()->school_id;
+        $tb->code = Auth::user()->code;
+        $tb->student_code = Auth::user()->school_id.date('y').substr(number_format(time() * mt_rand(), 0, '', ''), 0, 5);
+        $tb->gender = $request->gender;
+        $tb->phone_number = $request->phone_number;
+        $tb->pic_path = (!empty($request->pic_path)) ? $request->pic_path : '';
+        $tb->verified = 1;
+        $tb->department_id = (!empty($request->department_id))?$request->department_id : 0;
+        $tb->section_id = ($request->class_teacher_section_id != 0) ? $request->class_teacher_section_id : 0;
+        $tb->save();
+        return $tb;
     }
 
     public static function storeAccountant($request){

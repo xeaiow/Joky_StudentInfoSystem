@@ -38,11 +38,6 @@ class CreateUserRequest extends FormRequest
         ];
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
     public function rules()
     {
         return [
@@ -69,6 +64,7 @@ class CreateUserRequest extends FormRequest
             'name.max' => '姓名最長不得大於 40 個字元',
             'email.max' => '信箱最長不得大於 255 個字元',
             'email' => ':attribute格式錯誤',
+            'email.unique' => '電子信箱已存在',
             'password.confirmed' => '密碼與確認密碼不同',
             'password.min' => '密碼至少 6 個字元(英文或數字)'
         ];

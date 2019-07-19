@@ -99,7 +99,7 @@ class UserController extends Controller
             'register_sections' => $sections,
         ]);
 
-        return redirect()->route('register');
+        return view('layouts.student.register-student', compact('classes', 'sections'));
     }
 
     /**
@@ -221,54 +221,30 @@ class UserController extends Controller
         return redirect('/home');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param CreateUserRequest $request
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function store(CreateUserRequest $request)
+
+    public function stores(CreateUserRequest $request)
     {
-        $data = [
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-            'role' => 'student',
-            'active' => 1,
-            'school_id' => 2,
-            'code' => 19789034,
-            'student_code' => 21915388,
-            'gender' => $request->gender,
-            'boold_group' => '',
-            'nationality' => '',
-            'phone_number' => $request->phone_number,
-            'address' => (!empty($request->address)) ? $request->address : '',
-            'about' => (!empty($request->about)) ? $request->about : '',
-            'pic_path' => (!empty($request->pic_path)) ? $request->pic_path : '',
-            'verified' => 1,
-            'section_id' => $request->section
-        ];
-        User::create($data);
+        $exist = User::where('email', $request->email)->count();
 
-        
-
-        // DB::transaction(function () use ($request) {
-            // $password = $request->password;
-            // $tb = HandleUser::storeStudent($request);
-            // try {
-            //     // Fire event to store Student information
-            //     if(event(new StudentInfoUpdateRequested($request,$tb->id))){
-            //         // Fire event to send welcome email
-            //         event(new UserRegistered($tb, $password));
-            //     } else {
-            //         throw new \Exeception('事件回傳失敗');
-            //     }
-            // } catch(\Exception $ex) {
-            //     Log::info('Email 寄送失敗： '.$tb->email.'\n'.$ex->getMessage());
-            // }
-        // });
-
+        if ($exist != 0)
+        {
+            return back()->with('existed', '電子信箱已存在');
+        }
+        DB::transaction(function () use ($request) {
+            $password = $request->password;
+            $tb = HandleUser::storeStudent($request);
+            try {
+                // Fire event to store Student information
+                if(event(new StudentInfoUpdateRequested($request,$tb->id))){
+                    // Fire event to send welcome email
+                    event(new UserRegistered($tb, $password));
+                } else {
+                    throw new \Exeception('事件回傳失敗');
+                }
+            } catch(\Exception $ex) {
+                // Log::info('Email 寄送失敗： '.$tb->email.'\n'.$ex->getMessage());
+            }
+        });
         return back()->with('status', '新增成功');
     }
 

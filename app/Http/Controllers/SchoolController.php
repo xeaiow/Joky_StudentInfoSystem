@@ -23,9 +23,10 @@ class SchoolController extends Controller
       $classes = Myclass::all();
       $sections = Section::all();
       $teachers = User::join('departments', 'departments.id', '=', 'users.department_id')
-                            ->where('role', 'teacher')
-                            ->orderBy('name','ASC')
-                            ->where('active', 1)
+                            ->where('users.role', 'teacher')
+                            ->orderBy('users.name','ASC')
+                            ->where('users.active', 1)
+                            ->select(['users.id AS userId', 'departments.id AS id', 'users.name AS name', 'users.email AS email', 'users.role AS role', 'users.active AS active', 'users.school_id AS school_id', 'users.code AS code', 'users.student_code AS student_code', 'users.gender AS gender', 'users.blood_group AS blood_groups', 'users.nationality AS nationality', 'users.phone_number AS phone_number', 'users.address AS address', 'users.about AS about', 'users.pic_path AS pic_path', 'users.verified AS verified', 'users.section_id AS section_id', 'users.created_at AS created_at', 'users.updated_at AS updated_at', 'users.department_id AS department_id', 'departments.department_name AS department_name'])
                             ->get();
       $departments = Department::where('school_id',\Auth::user()->school_id)->get();
       return view('school.create-school', compact('schools', 'classes', 'sections', 'teachers', 'departments'));
