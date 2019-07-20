@@ -131,15 +131,28 @@ class CourseController extends Controller
      */
     public function updateNameAndTime(Request $request, $id)
     {
-      $request->validate([
+      $attributes = [
+        'course_name' => '課程名稱',
+        'course_time' => '上課時段'
+      ];
+
+      $rules = [
         'course_name' => 'required|string',
-        'course_time' => 'required|string',
-      ]);
+        'course_time' => 'required|string'
+      ];
+      
+      $messages = [
+        'required' => ':attribute必須填寫',
+        'string' => ':attribute必須為合法字元'
+      ];
+
+      $this->validate($request, $rules, $messages, $attributes);
+
       $tb = Course::find($id);
       $tb->course_name = $request->course_name;
       $tb->course_time = $request->course_time;
       $tb->save();
-      return back()->with('status', '儲存成功');
+      return back()->with('status', '更改成功');
     }
 
     /**

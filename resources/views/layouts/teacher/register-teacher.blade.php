@@ -131,8 +131,8 @@
 
                             <div class="col-md-7">
                                 <select id="gender" class="form-control" name="gender">
-                                    <option selected="selected">男</option>
-                                    <option>女</option>
+                                    <option selected="selected" value="male">男</option>
+                                    <option value="female">女</option>
                                 </select>
 
                                 @if ($errors->has('gender'))

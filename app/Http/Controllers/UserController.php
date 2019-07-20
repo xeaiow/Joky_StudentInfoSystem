@@ -42,10 +42,10 @@ class UserController extends Controller
     public function index($school_code, $student_code, $teacher_code)
     {
         session()->forget('section-attendance');
-        if (!empty($school_code) && $student_code == 1) {// For student
+        if (!empty($school_code) && $student_code == 1) { // For student
             $users = HandleUser::getStudents();
             $view = 'list.student-list';
-        } elseif (!empty($school_code) && $teacher_code == 1) {// For teacher
+        } elseif (!empty($school_code) && $teacher_code == 1) { // For teacher
             $users = HandleUser::getTeachers();
             $view = 'list.teacher-list';
         } else {
@@ -397,7 +397,6 @@ class UserController extends Controller
             $tb = User::find($request->user_id);
             $tb->name = $request->name;
             $tb->email = (!empty($request->email)) ? $request->email : '';
-            $tb->nationality = (!empty($request->nationality)) ? $request->nationality : '';
             $tb->phone_number = $request->phone_number;
             $tb->address = (!empty($request->address)) ? $request->address : '';
             $tb->about = (!empty($request->about)) ? $request->about : '';
@@ -408,19 +407,11 @@ class UserController extends Controller
             }
             if ($tb->save()) {
                 if ($request->user_role == 'student') {
-                    // $request->validate([
-                    //   'session' => 'required',
-                    //   'version' => 'required',
-                    //   'birthday' => 'required',
-                    //   'religion' => 'required',
-                    //   'father_name' => 'required',
-                    //   'mother_name' => 'required',
-                    // ]);
                     try{
                         // Fire event to store Student information
                         event(new StudentInfoUpdateRequested($request,$tb->id));
                     } catch(\Exception $ex) {
-                        Log::info('更改失敗, Id: '.$tb->id. 'err:'.$ex->getMessage());
+                        Log::info('id: '.$tb->id. 'err:'.$ex->getMessage());
                     }
                 }
             }

@@ -24,7 +24,7 @@ class UpdateUserRequest extends FormRequest
     public function attributes()
     {
         return [
-            'user_id' => '使用者id',
+            'user_id' => '使用者 id',
             'email' => '電子信箱',
             'name' => '姓名',
             'phone_number' => '手機號碼',
