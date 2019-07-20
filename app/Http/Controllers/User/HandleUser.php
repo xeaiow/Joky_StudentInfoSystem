@@ -107,6 +107,33 @@ class HandleUser {
         return false;
     }
 
+    public static function storeTeacher($request){
+
+        $exist = User::where('email', $request->email)->count();
+
+        if ($exist == 0)
+        {
+            $tb = new User();
+            $tb->name = $request->name;
+            $tb->email = (!empty($request->email)) ? $request->email : '';
+            $tb->password = bcrypt($request->password);
+            $tb->role = 'teacher';
+            $tb->active = 1;
+            $tb->school_id = Auth::user()->school_id;
+            $tb->code = Auth::user()->code;
+            $tb->student_code = Auth::user()->school_id.date('y').substr(number_format(time() * mt_rand(), 0, '', ''), 0, 5);
+            $tb->gender = $request->gender;
+            $tb->phone_number = $request->phone_number;
+            $tb->pic_path = (!empty($request->pic_path)) ? $request->pic_path : '';
+            $tb->verified = 1;
+            $tb->department_id = (!empty($request->department_id))?$request->department_id : 0;
+            $tb->section_id = ($request->class_teacher_section_id != 0) ? $request->class_teacher_section_id : 0;
+            $tb->save();
+            return $tb;
+        }
+        return false;
+    }
+
     public static function storeAdmin($request){
         $tb = new User();
         $tb->name = $request->name;
@@ -147,26 +174,6 @@ class HandleUser {
             $tb->section_id = ($request->class_teacher_section_id != 0) ? $request->class_teacher_section_id : 0;
         }
         
-        $tb->save();
-        return $tb;
-    }
-    
-    public static function storeTeacher($request){
-        $tb = new User();
-        $tb->name = $request->name;
-        $tb->email = (!empty($request->email)) ? $request->email : '';
-        $tb->password = bcrypt($request->password);
-        $tb->role = 'teacher';
-        $tb->active = 1;
-        $tb->school_id = Auth::user()->school_id;
-        $tb->code = Auth::user()->code;
-        $tb->student_code = Auth::user()->school_id.date('y').substr(number_format(time() * mt_rand(), 0, '', ''), 0, 5);
-        $tb->gender = $request->gender;
-        $tb->phone_number = $request->phone_number;
-        $tb->pic_path = (!empty($request->pic_path)) ? $request->pic_path : '';
-        $tb->verified = 1;
-        $tb->department_id = (!empty($request->department_id))?$request->department_id : 0;
-        $tb->section_id = ($request->class_teacher_section_id != 0) ? $request->class_teacher_section_id : 0;
         $tb->save();
         return $tb;
     }

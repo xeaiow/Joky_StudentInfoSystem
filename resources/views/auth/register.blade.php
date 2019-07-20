@@ -21,6 +21,12 @@
                 @endif
             </div>
             @endif
+            @if (session('existed'))
+            <div class="alert alert-dismissible alert-danger">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                {{ session('existed') }}
+            </div>
+            @endif
             <div class="card border-primary" style="margin-top: 20px;">
                 <div class="card-header text-center">
                     @switch(session('register_role'))

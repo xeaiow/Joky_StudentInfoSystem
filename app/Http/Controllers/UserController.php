@@ -102,6 +102,21 @@ class UserController extends Controller
         return view('layouts.student.register-student', compact('classes', 'sections'));
     }
 
+    // 新增教師頁面
+    public function redirectToRegisterTeacher ()
+    {
+        $departments = Department::where('school_id', Auth::user()->school_id)->get();
+        $classes     = Myclass::where('school_id', Auth::user()->school->id)->pluck('id');
+        $sections    = Section::with('class')->whereIn('class_id',$classes)->get();
+        session([
+          'register_role'       => 'teacher',
+          'departments'         => $departments,
+          'register_sections'   => $sections
+        ]);
+
+        return view('layouts.teacher.register-teacher', compact('departments', 'classes', 'sections'));
+    }
+
     /**
      * @param $section_id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -222,6 +237,7 @@ class UserController extends Controller
     }
 
 
+    // 新增學員
     public function stores(CreateUserRequest $request)
     {
         $exist = User::where('email', $request->email)->count();
@@ -248,6 +264,28 @@ class UserController extends Controller
         return back()->with('status', '新增成功');
     }
 
+    // 新增教師
+    public function storeTeachers(CreateTeacherRequest $request)
+    {
+        $exist = User::where('email', $request->email)->count();
+
+        if ($exist != 0)
+        {
+            return back()->with('existed', '電子信箱已存在');
+        }
+        DB::transaction(function () use ($request) {
+            $password = $request->password;
+            $tb = HandleUser::storeTeacher($request);
+            try {
+                // Fire event to send welcome email
+                event(new UserRegistered($tb, $password));
+            } catch(\Exception $ex) {
+                Log::info('Email 寄送失敗： '.$tb->email);
+            }
+        });
+        return back()->with('status', '新增成功');
+    }
+
     /**
      * @param CreateAdminRequest $request
      * @return \Illuminate\Http\RedirectResponse
@@ -263,24 +301,6 @@ class UserController extends Controller
         // } catch(\Exception $ex) {
         //     Log::info('Email 寄送失敗： '.$tb->email);
         // }
-
-        return back()->with('status', '新增成功');
-    }
-
-    /**
-     * @param CreateTeacherRequest $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function storeTeacher(CreateTeacherRequest $request)
-    {
-        $password = $request->password;
-        $tb = HandleUser::storeTeacher($request);
-        try {
-            // Fire event to send welcome email
-            event(new UserRegistered($tb, $password));
-        } catch(\Exception $ex) {
-            Log::info('Email 寄送失敗： '.$tb->email);
-        }
 
         return back()->with('status', '新增成功');
     }

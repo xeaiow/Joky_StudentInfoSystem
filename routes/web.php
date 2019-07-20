@@ -173,17 +173,7 @@ Route::middleware(['auth','admin'])->group(function (){
   Route::post('school/promote-students','UserController@promoteSectionStudentsPost');
   Route::post('school/theme','SchoolController@changeTheme');
   Route::get('register/student', 'UserController@redirectToRegisterStudent');
-  Route::get('register/teacher', function(){
-    $departments = \App\Department::where('school_id',\Auth::user()->school_id)->get();
-    $classes = \App\Myclass::where('school_id',\Auth::user()->school->id)->pluck('id');
-    $sections = \App\Section::with('class')->whereIn('class_id',$classes)->get();
-    session([
-      'register_role' => 'teacher',
-      'departments' => $departments,
-      'register_sections' => $sections
-    ]);
-    return redirect()->route('register');
-  });
+  Route::get('register/teacher', 'UserController@redirectToRegisterTeacher');
   Route::get('register/accountant', function(){
     session(['register_role' => 'accountant']);
     return redirect()->route('register');
@@ -193,7 +183,7 @@ Route::middleware(['auth','admin'])->group(function (){
     return redirect()->route('register');
   });
   Route::post('register/student', 'UserController@stores');
-  Route::post('register/teacher',  'UserController@storeTeacher');
+  Route::post('register/teacher',  'UserController@storeTeachers');
   Route::post('register/accountant',  'UserController@storeAccountant');
   Route::post('register/librarian',  'UserController@storeLibrarian');
 
