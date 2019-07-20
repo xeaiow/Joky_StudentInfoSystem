@@ -81,7 +81,7 @@ class CourseController extends Controller
       try{
         HandleCourse::addCourse($request);
       } catch (\Exception $ex){
-        return 'Could not add course.';
+        return back()->with('status', '新增失敗');
       }
       return back()->with('status', '新增成功');
     }

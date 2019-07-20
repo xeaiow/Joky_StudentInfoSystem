@@ -30,7 +30,7 @@ class HandleCourse {
         $tb = new Course;
         $tb->course_name = $request->course_name;
         $tb->class_id = $request->class_id;
-        $tb->course_type = $request->course_type;
+        $tb->course_type = 'core';
         $tb->course_time = $request->course_time;
         $tb->section_id = $request->section_id;
         $tb->teacher_id = $request->teacher_id;

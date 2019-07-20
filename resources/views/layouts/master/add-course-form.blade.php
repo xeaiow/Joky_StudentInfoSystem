@@ -40,14 +40,6 @@
             </select>
         </div>
         <div class="form-group">
-          <label for="course_type{{ $section->id }}">類型</label>
-          <select class="form-control" id="course_type{{$section->id}}" name="course_type">
-            <option value="core">主修</option>
-            <option value="elective">選修</option>
-            <option value="optional">其他</option>
-          </select>
-        </div>
-        <div class="form-group">
           <label for="courseTime{{ $section->id }}">上課時段</label>
           <input type="time" class="form-control" id="courseTime{{ $section->id }}" name="course_time">
         </div>
