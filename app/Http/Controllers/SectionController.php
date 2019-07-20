@@ -53,7 +53,7 @@ class SectionController extends Controller
     {
       $rules = [
         'section_number' => 'required',
-        'room_number' => 'required|numeric',
+        'room_number' => 'required|max:255',
         'class_id' => 'required|numeric',
       ];
       $messages = [
@@ -61,7 +61,8 @@ class SectionController extends Controller
         'room_number.required' => '教室必須填寫',
         'room_number.numeric' => '教室只能為數字',
         'class_id.required' => '課程編號遺失',
-        'class_id.numeric' => '課程編號不合法'
+        'class_id.numeric' => '課程編號不合法',
+        'room_number.max' => '描述最多只能輸入 255 個字元'
       ];
       $this->validate($request, $rules, $messages);
 

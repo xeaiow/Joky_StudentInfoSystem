@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', '課程')
+@section('title', '所有課程')
 
 @section('content')
 <div class="container-fluid">
@@ -12,14 +12,15 @@
             @if(Auth::user()->role != 'student')
             <ol class="breadcrumb" style="margin-top: 3%;">
                 <li><a href="{{url('school/sections?course=1')}}" style="color:#3b80ef;">所有課程與班級</a></li>
-                <li class="active">課程</li>
+                <li class="active">課程列表</li>
             </ol>
             @endif
-            <h2>相關課程</h2>
             <div class="panel panel-default">
               @if(count($courses) > 0)
                 @foreach ($courses as $course)
-                    <div class="page-panel-title"><b>課程</b>:   {{$course->section->section_number}} &nbsp;<b>教室</b>:  {{$course->section->class->class_number}}</div>
+                    <div class="page-panel-title">
+                        課程類型：{{$course->section->class->class_number}} - {{$course->section->section_number}}
+                    </div>
                     @break($loop->first)
                 @endforeach
                 <div class="panel-body">

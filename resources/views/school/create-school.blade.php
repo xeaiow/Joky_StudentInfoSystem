@@ -97,11 +97,11 @@
                                             <ul class="list-group">
                                               @foreach($sections as $section)
                                                 @if($section->class_id == $class->id)
-                                                <li class="list-group-item">課程 {{ $section->section_number }} &nbsp;
-                                                  <a class="btn btn-xs btn-primary" href="{{url('courses/'.$class->id.'/'.$section->id)}}">所有子課程</a>
+                                                <li class="list-group-item">{{ $section->section_number }} &nbsp;
+                                                  <a class="btn btn-xs btn-primary" href="{{ url('courses/0/'.$section->id) }}">檢視課程</a>
                                                   <span class="pull-right"> &nbsp;&nbsp;
-                                                    <a class="btn btn-xs btn-primary" data-toggle="collapse" href="#collapseForNewCourse{{$section->id}}" aria-expanded="false" aria-controls="collapseForNewCourse{{$section->id}}">新增子課程</a>  
-                                                    <a class="btn btn-xs btn-success" href="{{url('school/promote-students/'.$section->id)}}">管理學生</a>
+                                                    <a class="btn btn-xs btn-default" data-toggle="collapse" href="#collapseForNewCourse{{ $section->id }}" aria-expanded="false" aria-controls="collapseForNewCourse{{ $section->id }}">新增課程</a>  
+                                                    <a class="btn btn-xs btn-default" href="{{ url('school/promote-students/'.$section->id) }}">管理學生</a>
                                                   </span>
                                                   
                                                   @include('layouts.master.add-course-form')
@@ -132,8 +132,6 @@
                               @if(\Auth::user()->role == 'admin' && \Auth::user()->school_id == $school->id)
                                 <a class="btn btn-primary btn-sm" href="{{url('register/student')}}" >學員</a>
                                 <a class="btn btn-primary btn-sm" href="{{url('register/teacher')}}">教師</a>
-                                <a class="btn btn-primary btn-sm" href="{{url('register/accountant')}}">會計師</a>
-                                <a class="btn btn-primary btn-sm" href="{{url('register/librarian')}}">圖書館員</a>
                               @endif
                             @endforeach
                             </div>
