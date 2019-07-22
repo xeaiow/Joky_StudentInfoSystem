@@ -10,7 +10,7 @@
     <tr>
       <th scope="col">學號</th>
       <th scope="col">姓名</th>
-      <th scope="col">性別</th>
+      <th scope="col">頭像</th>
       @foreach ($users as $user)
         @if($user->role == 'student')
           <th scope="col">出勤狀況</th>
@@ -61,21 +61,17 @@
       </td>
       @if($user->role == 'student')
         @if(Auth::user()->role == 'student' || Auth::user()->role == 'teacher' || Auth::user()->role == 'admin')
-          <td ><a class="btn btn-xs btn-info" role="button" href="{{url('attendances/0/'.$user->id.'/0')}}">查看</a></td>
-          {{--@if (!Session::has('section-attendance'))
-          <td><a class="btn btn-xs btn-success" role="button" href="{{url('grades/'.$user->id)}}">查看</a></td>
-          @endif --}}
+          @if($user->active == 1)
+            <td><a class="btn btn-xs btn-info" role="button" href="{{ url('attendances/0/'.$user->id.'/0') }}">查看</a></td>
+          @else
+            <td><a class="btn btn-xs btn-default" disabled="disabled" role="button">已退學</a></td>
+          @endif
         @endif
         @if (!Session::has('section-attendance'))
-        <td>{{$user->studentInfo['session']}}</td>
-        <td>{{ucfirst($user->studentInfo['version'])}}</td>
-        <td>{{$user->section->class->class_number}} {{!empty($user->group)? '- '.$user->group:''}}</td>
-        <td style="white-space: nowrap;">{{$user->section->section_number}}
-          {{-- @if(Auth::user()->role == 'student' || Auth::user()->role == 'teacher' || Auth::user()->role == 'admin')
-            - <a class="btn btn-xs btn-primary" role="button" href="{{url('courses/0/'.$user->section->id)}}">All Courses</a>
-          @endif --}}
-          
-        </td>
+        <td>{{ $user->studentInfo['session'] }}</td>
+        <td>{{ ucfirst($user->studentInfo['version']) }}</td>
+        <td>{{ $user->section->class->class_number }} {{ !empty($user->group)? '- '.$user->group :'' }}</td>
+        <td style="white-space: nowrap;">{{$user->section->section_number}}</td>
         @endif
       @elseif($user->role == 'teacher')
         @if (!Session::has('section-attendance'))

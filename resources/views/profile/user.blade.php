@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @if(count(array($user)) > 0)
-  @section('title', $user->name)
+  @section('title', $user->name.'的個人資料')
 @endif
 
 @section('content')

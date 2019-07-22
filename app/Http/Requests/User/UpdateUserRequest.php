@@ -43,7 +43,7 @@ class UpdateUserRequest extends FormRequest
             'user_id' => 'required|numeric',
             'email' => 'required|email|max:255|' . Rule::unique('users')->ignore($this->get('user_id')),
             'name' => 'required|string|max:20',
-            'phone_number' => 'required|string|' . Rule::unique('users')->ignore($this->get('user_id')),
+            'phone_number' => 'required|string|',
         ];
 
         if ($this->get('user_role') == 'teacher') {
@@ -61,7 +61,7 @@ class UpdateUserRequest extends FormRequest
             'numeric' => ':attribute必須為數字',
             'email' => '電子信箱格式錯誤',
             'email.unique' => '電子信箱已存在',
-            'name.max' => '姓名不得超過 20 字元'
+            'name.max' => '姓名不得超過 20 個字元'
         ];
     }
 }

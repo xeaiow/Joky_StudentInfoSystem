@@ -164,6 +164,7 @@ Route::middleware(['auth','master'])->group(function (){
   Route::post('create-school', 'SchoolController@store');
   Route::get('school/admin-list/{school_id}','SchoolController@show');
   Route::get('school/admin-list/{school_id}/deactivate','SchoolController@deactivate');
+  
 });
 Route::middleware(['auth','admin'])->group(function (){
   Route::post('school/add-class','MyclassController@store');
@@ -189,6 +190,8 @@ Route::middleware(['auth','admin'])->group(function (){
 
   Route::get('edit/course/{id}','CourseController@edit');
   Route::post('edit/course/{id}','CourseController@updateNameAndTime');
+
+  Route::get('user/{id}/deactivate', 'UserController@deactivateStudent');
 });
 
 //use PDF;

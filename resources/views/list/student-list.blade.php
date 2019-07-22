@@ -19,6 +19,11 @@
             <div class="card border-primary">
                 <div class="card-header text-center">所有學生</div>
                 <div class="card-body">
+                @if (session('errorMsg'))
+                    <div class="alert alert-error">
+                        {{ session('errorMsg') }}
+                    </div>
+                @endif
                 @if(count($users) > 0)
                 @foreach ($users as $user)
                     @if (Session::has('section-attendance'))
@@ -29,11 +34,6 @@
                     @break($loop->first)
                 @endforeach
                     <div class="panel-body">
-                        @if (session('status'))
-                            <div class="alert alert-success">
-                                {{ session('status') }}
-                            </div>
-                        @endif
                         @component('components.users-list',['users'=>$users,'current_page'=>$current_page,'per_page'=>$per_page])
                         @endcomponent
                     </div>

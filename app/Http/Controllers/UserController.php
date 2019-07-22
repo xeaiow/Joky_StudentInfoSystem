@@ -164,7 +164,7 @@ class UserController extends Controller
                 $st[] = [
                     'id' => $student->id,
                     'section_id' => $request->to_section[$i],
-                    'active' => isset($request["left_school$i"])?0:1,
+                    'active' => isset($request["left_school$i"]) ? 0 : 1,
                 ];
 
                 $st2[] = [
@@ -456,6 +456,27 @@ class UserController extends Controller
         }
 
         $admin->save();
+
+        return back()->with('status', '更改成功');
+    }
+
+    public function deactivateStudent(Request $request)
+    {
+        $student = User::find($request->id);
+
+        if (1 != \Auth::user()->school_id)
+        {
+            return back()->with('errorMsg', '權限不足');
+        }
+
+        if ($student->active !== 1) {
+            $student->active = 1;
+        }
+        else {
+            $student->active = 0;
+        }
+
+        $student->save();
 
         return back()->with('status', '更改成功');
     }

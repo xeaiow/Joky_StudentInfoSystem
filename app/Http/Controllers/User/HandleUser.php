@@ -16,7 +16,7 @@ class HandleUser {
         return User::with(['section.class', 'school', 'studentInfo'])
                 ->where('code', Auth::user()->school->code)
                 ->where('role', 'student')
-                ->where('active', 1)
+                ->orderBy('active', 'desc')
                 ->orderBy('name', 'asc')
                 ->paginate(50);
     }
@@ -73,7 +73,6 @@ class HandleUser {
     public static function getUserByUserCode($user_code){
         return User::with('section', 'studentInfo')
               ->where('student_code', $user_code)
-              ->where('active', 1)
               ->first();
     }
 

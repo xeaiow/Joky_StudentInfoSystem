@@ -161,7 +161,7 @@
                             <label for="session" class="col-md-4 control-label">學籍</label>
 
                             <div class="col-md-6">
-                                <input id="session" type="text" class="form-control" name="session" required>
+                                <input id="session" type="text" class="form-control" name="session">
 
                                 @if ($errors->has('session'))
                                 <span class="help-block">
@@ -176,7 +176,7 @@
 
                             <div class="col-md-6">
                                 <input id="father_name" type="text" class="form-control" name="father_name"
-                                    value="{{ $user->studentInfo['father_name'] }}" required>
+                                    value="{{ $user->studentInfo['father_name'] }}">
 
                                 @if ($errors->has('father_name'))
                                 <span class="help-block">
@@ -187,7 +187,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('father_phone_number') ? ' has-error' : '' }}">
-                            <label for="father_phone_number" class="col-md-4 control-label">父親聯絡號碼</label>
+                            <label for="father_phone_number" class="col-md-4 control-label">父親聯絡方式</label>
 
                             <div class="col-md-6">
                                 <input id="father_phone_number" type="text" class="form-control"
@@ -205,7 +205,7 @@
                             <label for="mother_name" class="col-md-4 control-label">母親姓名</label>
                             <div class="col-md-6">
                                 <input id="mother_name" type="text" class="form-control" name="mother_name"
-                                    value="{{ $user->studentInfo['mother_name'] }}" required>
+                                    value="{{ $user->studentInfo['mother_name'] }}">
                                 @if ($errors->has('mother_name'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('mother_name') }}</strong>
@@ -215,7 +215,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('mother_phone_number') ? ' has-error' : '' }}">
-                            <label for="mother_phone_number" class="col-md-4 control-label">母親聯絡號碼</label>
+                            <label for="mother_phone_number" class="col-md-4 control-label">母親聯絡方式</label>
                             <div class="col-md-6">
                                 <input id="mother_phone_number" type="text" class="form-control"
                                     name="mother_phone_number" value="{{ $user->studentInfo['mother_phone_number'] }}">

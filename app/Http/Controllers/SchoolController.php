@@ -103,14 +103,17 @@ class SchoolController extends Controller
       if ($school->first()['deactivate'] == 1)
       {
         $school->update(['deactivate' => 0]);
+        // 停權該校學生
+        User::where('school_id', $school_id)->update(['active' => 1]);
       }
       else {
         $school->update(['deactivate' => 1]);
+        // 停權該校學生
+        User::where('school_id', $school_id)->update(['active' => 0]);
       }
 
-      $admins = User::where('school_id',$school_id)->where('role','admin')->get();
-      $school = School::where('id', $school_id)->first();
-      return view('school.admin-list', compact('admins', 'school'));
+      
+      return redirect('/create-school');
     }
 
     /**
@@ -138,7 +141,7 @@ class SchoolController extends Controller
       ];
       $this->validate($request, $rules, $messages, $attributes);
       $s = new Department;
-      $s->school_id = \Auth::user()->school_id;
+      $s->school_id = 1;
       $s->department_name = $request->department_name;
       $s->save();
       return back()->with('status', '新增成功');
