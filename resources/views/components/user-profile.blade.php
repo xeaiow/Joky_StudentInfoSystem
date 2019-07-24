@@ -75,8 +75,8 @@
                 <tr>
                   <td>學籍/入學年份</td>
                   <td>{{ $user->studentInfo['session'] }}</td>
-                  <td></td>
-                  <td></td>
+                  <td>學籍狀態</td>
+                  <td>{{ ( $user->active == '1' ) ? '在學中' : '非在學中' }}</td>
                 </tr>
               </table>
             </div>
@@ -187,14 +187,20 @@
         <tr>
           <td><b>出生年月日</b></td>
           <td>{{Carbon\Carbon::parse($user->birthday)->format('Y/m/d')}}</td>
-          <td><b>備註</b></td>
-          <td colspan="3">{{$user->about}}</td>
+          <td><b>手機</b></td>
+          <td>{{ $user->phone_number }}</td>
         </tr>
         <tr>
           <td><b>聯絡地址</b></td>
-          <td>{{$user->address}}</td>
-          <td><b>手機</b></td>
-          <td>{{$user->phone_number}}</td>
+          <td colspan="3">{{ $user->address }}</td>
+        </tr>
+        <tr>
+          <td><b>備註</b></td>
+          <td colspan="3">{{ $user->about }}</td>
+        </tr>
+        <tr>
+          <td><b>學籍狀態</b></td>
+          <td colspan="3">{{ ( $user->active == '1' ) ? '在學' : '非在學' }}</td>
         </tr>
         @endif
         @if($user->role == "student")

@@ -49,7 +49,7 @@
                     @endswitch
                 </div>
                 <div class="card-body">  
-                    <form class="form-horizontal" method="POST" id="registerForm" action="{{ url('register/'.session('register_role')) }}">
+                    <form class="form-horizontal" method="POST" action="{{ url('register/admin') }}">
                         {{ csrf_field() }}
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-3 control-label">姓名</label>
@@ -183,44 +183,6 @@
                             </div>
                         </div>
                         @endif
-                        <!-- <div class="form-group{{ $errors->has('blood_group') ? ' has-error' : '' }}">
-                            <label for="blood_group" class="col-md-3 control-label">血型</label>
-
-                            <div class="col-md-7">
-                                <select id="blood_group" class="form-control" name="blood_group">
-                                    <option selected="selected">A+</option>
-                                    <option>A-</option>
-                                    <option>B+</option>
-                                    <option>B-</option>
-                                    <option>AB+</option>
-                                    <option>AB-</option>
-                                    <option>O+</option>
-                                    <option>O-</option>
-                                </select>
-
-                                @if ($errors->has('blood_group'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('blood_group') }}</strong>
-                                </span>
-                                @endif
-                            </div>
-                        </div> -->
-
-                        <!-- <div class="form-group{{ $errors->has('nationality') ? ' has-error' : '' }}">
-                            <label for="nationality" class="col-md-3 control-label">國籍</label>
-
-                            <div class="col-md-7">
-                                <input id="nationality" type="text" class="form-control" name="nationality" value="{{ old('nationality') }}"
-                                    required>
-
-                                @if ($errors->has('nationality'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('nationality') }}</strong>
-                                </span>
-                                @endif
-                            </div>
-                        </div> -->
-
                         <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
                             <label for="gender" class="col-md-3 control-label">性別</label>
 
@@ -238,22 +200,6 @@
                             </div>
                         </div>
                         @if(session('register_role', 'student') == 'student')
-                        <!-- <div class="form-group{{ $errors->has('version') ? ' has-error' : '' }}">
-                            <label for="version" class="col-md-3 control-label">國籍</label>
-
-                            <div class="col-md-7">
-                                <select id="version" class="form-control" name="version">
-                                    <option selected="selected">Bangla</option>
-                                    <option>English</option>
-                                </select>
-
-                                @if ($errors->has('version'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('version') }}</strong>
-                                </span>
-                                @endif
-                            </div>
-                        </div> -->
                         <div class="form-group{{ $errors->has('session') ? ' has-error' : '' }}">
                             <label for="session" class="col-md-3 control-label">學籍</label>
 
@@ -268,42 +214,6 @@
                                 @endif
                             </div>
                         </div>
-
-                        <!-- <div class="form-group{{ $errors->has('group') ? ' has-error' : '' }}">
-                            <label for="group" class="col-md-3 control-label">補習課程 (選填)</label>
-
-                            <div class="col-md-7">
-                                <input id="group" type="text" class="form-control" name="group" value="{{ old('group') }}"
-                                    placeholder="Science, Arts, Commerce,etc.">
-
-                                @if ($errors->has('group'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('group') }}</strong>
-                                </span>
-                                @endif
-                            </div>
-                        </div> -->
-
-                        <!-- <div class="form-group{{ $errors->has('religion') ? ' has-error' : '' }}">
-                            <label for="religion" class="col-md-3 control-label">信仰</label>
-
-                            <div class="col-md-7">
-                                <select id="religion" class="form-control" name="religion">
-                                    <option selected="selected">Islam</option>
-                                    <option>Hinduism</option>
-                                    <option>Christianism</option>
-                                    <option>Buddhism</option>
-                                    <option>Other</option>
-                                </select>
-
-                                @if ($errors->has('religion'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('religion') }}</strong>
-                                </span>
-                                @endif
-                            </div>
-                        </div> -->
-
                         <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
                             <label for="address" class="col-md-3 control-label">地址</label>
 
@@ -362,67 +272,6 @@
                                 @endif
                             </div>
                         </div>
-
-                        <!-- <div class="form-group{{ $errors->has('father_national_id') ? ' has-error' : '' }}">
-                            <label for="father_national_id" class="col-md-3 control-label">父親身分證字號</label>
-
-                            <div class="col-md-7">
-                                <input id="father_national_id" type="text" class="form-control" name="father_national_id"
-                                    value="{{ old('father_national_id') }}">
-
-                                @if ($errors->has('father_national_id'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('father_national_id') }}</strong>
-                                </span>
-                                @endif
-                            </div>
-                        </div> -->
-
-                        <!-- <div class="form-group{{ $errors->has('father_occupation') ? ' has-error' : '' }}">
-                            <label for="father_occupation" class="col-md-3 control-label">父親職業</label>
-
-                            <div class="col-md-7">
-                                <input id="father_occupation" type="text" class="form-control" name="father_occupation"
-                                    value="{{ old('father_occupation') }}">
-
-                                @if ($errors->has('father_occupation'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('father_occupation') }}</strong>
-                                </span>
-                                @endif
-                            </div>
-                        </div> -->
-
-                        <!-- <div class="form-group{{ $errors->has('father_designation') ? ' has-error' : '' }}">
-                            <label for="father_designation" class="col-md-3 control-label">父親綽號</label>
-
-                            <div class="col-md-7">
-                                <input id="father_designation" type="text" class="form-control" name="father_designation"
-                                    value="{{ old('father_designation') }}">
-
-                                @if ($errors->has('father_designation'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('father_designation') }}</strong>
-                                </span>
-                                @endif
-                            </div>
-                        </div> -->
-
-                        <!-- <div class="form-group{{ $errors->has('father_annual_income') ? ' has-error' : '' }}">
-                            <label for="father_annual_income" class="col-md-3 control-label">父親年收入</label>
-
-                            <div class="col-md-7">
-                                <input id="father_annual_income" type="text" class="form-control" name="father_annual_income"
-                                    value="{{ old('father_annual_income') }}">
-
-                                @if ($errors->has('father_annual_income'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('father_annual_income') }}</strong>
-                                </span>
-                                @endif
-                            </div>
-                        </div> -->
-
                         <div class="form-group{{ $errors->has('mother_name') ? ' has-error' : '' }}">
                             <label for="mother_name" class="col-md-3 control-label">母親姓名</label>
 
@@ -437,7 +286,6 @@
                                 @endif
                             </div>
                         </div>
-
                         <div class="form-group{{ $errors->has('mother_phone_number') ? ' has-error' : '' }}">
                             <label for="mother_phone_number" class="col-md-3 control-label">母親聯絡方式</label>
 
@@ -452,68 +300,7 @@
                                 @endif
                             </div>
                         </div>
-
-                        <!-- <div class="form-group{{ $errors->has('mother_national_id') ? ' has-error' : '' }}">
-                            <label for="mother_national_id" class="col-md-3 control-label">母親身分證字號</label>
-
-                            <div class="col-md-7">
-                                <input id="mother_national_id" type="text" class="form-control" name="mother_national_id"
-                                    value="{{ old('mother_national_id') }}">
-
-                                @if ($errors->has('mother_national_id'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('mother_national_id') }}</strong>
-                                </span>
-                                @endif
-                            </div>
-                        </div> -->
-
-                        <!-- <div class="form-group{{ $errors->has('mother_occupation') ? ' has-error' : '' }}">
-                            <label for="mother_occupation" class="col-md-3 control-label">母親職業</label>
-
-                            <div class="col-md-7">
-                                <input id="mother_occupation" type="text" class="form-control" name="mother_occupation"
-                                    value="{{ old('mother_occupation') }}">
-
-                                @if ($errors->has('mother_occupation'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('mother_occupation') }}</strong>
-                                </span>
-                                @endif
-                            </div>
-                        </div> -->
-
-                        <!-- <div class="form-group{{ $errors->has('mother_designation') ? ' has-error' : '' }}">
-                            <label for="mother_designation" class="col-md-3 control-label">母親綽號</label>
-
-                            <div class="col-md-7">
-                                <input id="mother_designation" type="text" class="form-control" name="mother_designation"
-                                    value="{{ old('mother_designation') }}">
-
-                                @if ($errors->has('mother_designation'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('mother_designation') }}</strong>
-                                </span>
-                                @endif
-                            </div>
-                        </div> -->
-
-                        <!-- <div class="form-group{{ $errors->has('mother_annual_income') ? ' has-error' : '' }}">
-                            <label for="mother_annual_income" class="col-md-3 control-label">母親年收入</label>
-
-                            <div class="col-md-7">
-                                <input id="mother_annual_income" type="text" class="form-control" name="mother_annual_income"
-                                    value="{{ old('mother_annual_income') }}">
-
-                                @if ($errors->has('mother_annual_income'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('mother_annual_income') }}</strong>
-                                </span>
-                                @endif
-                            </div>
-                        </div> -->
                         @endif
-
                         <div class="form-group">
                             <label class="col-md-3 control-label">頭像</label>
                             <div class="col-md-7">
@@ -522,7 +309,6 @@
                                 @endcomponent
                             </div>
                         </div>
-
                         <div class="form-group">
                             <div class="col-md-10 col-md-offset-8">
                                 <button type="submit" id="registerBtn" class="btn btn-primary">

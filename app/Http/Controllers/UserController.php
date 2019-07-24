@@ -294,13 +294,12 @@ class UserController extends Controller
     {
         $password = $request->password;
         $tb = HandleUser::storeAdmin($request);
-        // try {
-        //     // Fire event to send welcome email
-        //     // event(new userRegistered($userObject, $plain_password)); // $plain_password(optional)
-        //     event(new UserRegistered($tb, $password));
-        // } catch(\Exception $ex) {
-        //     Log::info('Email 寄送失敗： '.$tb->email);
-        // }
+        try {
+            // Fire event to send welcome email
+            event(new UserRegistered($tb, $password));
+        } catch(\Exception $ex) {
+            Log::info('Email 寄送失敗： '.$tb->email);
+        }
 
         return back()->with('status', '新增成功');
     }
@@ -451,20 +450,21 @@ class UserController extends Controller
 
         if ($admin->active !== 1) {
             $admin->active = 1;
-        } else {
-            $admin->active = 0;
+            $admin->save();
+            return back()->with('status', '啟用成功');
         }
-
-        $admin->save();
-
-        return back()->with('status', '更改成功');
+        else {
+            $admin->active = 0;
+            $admin->save();
+            return back()->with('status', '停權成功');
+        } 
     }
 
     public function deactivateStudent(Request $request)
     {
         $student = User::find($request->id);
 
-        if (1 != \Auth::user()->school_id)
+        if ($student->where('id', $request->id)->first()['school_id'] != \Auth::user()->school_id)
         {
             return back()->with('errorMsg', '權限不足');
         }

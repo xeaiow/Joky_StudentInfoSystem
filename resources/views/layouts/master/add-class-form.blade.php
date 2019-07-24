@@ -9,15 +9,21 @@
         <h4 class="modal-title" id="myModalLabel">新增課程</h4>
       </div>
       <div class="modal-body" style="height:300px;">
-        <form class="form-horizontal" action="{{url('school/add-class')}}" method="post">
-          {{csrf_field()}}
+        <form class="form-horizontal" action="{{ url('school/add-class') }}" method="post">
+          {{ csrf_field() }}
           <div class="form-group">
-            <label for="classNumber{{$school->id}}">名稱</label>
+            <label for="classNumber{{ $school->id }}">名稱</label>
               <input type="text" name="class_number" class="form-control" id="classNumber{{$school->id}}" placeholder="會話一" required>
           </div>
           <div class="form-group">
             <label for="classRoomNumber{{$school->id}}">課程類別</label>
-              <input type="text" name="group" class="form-control" id="classRoomNumber{{$school->id}}" placeholder="英語, 數學, 自然">
+            <select id="classRoomNumber{{ $school->id }}" class="form-control">
+              @foreach($departments as $d)
+                @if( $d->school_id == $school->id )
+                  <option value="{{ $d->department_id }}">{{ $d->department_name }}</option>
+                @endif
+              @endforeach
+            </select>
           </div>
           <div class="form-group text-right">
             <button type="submit" class="btn btn-primary btn-sm">新增</button>

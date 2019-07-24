@@ -11,7 +11,6 @@
         </div>
         @endif
         <div class="col-md-{{ (\Auth::user()->role == 'master')? 12 : 8 }}" id="main-container">
-            
             @if (session('status'))
             <div class="alert alert-success">
                 {{ session('status') }}
@@ -19,7 +18,23 @@
             @endif
             <div class="panel panel-default">
                 <div class="page-panel-title text-center">編輯 {{ $user->name }}</div>
-
+                <div class="row">
+                    <div class="col-md-12 text-right">
+                    @if($user->active == 1)
+                        @if($user->role == 'student')
+                            <a href="{{ URL::to('user/'.$user->id.'/deactivate') }}" class="btn btn-default btn-xs" role="button">停權</a>
+                        @else
+                            <a href="{{ URL::to('master/deactivate-admin/'.$user->id) }}" class="btn btn-default btn-xs" role="button">停權</a>     
+                        @endif
+                    @else
+                        @if($user->role == 'student')
+                            <a href="{{ URL::to('user/'.$user->id.'/deactivate') }}" class="btn btn-primary btn-xs" role="button">啟用</a>
+                        @else
+                        <a href="{{ URL::to('master/deactivate-admin/'.$user->id) }}" class="btn btn-primary btn-xs" role="button">啟用</a>
+                        @endif
+                    @endif
+                    </div>
+                </div>
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ url('edit/user') }}">
                         {{ csrf_field() }}

@@ -43,8 +43,8 @@ class CreateAdminRequest extends FormRequest
             'name' => 'required|string|max:50',
             'password' => 'required|string|min:6|confirmed',
             'gender' => 'required',
-            'phone_number' => 'required|unique:users',
-            'email' => 'email|max:255|unique:users',
+            'phone_number' => 'required',
+            'email' => 'email|max:255',
         ];
     }
 
@@ -56,8 +56,8 @@ class CreateAdminRequest extends FormRequest
             'password.confirmed' => '密碼與確認密碼不符',
             'phone_number.unique' => '手機號碼已存在',
             'email.unique' => '電子信箱已存在',
-            'email.max' => '電子信箱不得超過 255 字元',
-            'name.max' => '姓名不得超過 50 字元',
+            'email.max' => '電子信箱不得超過 255 個字元',
+            'name.max' => '姓名不得超過 50 個字元',
             'password.min' => '密碼不得少於 6 個字元',
         ];
     }

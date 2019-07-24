@@ -10,12 +10,12 @@
     }
 </style>
 
-<div class="container-fluid" style="margin-top: 20px;">
+<div class="container-fluid">
     <div class="row">
         <div class="col-md-2" id="side-navbar">
             @include('layouts.leftside-menubar')
         </div>
-        <div class="col-md-10" id="main-container">
+        <div class="col-md-10" id="main-container" style="margin-top: 20px;">
             <div class="card border-primary">
                 <div class="card-header text-center">所有學生</div>
                 <div class="card-body">

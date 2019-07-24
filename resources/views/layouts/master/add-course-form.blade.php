@@ -20,23 +20,23 @@
                 return $department->school_id == $school->id;
               }) }}
               @foreach ($departments_of_this_school as $d)
-                <option value="{{$d->department_name}}">{{$d->department_name}}</option>
+                <option id="{{ $d->id }}" value="{{ $d->department_name }}">{{ $d->department_name }}</option>
               @endforeach
             @endif
           </select>
         </div>
         <div class="form-group">
           <label for="assignTeacher{{ $section->id }}">教師</label>
-            <select class="form-control" id="assignTeacher{{ $section->id }}" name="teacher_id">
+            <select class="form-control assignTeacher" id="assignTeacher{{ $section->id }}" name="teacher_id" disabled>
               <option value="0" selected disabled>請選擇</option>
-              @if(count($teachers) > 0)
+              <!-- @if(count($teachers) > 0)
                 {{ $teachers_of_this_school = $teachers->filter(function ($teacher) use ($school){
                   return $teacher->school_id == $school->id;
                 }) }}
                 @foreach($teachers_of_this_school as $teacher)
                   <option value="{{ $teacher->userId }}" data-department="{{ $teacher->department_name }}">{{ $teacher->name }}</option>
                 @endforeach
-              @endif
+              @endif -->
             </select>
         </div>
         <div class="form-group">
@@ -56,5 +56,23 @@
   $('#teacherDepartment{{$section->id}}').click(function () {
     $("#assignTeacher{{$section->id}} option").hide();
     $("#assignTeacher{{$section->id}} option[data-department="+$(this).val()+"]").show();
+  });
+
+  $('#teacherDepartment{{ $section->id }}').change(function() {
+    $.ajax({
+      url: 'school/get-teacher/' + $(this).children(":selected").attr('id'),
+      type: 'GET',
+      error: function(xhr) {
+        
+      },
+      success: function(res) {
+        $.each(res, function (i, v) {
+          $(".assignTeacher").append(
+            new Option(v.name, v.id)
+          );
+        });
+        $('.assignTeacher').attr('disabled', false);
+      }
+    });
   });
 </script>

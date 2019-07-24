@@ -1,8 +1,14 @@
 @extends('layouts.app')
 
-@section('title', '管理客戶')
+@section('title', '設定')
 
 @section('content')
+<style>
+.dropdown-menu li a:hover {
+  color: #000 !important;
+}  
+</style>
+
 <div class="container-fluid">
     <div class="row">
       @if(\Auth::user()->role != 'master')
@@ -61,7 +67,22 @@
                           <div class="card-body">
                             @foreach ($departments as $d)
                               @if( $d->school_id == $school->id )
-                                <span class="badge" style="background-color:#3398DB;">{{ $d->department_name }}</span>
+                                <div class="row">
+                                  <div class="col-md-12">
+                                    <div class="btn-group">
+                                      <button type="button" class="btn btn-info btn-xs">{{ $d->department_name }}</button>
+                                      <button type="button" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="caret"></span>
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                      </button>
+                                      <ul class="dropdown-menu">
+                                        <li>
+                                          <a data-toggle="modal" class="openEditDepartmentModal" str="{{ $d->department_name }}" deptId="{{ $d->id }}">編輯</a>
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </div><br />
                               @endif
                             @endforeach
                           </div>
@@ -72,7 +93,7 @@
                           <div class="card-header nav-link-align-btn">
                             課程與班級
                             <span class="pull-right">
-                              <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#addClassModal{{$school->id}}">新增課程</button>
+                              <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#addClassModal{{$school->id}}">新增</button>
                             </span>
                           </div>
                           <div class="card-body"> 
@@ -95,19 +116,20 @@
                                           </div>
                                           <div class="modal-body">
                                             <ul class="list-group">
-                                              @foreach($sections as $section)
-                                                @if($section->class_id == $class->id)
-                                                <li class="list-group-item">{{ $section->section_number }} &nbsp;
-                                                  <a class="btn btn-xs btn-primary" href="{{ url('courses/0/'.$section->id) }}">檢視課程</a>
-                                                  <span class="pull-right"> &nbsp;&nbsp;
-                                                    <a class="btn btn-xs btn-default" data-toggle="collapse" href="#collapseForNewCourse{{ $section->id }}" aria-expanded="false" aria-controls="collapseForNewCourse{{ $section->id }}">新增課程</a>  
-                                                    <a class="btn btn-xs btn-default" href="{{ url('school/promote-students/'.$section->id) }}">管理學生</a>
-                                                  </span>
-                                                  
-                                                  @include('layouts.master.add-course-form')
-                                                </li>
-                                                @endif
-                                              @endforeach
+                                              
+                                                @foreach($sections as $section)
+                                                  @if($section->class_id == $class->id)
+                                                    <li class="list-group-item">{{ $section->section_number }} &nbsp;
+                                                      <a class="btn btn-xs btn-primary" href="{{ url('courses/0/'.$section->id) }}">檢視課程</a>
+                                                      <span class="pull-right"> &nbsp;&nbsp;
+                                                        <a class="btn btn-xs btn-default" data-toggle="collapse" href="#collapseForNewCourse{{ $section->id }}" aria-expanded="false" aria-controls="collapseForNewCourse{{ $section->id }}">新增班級</a>  
+                                                        <a class="btn btn-xs btn-default" href="{{ url('school/promote-students/'.$section->id) }}">管理學生</a>
+                                                      </span>
+                                                      @include('layouts.master.add-course-form')
+                                                    </li>
+                                                  @endif
+                                                @endforeach
+                                              
                                             </ul>
                                             @include('layouts.master.create-section-form')
                                           </div>
@@ -149,14 +171,42 @@
                             <h4 class="modal-title">新增教育類型</h4>
                           </div>
                           <div class="modal-body">
-                            <form action="{{url('school/add-department')}}" method="post">
-                              {{csrf_field()}}
+                            <form action="{{ url('school/add-department') }}" method="post">
+                              {{ csrf_field() }}
                               <div class="form-group">
                                 <label>類型名稱</label>
                                 <input type="text" class="form-control" name="department_name" placeholder="英語、數學、自然..">
                               </div>
                               <div class="form-group text-right">
                                 <button type="submit" class="btn btn-primary btn-sm">確定</button>
+                              </div>
+                            </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <!-- 編輯教育類型 Modal -->
+                    <div class="modal fade" id="editDepartmentModal" tabindex="-1" role="dialog">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 id="edit-department-title">編輯</h4>
+                          </div>
+                          <div class="modal-body">
+                            <form action="" id="edit-department-form" method="post">
+                              {{ csrf_field() }}
+                              <div class="form-group">
+                                <label>欲更改的類型名稱</label>
+                                <input type="text" class="form-control" name="department_name">
+                              </div>
+                              <div class="form-group text-right">
+                                <button type="submit" class="btn btn-primary btn-sm">更改</button>
                               </div>
                             </div>
                             </form>
@@ -193,4 +243,12 @@
         </div>
     </div>
 </div>
+<script>
+$(".openEditDepartmentModal").click(function() {
+  $("#editDepartmentModal").modal('show');
+  $("#edit-department-title").text('編輯' + $(this).attr('str'));
+  $("#edit-department-form").attr('action', '//' + window.location.host + '/' + 'school/edit-department/' + $(this).attr('deptId'));
+});
+  
+</script>
 @endsection

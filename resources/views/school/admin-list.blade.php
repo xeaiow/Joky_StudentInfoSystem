@@ -46,9 +46,9 @@
                             <th>姓名</th>
                             <th>編號</th>
                             <th>電子信箱</th>
-                            <th>手機</th>
+                            <th>聯絡方式</th>
                             <th>地址</th>
-                            <th>操作</th>
+                            <th>編輯</th>
                         </tr>
                         @foreach ($admins as $admin)
                         <tr>
@@ -61,12 +61,7 @@
                             <td>{{$admin->address}}</td>
                             <td>
                             <div class="btn-group" role="group">
-                            <a href="{{url('edit/user/'.$admin->id)}}" class="btn btn-xs btn-primary" role="button"><i class="material-icons">edit</i></a>
-                                @if($admin->active == 0)
-                                <a href="{{url('master/activate-admin/'.$admin->id)}}" class="btn btn-xs btn-danger" role="button"><i class="material-icons">check</i></a>
-                                @else
-                                <a href="{{url('master/deactivate-admin/'.$admin->id)}}" class="btn btn-xs btn-default" role="button"><i class="material-icons">clear</i></a>
-                                @endif
+                                <a href="{{url('edit/user/'.$admin->id)}}" class="btn btn-xs btn-primary" role="button"><i class="material-icons">edit</i></a>
                             </div>
                             </td>
                         </tr>

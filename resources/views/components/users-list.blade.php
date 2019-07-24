@@ -8,7 +8,7 @@
 <table class="table table-bordered table-data-div table-condensed table-striped table-hover">
   <thead>
     <tr>
-      <th scope="col">學號</th>
+      <th scope="col">學號/編號</th>
       <th scope="col">姓名</th>
       <th scope="col">頭像</th>
       @foreach ($users as $user)
@@ -24,7 +24,7 @@
           @if (!Session::has('section-attendance'))
           <th scope="col">信箱</th>
           @if(Auth::user()->role == 'student' || Auth::user()->role == 'teacher' || Auth::user()->role == 'admin')
-            <th scope="col">課程</th>
+            <th scope="col">教授課程</th>
           @endif
           @endif
         @elseif($user->role == 'accountant' || $user->role == 'librarian')

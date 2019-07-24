@@ -82,6 +82,9 @@ Route::middleware(['auth','teacher'])->group(function (){
   Route::post('courses/store', 'CourseController@store');
   Route::post('courses/save-configuration', 'CourseController@saveConfiguration');
 });
+Route::middleware(['auth','admin'])->group(function (){
+  Route::post('courses/store', 'CourseController@store');
+});
 
 Route::middleware(['auth','admin'])->group(function (){
   Route::get('academic/syllabus', 'SyllabusController@index');
@@ -169,7 +172,9 @@ Route::middleware(['auth','master'])->group(function (){
 Route::middleware(['auth','admin'])->group(function (){
   Route::post('school/add-class','MyclassController@store');
   Route::post('school/add-section','SectionController@store');
+  Route::get('school/get-teacher/{department}','SectionController@getTeacher');
   Route::post('school/add-department','SchoolController@addDepartment');
+  Route::post('school/edit-department/{department_id}','SchoolController@editDepartment');
   Route::get('school/promote-students/{section_id}','UserController@promoteSectionStudents');
   Route::post('school/promote-students','UserController@promoteSectionStudentsPost');
   Route::post('school/theme','SchoolController@changeTheme');

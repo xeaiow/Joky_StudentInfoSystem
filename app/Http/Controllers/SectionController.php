@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Section as Section;
+use App\User;
 use App\Http\Resources\SectionResource;
 use Illuminate\Http\Request;
 
@@ -53,22 +54,20 @@ class SectionController extends Controller
     {
       $rules = [
         'section_number' => 'required',
-        'room_number' => 'required|max:255',
+        'room_number' => 'max:255',
         'class_id' => 'required|numeric',
       ];
       $messages = [
-        'section_number.required' => '班級名稱必須填寫',
-        'room_number.required' => '教室必須填寫',
-        'room_number.numeric' => '教室只能為數字',
-        'class_id.required' => '課程編號遺失',
-        'class_id.numeric' => '課程編號不合法',
+        'section_number.required' => '課程類型名稱必須填寫',
+        'class_id.required' => '資料遺失',
+        'class_id.numeric' => '資料不合法',
         'room_number.max' => '描述最多只能輸入 255 個字元'
       ];
       $this->validate($request, $rules, $messages);
 
       $tb = new Section;
       $tb->section_number = $request->section_number;
-      $tb->room_number = $request->room_number;
+      $tb->room_number = ( empty($request->room_number) ) ? '' : $request->room_number;
       $tb->class_id = $request->class_id;
       $tb->save();
       return back()->with('status', '新增成功');
@@ -129,5 +128,13 @@ class SectionController extends Controller
       ]):response()->json([
         'status' => 'error'
       ]);
+    }
+
+    // 由 department id 取得旗下老師名單
+    public function getTeacher (Request $req)
+    {
+      return User::where('department_id', $req->department)
+      ->orderBy('name', 'asc')
+      ->get(['id', 'name']);
     }
 }

@@ -129,21 +129,43 @@ class SchoolController extends Controller
 
     public function addDepartment(Request $request){
       $attributes = [
-        'department_name' => '教育類型名稱'
+        'department_name' => '類型名稱'
       ];
       $messages = [
         'required' => ':attribute必須填寫',
         'string' => ':attribute必須為字元',
-        'max' => ':attribute不得超過 50 字元'
+        'max' => ':attribute不得超過 50 個字元'
       ];
       $rules = [
         'department_name' => 'required|string|max:50',
       ];
       $this->validate($request, $rules, $messages, $attributes);
       $s = new Department;
-      $s->school_id = 1;
+      $s->school_id = \Auth::user()->school_id;
       $s->department_name = $request->department_name;
       $s->save();
+      return back()->with('status', '新增成功');
+    }
+
+    // 編輯類型名稱
+    public function editDepartment(Request $request){
+      $attributes = [
+        'department_name' => '類型名稱'
+      ];
+      $messages = [
+        'required' => ':attribute必須填寫',
+        'string' => ':attribute必須為字元',
+        'max' => ':attribute不得超過 50 個字元'
+      ];
+      $rules = [
+        'department_name' => 'required|string|max:50',
+      ];
+      $this->validate($request, $rules, $messages, $attributes);
+
+      Department::where('school_id', \Auth::user()->school_id)
+      ->where('id', $request->department_id)
+      ->update(['department_name' => $request->department_name]);
+
       return back()->with('status', '新增成功');
     }
 

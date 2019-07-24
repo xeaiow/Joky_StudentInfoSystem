@@ -19,13 +19,12 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
                     @component('components.user-profile',['user'=>$user])
                     @endcomponent
                 </div>
               @else
                 <div class="panel-body">
-                    No Related Data Found.
+                    沒有資料
                 </div>
               @endif
             </div>
