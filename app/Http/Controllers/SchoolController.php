@@ -20,7 +20,9 @@ class SchoolController extends Controller
     public function index()
     {
       $schools = School::all();
-      $classes = Myclass::all();
+      $classes = Myclass::join('departments', 'departments.id', '=', 'classes.group')
+      ->select(['classes.id AS id', 'classes.class_number AS class_number', 'classes.school_id AS school_id', 'classes.group AS group', 'departments.department_name AS department_name', 'departments.school_id AS school_id'])
+      ->get();
       $sections = Section::all();
       $teachers = User::join('departments', 'departments.id', '=', 'users.department_id')
                             ->where('users.role', 'teacher')

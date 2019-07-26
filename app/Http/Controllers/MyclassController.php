@@ -40,17 +40,19 @@ class MyclassController extends Controller
     public function store(Request $request)
     {
       $rules = [
-        'class_number' => 'required'
+        'class_number' => 'required',
+        'group' => 'required'
       ];
       $messages = [
-        'class_number.required' => '課程名稱必須填寫'
+        'class_number.required' => '課程名稱必須填寫',
+        'group.required' => '課程類別必須填寫'
       ];
       $this->validate($request, $rules, $messages);
       
       $tb = new Myclass;
       $tb->class_number = $request->class_number;
       $tb->school_id = \Auth::user()->school_id;
-      $tb->group = (!empty($request->group))?$request->group:'';
+      $tb->group = $request->group;
       $tb->save();
       return back()->with('status', '新增成功');
     }

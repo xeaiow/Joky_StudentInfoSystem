@@ -109,9 +109,6 @@
     <a class="nav-link" href="{{ url('academic/syllabus') }}"><i class="material-icons">vertical_split</i> <span class="nav-link-text">教學大綱</span></a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="{{ url('academic/notice') }}"><i class="material-icons">message</i> <span class="nav-link-text">通知</span></a>
-  </li>
-  <li class="nav-item">
     <a class="nav-link" href="{{ url('academic/event') }}"><i class="material-icons">event</i> <span class="nav-link-text">公告</span></a>
   </li>
   <li class="nav-item" style="border-bottom: 1px solid #dbd8d8;"></li>

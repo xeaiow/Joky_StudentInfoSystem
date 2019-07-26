@@ -100,32 +100,7 @@
                     </div>
                     <br />
                     <div class="row">
-                        <div class="col-sm-6">
-                            <div class="card-body">
-                                <div class="card-title important-text"><h3>通知</h3></div>
-                                <p class="card-text">
-                                    @if(count($notices) > 0)
-                                        <div class="list-group">
-                                            @foreach($notices as $notice)
-                                            <a href="{{url($notice->file_path)}}" class="list-group-item">
-                                                <i class="badge badge-download material-icons">
-                                                    keyboard_arrow_right
-                                                </i>
-                                                <h5 class="list-group-item-heading important-text">{{ $notice->title }}</h5>
-                                                <p class="list-group-item-text">{{ $notice->created_at->format('Y/m/d h:i:s') }}</p>
-                                            </a>
-                                            @endforeach
-                                        </div>
-                                    @else
-                                        沒有資料
-                                    @endif
-                                    <div class="text-right">
-                                        <a href="{{ URL::to('academic/notice') }}"><span class="badge badge-pill badge-dark focus">查看更多..</span></a>
-                                    </div>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <div class="card-body">
                                 <div class="card-title important-text"><h3>公告</h3></div>
                                 <p class="card-text">

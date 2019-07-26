@@ -22,6 +22,11 @@
                 {{ session('status') }}
               </div>
             @endif
+            @if (session('errorMsg'))
+              <div class="alert alert-danger">
+                {{ session('errorMsg') }}
+              </div>
+            @endif
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -103,7 +108,9 @@
                                 @foreach($classes as $class)
                                   @if($class->school_id == $school->id)
                                   <div class="col-sm-12">
-                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal{{$class->id}}" style="margin-top: 5%;">{{$class->class_number}} {{!empty($class->group)? '- '.$class->group:''}}</button>
+                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal{{$class->id}}" style="margin-top: 5%;">
+                                      {{ $class->class_number }} - {{ $class->department_name }}
+                                    </button>
                                     <!-- Modal -->
                                     <div class="modal fade" id="myModal{{$class->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                       <div class="modal-dialog modal-lg" role="document">
@@ -202,11 +209,11 @@
                             <form action="" id="edit-department-form" method="post">
                               {{ csrf_field() }}
                               <div class="form-group">
-                                <label>欲更改的類型名稱</label>
-                                <input type="text" class="form-control" name="department_name">
+                                <label>教育類型名稱</label>
+                                <input type="text" class="form-control" name="department_name" id="department_name">
                               </div>
                               <div class="form-group text-right">
-                                <button type="submit" class="btn btn-primary btn-sm">更改</button>
+                                <button type="submit" class="btn btn-primary">更改</button>
                               </div>
                             </div>
                             </form>
@@ -245,8 +252,10 @@
 </div>
 <script>
 $(".openEditDepartmentModal").click(function() {
+  var resourceName = $(this).attr('str');
   $("#editDepartmentModal").modal('show');
-  $("#edit-department-title").text('編輯' + $(this).attr('str'));
+  $("#department_name").val(resourceName); 
+  $("#edit-department-title").text('編輯' + resourceName);
   $("#edit-department-form").attr('action', '//' + window.location.host + '/' + 'school/edit-department/' + $(this).attr('deptId'));
 });
   

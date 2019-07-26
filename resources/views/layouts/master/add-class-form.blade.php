@@ -13,14 +13,14 @@
           {{ csrf_field() }}
           <div class="form-group">
             <label for="classNumber{{ $school->id }}">名稱</label>
-              <input type="text" name="class_number" class="form-control" id="classNumber{{$school->id}}" placeholder="會話一" required>
+              <input type="text" name="class_number" class="form-control" id="classNumber{{$school->id}}" placeholder="英語會話" required>
           </div>
           <div class="form-group">
             <label for="classRoomNumber{{$school->id}}">課程類別</label>
-            <select id="classRoomNumber{{ $school->id }}" class="form-control">
+            <select id="classRoomNumber{{ $school->id }}" name="group" class="form-control">
               @foreach($departments as $d)
                 @if( $d->school_id == $school->id )
-                  <option value="{{ $d->department_id }}">{{ $d->department_name }}</option>
+                  <option value="{{ $d->id }}">{{ $d->department_name }}</option>
                 @endif
               @endforeach
             </select>

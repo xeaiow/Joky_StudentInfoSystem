@@ -1,15 +1,32 @@
+<style>
+    th {
+        font-size: 16px !important;
+    }
+</style>
+
 <div id="my_upload">
     @if($upload_type != 'profile')
-        <!-- <h3>{{ucfirst($upload_type)}}</h3> -->
-        <label for="upload-title">標題</label>
-        <input type="text" class="form-control" name="upload-title" id="upload-title" placeholder="輸入一個醒目的標題" required>
-        <br/>
+        <div class="form-group">
+            <label for="upload-title">標題</label>
+            <input type="text" class="form-control" name="upload-title" id="upload-title" required>
+        </div>
+        <div class="form-group">
+            <label for="event-content">內容</label>
+            <textarea name="event-content" id="event-content" class="form-control" rows="3" required></textarea>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" id="attachment" value="">
+                附加檔案
+            </label>
+        </div>
+        <button type="submit" id="publish-event" class="btn btn-primary btn-sm">發佈公告</button>
     @endif
-  <input class="form-control-sm" id="fileupload" type="file"  accept=".xlsx,.xls,.doc,.docx,.ppt,.pptx,.txt,.pdf,image/png,image/jpeg" name="file" data-url="{{url('upload/file')}}">
+  <input class="form-control-sm" id="fileupload" type="file"  accept=".xlsx,.xls,.doc,.docx,.ppt,.pptx,.txt,.pdf,image/png,image/jpeg" name="file" data-url="{{ url('upload/file') }}">
   <br/>
   <div class="progress">
     <div class="progress-bar progress-bar-striped active" id="up-prog-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
-      <div class="text-xs-center" id="up-prog-info">0% 上傳完成</div>
+      <div class="text-xs-center" id="up-prog-info">0% 上傳並發佈完成</div>
     </div>
   </div>
   <div id="errorAlert"></div>
@@ -21,15 +38,29 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.5.2/jquery.fileupload.min.js"></script>
 <script>
 $(function () {
+
+    $("#fileupload, .progress, #fileInfo").hide();
+
+    $('#attachment').change(function() {
+        if($(this).is(":checked")) {
+            $("#fileupload, .progress, #fileInfo").show();
+            $("#publish-event").hide();
+        }
+        else {
+            $("#fileupload, .progress, #fileInfo, #publish-event").hide();
+            $("#publish-event").show();
+        }      
+    });
+
     var jqXHR = null;
     var uploadButton = $('<button/>')
             .addClass('btn btn-primary btn-sm')
-            .text('上傳')
+            .text('上傳並發佈')
             .on('click', function () {
                 @if($upload_type != 'profile')
                     if(!$('#upload-title').val()){
                         swal({
-                            title:'需要標題',
+                            title:'標題必須填寫',
                             type:'info',
                             showCloseButton: true,
                         });
@@ -58,7 +89,7 @@ $(function () {
                         $this.off('click').text('退出').on('click', function () {
                             $this.remove();
                             data.abort();
-                            data.context.text('檔案上傳已取消');
+                            data.context.text('已取消上傳');
                         });
                         @if($upload_type != 'profile')
                             data.formData = {upload_type: '{{$upload_type}}',title: $('#upload-title').val()};
@@ -80,7 +111,7 @@ $(function () {
                 $('#fileInfo').remove();
                         data.context = $('<div/>').attr('id', 'fileInfo').appendTo('#my_upload');
                         var node = $('<p/>')
-                            .append($('<span/>').text(file.name)).append(uploadButton.clone(true).data(data));
+                            .append($('<span/>').text(file.name)).append(' ').append(uploadButton.clone(true).data(data));
                         node.appendTo(data.context);
             }
         },
@@ -92,7 +123,7 @@ $(function () {
                     'aria-valuenow',
                     progress
                 ).css('width', progress + '%');
-                $('#up-prog-info').text(progress + "% 上傳完成");
+                $('#up-prog-info').text("上傳並發佈完成");
         }
     })
     .on('fileuploaddone', function (e, data) {
@@ -102,7 +133,7 @@ $(function () {
         if(error) {
             $('#errorAlert').text(error);
         } else {
-            data.context.html('<div>上傳完成.</div>');
+            data.context.html('<div>上傳完成</div>');
             $('button.cancelBtn').hide();
             $('#errorAlert').empty();
             @if($upload_type == 'profile')
@@ -112,7 +143,7 @@ $(function () {
         }
     })
     .on('fileuploadfail', function (e, data) {
-            data.context.text('檔案上傳已取消');
+            data.context.text('已取消上傳');
             var error = data['jqXHR']['responseJSON']['error'];
             $('#errorAlert').text(error);
             console.log(data['jqXHR']['responseJSON']);
@@ -145,4 +176,32 @@ function upload(file) {
   }
 }
 --}}
+
+$("#publish-event").click(function() {
+    $.ajax({
+        url: location.href + '/create',
+        type: 'POST',
+        dataType : 'json',
+        contentType : 'application/json; charset=utf-8',
+        data : JSON.stringify({
+            'uploadTitle': $("#upload-title").val(),
+            'eventContent': $("#event-content").val()
+        }),
+        error: function(err) {
+            console.log(err)
+        },
+        success: function(res) {
+            swal({
+                title:'發佈成功',
+                type:'success',
+                showCloseButton: true,
+                confirmButtonText: '確定'
+            }).then((result) => {
+                if (result.value) {
+                    location.reload();
+                }
+            });
+        }
+    });
+});
 </script>

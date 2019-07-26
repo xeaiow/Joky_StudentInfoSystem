@@ -97,6 +97,7 @@ Route::middleware(['auth','admin'])->group(function (){
   Route::get('academic/remove/notice/{id}', 'NoticeController@update');
   Route::get('academic/remove/event/{id}', 'EventController@update');
   Route::get('academic/remove/routine/{id}', 'RoutineController@update');
+  Route::post('academic/event/create', 'EventController@createButNotAttachment');
 });
 
 Route::middleware(['auth','admin'])->group(function (){

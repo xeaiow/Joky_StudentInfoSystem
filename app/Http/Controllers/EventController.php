@@ -29,6 +29,20 @@ class EventController extends Controller
       return view('events.create',['files'=>$files]);
     }
 
+    // 新增公告但無夾帶檔案
+    public function createButNotAttachment(Request $req)
+    {
+      $data = [
+        'title' => $req->uploadTitle,
+        'file_path' => '',
+        'description' => $req->eventContent,
+        'active' => 1,
+        'school_id' => \Auth::user()->school_id,
+        'user_id' => \Auth::user()->id
+      ];
+      return Event::create($data);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -81,7 +95,7 @@ class EventController extends Controller
       $tb = Event::find($id);
       $tb->active = 0;
       $tb->save();
-      return back()->with('status','File removed');
+      return back()->with('status','刪除成功');
     }
 
     /**

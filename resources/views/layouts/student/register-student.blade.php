@@ -97,8 +97,8 @@
                             <div class="col-md-7">
                                 <select id="section" class="form-control" name="section" required>
                                     @foreach (session('register_sections') as $section)
-                                    <option value="{{$section->id}}">課程：{{$section->section_number}}, 班級：
-                                        {{$section->class->class_number}}</option>
+                                    <option value="{{$section->id}}">
+                                    {{ $section->class->class_number }} - {{ $section->section_number }}</option>
                                     @endforeach
                                 </select>
 
@@ -264,7 +264,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('mother_phone_number') ? ' has-error' : '' }}">
-                            <label for="mother_phone_number" class="col-md-3 control-label">母親聯絡方式</label>
+                            <label for="mother_phone_number" class="col-md-3 control-label">母親聯絡電話</label>
 
                             <div class="col-md-7">
                                 <input id="mother_phone_number" type="text" class="form-control" name="mother_phone_number"
