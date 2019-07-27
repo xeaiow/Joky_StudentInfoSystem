@@ -127,7 +127,7 @@
                                                 @foreach($sections as $section)
                                                   @if($section->class_id == $class->id)
                                                     <li class="list-group-item">{{ $section->section_number }} &nbsp;
-                                                      <a class="btn btn-xs btn-primary" href="{{ url('courses/0/'.$section->id) }}">檢視課程</a>
+                                                      <a class="btn btn-xs btn-primary" href="{{ url('courses/0/'.$section->id) }}">檢視班級</a>
                                                       <span class="pull-right"> &nbsp;&nbsp;
                                                         <a class="btn btn-xs btn-default" data-toggle="collapse" href="#collapseForNewCourse{{ $section->id }}" aria-expanded="false" aria-controls="collapseForNewCourse{{ $section->id }}">新增班級</a>  
                                                         <a class="btn btn-xs btn-default" href="{{ url('school/promote-students/'.$section->id) }}">管理學生</a>

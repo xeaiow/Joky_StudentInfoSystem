@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Course')
+@section('title', '課程')
 
 @section('content')
 <div class="container-fluid">
@@ -9,7 +9,7 @@
             @include('layouts.leftside-menubar')
         </div>
         <div class="col-md-10" id="main-container">
-            <h2>所有授課課程    </h2>
+            <h2>所有授課課程</h2>
             <div class="panel panel-default">
               @if(count($courses) > 0)
               @foreach ($courses as $course)

@@ -41,14 +41,11 @@
         </td>
       @endif
       @if(!$student)
-        @if($course->exam_id != 0)
+
           <td>
             <a href="{{url('course/students/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-info btn-xs"><i class="material-icons">message</i> 推送訊息</a>
           </td>
-        @else
-          <td>尚無資料</td>
-        @endif
-        @if(!$student && ($course->teacher_id == Auth::user()->id || Auth::user()->role == 'admin') && $course->exam_id != 0)
+        @if(!$student && ($course->teacher_id == Auth::user()->id || Auth::user()->role == 'admin'))
           <td>
             <a href="{{url('attendances/students/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-primary btn-xs"><i class="material-icons">spellcheck</i> 點名</a>
           </td>

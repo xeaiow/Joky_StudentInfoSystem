@@ -58,7 +58,7 @@ class SectionController extends Controller
         'class_id' => 'required|numeric',
       ];
       $messages = [
-        'section_number.required' => '課程類型名稱必須填寫',
+        'section_number.required' => '子課程名稱必須填寫',
         'class_id.required' => '資料遺失',
         'class_id.numeric' => '資料不合法',
         'room_number.max' => '描述最多只能輸入 255 個字元'

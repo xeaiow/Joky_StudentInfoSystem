@@ -84,6 +84,11 @@ Route::middleware(['auth','teacher'])->group(function (){
 });
 Route::middleware(['auth','admin'])->group(function (){
   Route::post('courses/store', 'CourseController@store');
+  Route::get('courses/add-and-drop/{student_id}', 'CourseController@addAndDropCourse');
+  Route::get('courses/keywordGetCourse/{course_name}', 'CourseController@keywordGetCourse');
+  Route::get('courses/getCourse/{course_name}', 'CourseController@getCourse');
+  Route::post('courses/add', 'CourseController@addCourse');
+  Route::post('courses/drop', 'CourseController@dropCourse');
 });
 
 Route::middleware(['auth','admin'])->group(function (){

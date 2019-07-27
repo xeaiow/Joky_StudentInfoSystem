@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Course;
+use App\StudentCourse;
 use App\Http\Resources\CourseResource;
 use Illuminate\Http\Request;
 use App\Http\Requests\Course\SaveConfigurationRequest;
@@ -168,5 +169,80 @@ class CourseController extends Controller
       ]):response()->json([
         'status' => 'error'
       ]);
+    }
+
+    // 加退選課程頁面
+    public function addAndDropCourse(Request $req)
+    {
+      $currentCourse = StudentCourse::join('courses', 'student_courses.course_id', '=', 'courses.id')
+      ->select('student_courses.*', 'courses.course_name', 'courses.id AS courseId')
+      ->where('student_id', $req->student_id)
+      ->get();
+      return view('course.add-drop-course', ['courses' => $currentCourse, 'student_id' => $req->student_id]);
+    }
+
+
+    // 用關鍵字取得課程列表
+    public function keywordGetCourse (Request $req)
+    {
+      $keyword = $req->course_name;
+      return Course::
+      join('classes', 'classes.id', '=', 'courses.class_id')
+      ->where('classes.school_id', \Auth::user()->school_id)
+      ->where('course_name', 'like', $keyword.'%')
+      ->get();
+    }
+
+    // 用關鍵字取得課程列表
+    public function getCourse (Request $req)
+    {
+      $keyword = $req->course_name;
+      return Course::
+      join('users', 'users.id', '=', 'courses.teacher_id')
+      ->join('classes', 'classes.id', '=', 'courses.class_id')
+      ->select('courses.id', 'courses.course_name', 'courses.course_time', 'users.name')
+      ->where('classes.school_id', \Auth::user()->school_id)
+      ->where('course_name', $keyword)
+      ->get();
+    }
+
+    // 加選課程
+    public function addCourse (Request $req)
+    {
+      $exists = StudentCourse::where('student_id', $req->student_id)
+      ->where('course_id', $req->course_id)->count();
+
+      if ($exists == 0)
+      {
+        $data = [
+          'student_id' => $req->student_id,
+          'course_id' => $req->course_id
+        ];
+        $response['result'] = StudentCourse::create($data);
+        $response['status'] = true;
+        return $response;
+      }
+      else {
+        $response['status'] = false;
+        return $response;
+      }
+    }
+
+    // 退選課程
+    public function dropCourse (Request $req)
+    {
+      $course = StudentCourse::where('student_id', $req->student_id)
+      ->where('course_id', $req->course_id);
+
+      if ($course->count() > 0)
+      {
+        $course->delete();
+        $response['status'] = true;
+        return $response;
+      }
+      else {
+        $response['status'] = false;
+        return $response;
+      }
     }
 }

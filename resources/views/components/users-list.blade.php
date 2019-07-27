@@ -15,10 +15,10 @@
         @if($user->role == 'student')
           <th scope="col">出勤狀況</th>
           @if (!Session::has('section-attendance'))
-          <th scope="col">學年度</th>
           <th scope="col">學籍</th>
           <th scope="col">班級</th>
           <th scope="col">教室</th>
+          <th scope="col">出勤狀況</th>
         @endif
         @elseif($user->role == 'teacher')
           @if (!Session::has('section-attendance'))
@@ -69,9 +69,9 @@
         @endif
         @if (!Session::has('section-attendance'))
         <td>{{ $user->studentInfo['session'] }}</td>
-        <td>{{ ucfirst($user->studentInfo['version']) }}</td>
         <td>{{ $user->section->class->class_number }} {{ !empty($user->group)? '- '.$user->group :'' }}</td>
         <td style="white-space: nowrap;">{{$user->section->section_number}}</td>
+        <td><a class="btn btn-xs btn-default" disabled="disabled" role="button">查看</a></td>
         @endif
       @elseif($user->role == 'teacher')
         @if (!Session::has('section-attendance'))
@@ -96,6 +96,7 @@
         <td>
           <a class="btn btn-xs btn-primary" href="{{ url('edit/user/'.$user->id) }}">編輯</a>
           <a class="btn btn-xs btn-primary" href="{{ url('user/'.$user->student_code) }}">詳細</a>
+          <a class="btn btn-xs btn-primary" href="{{ url('courses/add-and-drop/'.$user->student_code) }}">加退選</a>
         </td>
         @endif
       @endif
