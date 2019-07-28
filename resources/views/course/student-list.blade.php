@@ -51,9 +51,9 @@ th {
                     <tr>
                       <td>{{ $student->student_code }}</td>
                       <td>{{ $student->name }}</td>
-                      <td>{{ $student->pic_path }}</td>
-                      <td>{{ $student->gender }}</td>
-                      <td>{{ $student->course_id }}</td>
+                      <td><img src="{{ asset('01-progress.gif') }}" data-src="{{ url($student->pic) }}" style="border-radius: 50%;" width="25px" height="25px"></td>
+                      <td>{{ ( $student->gender == 'male' ) ? '男' : '女' }}</td>
+                      <td>{{ $student->course_name }}</td>
                     </tr>
                   @endforeach
                 </tbody>

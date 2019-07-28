@@ -251,8 +251,9 @@ class CourseController extends Controller
     {
         $course_id = $req->course_id;
         $studentList = StudentCourse::join('users', 'users.student_code', '=', 'student_courses.student_id')
+        ->join('courses', 'courses.id', '=', 'student_courses.course_id')
         ->where('course_id', $course_id)
-        ->get(['users.student_code', 'users.name', 'users.pic_path', 'users.id AS id', 'users.gender', 'student_courses.course_id']);
+        ->get(['users.student_code', 'users.name', 'users.pic_path AS pic', 'users.id AS id', 'users.gender', 'student_courses.course_id', 'courses.course_name']);
         return view('course.student-list', ['students' => $studentList]);
     }
 }
