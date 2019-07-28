@@ -7,15 +7,16 @@
   <table class="table table-bordered table-striped table-data-div table-hover">
   <thead>
     <tr>
-      <th scope="col">課程名稱</th>
+      <th scope="col">班級名稱</th>
+      <th scope="col">備註</th>
       <th scope="col">上課時段</th>
-      <th scope="col">描述</th>
       @if($student)
         <th scope="col">授課教師</th>
       @endif
       @if(!$student)
-        <th scope="col">學生資料</th>
+        <th scope="col">聯絡簿</th>
         <th scope="col">點名紀錄</th>
+        <th scope="col">學生名單</th>
       @endif
       @foreach ($courses as $course)
         @if(!$student && ($course->teacher_id == Auth::user()->id || Auth::user()->role == 'admin') && $course->exam_id != 0)
@@ -33,21 +34,23 @@
     @foreach ($courses as $course)
     <tr>
       <td>{{$course->course_name}}</td>
-      <td>{{$course->course_time}}</td>
       <td>{{$course->section->room_number}}</td>
+      <td>{{$course->course_time}}</td>
       @if($student)
         <td>
           <a href="{{url('user/'.$course->teacher->student_code)}}">{{$course->teacher->name}}</a>
         </td>
       @endif
       @if(!$student)
-
-          <td>
-            <a href="{{url('course/students/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-info btn-xs"><i class="material-icons">message</i> 推送訊息</a>
-          </td>
+        <td>
+          <a href="{{ url('course/students/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id) }}" role="button" class="btn btn-primary btn-xs"><i class="material-icons">message</i> 推送訊息</a>
+        </td>
         @if(!$student && ($course->teacher_id == Auth::user()->id || Auth::user()->role == 'admin'))
           <td>
-            <a href="{{url('attendances/students/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-primary btn-xs"><i class="material-icons">spellcheck</i> 點名</a>
+            <a href="{{ url('attendances/students/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id) }}" role="button" class="btn btn-primary btn-xs"><i class="material-icons">spellcheck</i> 點名</a>
+          </td>
+          <td>
+            <a href="{{ url('courses/students/'.$course->id) }}" role="button" class="btn btn-primary btn-xs"><i class="material-icons">group</i> 查看</a>
           </td>
         @else
           <td>尚無資料</td>

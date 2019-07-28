@@ -245,4 +245,14 @@ class CourseController extends Controller
         return $response;
       }
     }
+
+    // 取得課程學員
+    public function getCourseStudent(Request $req)
+    {
+        $course_id = $req->course_id;
+        $studentList = StudentCourse::join('users', 'users.student_code', '=', 'student_courses.student_id')
+        ->where('course_id', $course_id)
+        ->get(['users.student_code', 'users.name', 'users.pic_path', 'users.id AS id', 'users.gender', 'student_courses.course_id']);
+        return view('course.student-list', ['students' => $studentList]);
+    }
 }

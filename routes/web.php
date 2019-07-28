@@ -81,6 +81,7 @@ Route::middleware(['auth','teacher'])->group(function (){
   // Route::post('courses/save-under-exam', 'CourseController@update');
   Route::post('courses/store', 'CourseController@store');
   Route::post('courses/save-configuration', 'CourseController@saveConfiguration');
+  Route::get('courses/students/{course_id}', 'CourseController@getCourseStudent');
 });
 Route::middleware(['auth','admin'])->group(function (){
   Route::post('courses/store', 'CourseController@store');

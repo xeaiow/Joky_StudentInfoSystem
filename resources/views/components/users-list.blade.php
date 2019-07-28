@@ -18,7 +18,6 @@
           <th scope="col">學籍</th>
           <th scope="col">班級</th>
           <th scope="col">教室</th>
-          <th scope="col">出勤狀況</th>
         @endif
         @elseif($user->role == 'teacher')
           @if (!Session::has('section-attendance'))
@@ -71,7 +70,6 @@
         <td>{{ $user->studentInfo['session'] }}</td>
         <td>{{ $user->section->class->class_number }} {{ !empty($user->group)? '- '.$user->group :'' }}</td>
         <td style="white-space: nowrap;">{{$user->section->section_number}}</td>
-        <td><a class="btn btn-xs btn-default" disabled="disabled" role="button">查看</a></td>
         @endif
       @elseif($user->role == 'teacher')
         @if (!Session::has('section-attendance'))
