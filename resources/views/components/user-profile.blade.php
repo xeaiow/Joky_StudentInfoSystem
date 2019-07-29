@@ -38,11 +38,7 @@
       <span class="label label-success">男</span>
     @else
       <span class="label label-danger">女</span>
-    @endif
-      @if ($user->role == 'teacher' && $user->section_id > 0)
-        <small>Class Teacher of Section: <span class="label label-info">{{ucfirst($user->section->section_number)}}</span></small>
-      @endif
-      
+    @endif      
       @if($user->role == "student")
        <button class="btn btn-xs btn-success pull-right" role="button" id="btnPrint"><i class="material-icons">print</i> 列印</button>
        <div class="visible-print-block" id="profile-content">
@@ -171,12 +167,24 @@
           <td><b>學籍/入學年份</b></td>
           <td>{{$user->studentInfo['session']}}</td>
           @else
-          <td><b>課程類型</b></td>
-          <td>{{$user->student_code}}</td>
-          <td><b>描述</b></td>
-          <td>{{$user->about}}</td>
+          <td><b>教師編號</b></td>
+          <td>{{ $user->student_code }}</td>
+          <td><b>電子信箱</b></td>
+          <td>{{ $user->email }}</td>
           @endif
         </tr>
+        @if($user->role == "teacher")
+          <tr>
+            <td><b>聯絡方式</b></td>
+            <td>{{ $user->phone_number }}</td>
+            <td><b>地址</b></td>
+            <td>{{ $user->address }}</td>
+          </tr>
+          <tr>
+            <td><b>備註</b></td>
+            <td colspan="3">{{ $user->about }}</td>
+          </tr>
+          @endif
         @if($user->role == "student")
         <tr>
           <td><b>課程分類</b></td>

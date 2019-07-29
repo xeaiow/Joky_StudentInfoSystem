@@ -94,7 +94,9 @@
         <td>
           <a class="btn btn-xs btn-primary" href="{{ url('edit/user/'.$user->id) }}">編輯</a>
           <a class="btn btn-xs btn-primary" href="{{ url('user/'.$user->student_code) }}">詳細</a>
-          <a class="btn btn-xs btn-primary" href="{{ url('courses/add-and-drop/'.$user->student_code) }}">加退選</a>
+          @if($user->role == 'student')
+            <a class="btn btn-xs btn-primary" href="{{ url('courses/add-and-drop/'.$user->student_code) }}">加退選</a>
+          @endif
         </td>
         @endif
       @endif

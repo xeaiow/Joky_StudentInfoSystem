@@ -87,7 +87,7 @@
 
                         @if($user->role == 'teacher')
                         <div class="form-group{{ $errors->has('department') ? ' has-error' : '' }}">
-                            <label for="department" class="col-md-4 control-label">部門</label>
+                            <label for="department" class="col-md-4 control-label">課程類別</label>
 
                             <div class="col-md-6">
                                 <select id="department" class="form-control" name="department_id">
@@ -106,15 +106,15 @@
                             </div>
                         </div>
                         <div class="form-group{{ $errors->has('class_teacher') ? ' has-error' : '' }}">
-                            <label for="class_teacher" class="col-md-4 control-label">Class Teacher</label>
+                            <label for="class_teacher" class="col-md-4 control-label">子課程</label>
 
                             <div class="col-md-6">
                                 <select id="class_teacher" class="form-control" name="class_teacher_section_id">
-                                    <option selected="selected" value="{{$user->section->id}}">Section:
-                                        {{$user->section->section_number}} Class:
+                                    <option selected="selected" value="{{$user->section->id}}">
+                                        {{$user->section->section_number}} - 
                                         {{$user->section->class->class_number}}</option>
                                     @foreach ($sections as $section)
-                                    <option value="{{$section->id}}">Section: {{$section->section_number}} Class:
+                                    <option value="{{$section->id}}">{{$section->section_number}} - 
                                         {{$section->class->class_number}}</option>
                                     @endforeach
                                 </select>

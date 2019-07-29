@@ -90,14 +90,20 @@ class GradeController extends Controller
     }
 
     public function allExamsGrade(){
-      $classes = \App\Myclass::where('school_id',\Auth::user()->school->id)->get();
+      $classes = \App\Myclass::
+      join('departments', 'departments.id', '=', 'classes.group')
+      ->select('classes.id AS id', 'classes.class_number', 'departments.department_name')
+      ->where('classes.school_id', \Auth::user()->school->id)->get();
+
       $classIds = $classes->pluck('id')->toArray();
-      $sections = \App\Section::whereIn('class_id',$classIds)
-                  ->orderBy('section_number')
-                  ->get();
+
+      $sections = \App\Section::whereIn('class_id', $classIds)
+      ->orderBy('section_number')
+      ->get();
+
       return view('grade.all-exams-grade',[
-        'classes'=>$classes,
-        'sections'=>$sections
+        'classes' => $classes,
+        'sections' => $sections
       ]);
     }
 

@@ -8,6 +8,9 @@
 .ck-editor__editable{
     min-height: 200px;
 }
+.alert-success a, .alert-success a:hover {
+    color: #FFF !important;
+}
 </style>
 <div class="container-fluid">
     <div class="row">
@@ -38,7 +41,7 @@
                                     </div>
                                 </th>
                                 <th>學號</th>
-                                <th>姓名A</th>
+                                <th>姓名</th>
                             </tr>
                             @foreach ($students as $student)
                             <tr>
@@ -107,7 +110,10 @@
                 </script>
                 @else
                 <div class="panel-body">
-                    沒有找到資料
+                    <div class="alert alert-dismissible alert-success">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        該課程尚無學員，請先<a href="{{ url('register/student') }}">新增學員</a>。
+                    </div>
                 </div>
                 @endif
             </div>
