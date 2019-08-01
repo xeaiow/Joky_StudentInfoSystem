@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', '課程出席狀況')
+@section('title', '班級資訊')
 
 @section('content')
 <style>

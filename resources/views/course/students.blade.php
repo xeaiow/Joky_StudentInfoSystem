@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Course Students')
+@section('title', '學生資訊')
 
 @section('content')
 <script src="https://cdn.ckeditor.com/ckeditor5/12.0.0/classic/ckeditor.js"></script>
